@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+
+button {
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-padrao
+{
+  background-color: transparent !important;
+  border: solid 1px #25b3ff !important;
+  border-radius: 50px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-padrao:hover
+{
+  background-color: #fff !important;
+  border: solid 1px #fff !important;
+  transition: 0.5s;
+  color: black;
+  border-radius: 50px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
+p {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+.input-form
+{
+  font-family: 'Poppins', sans-serif;
+}
+
+.txt-info
+{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: red;
+}
+
+.cursor-pointer
+{
+  cursor: pointer;
+}
+
+.bloc-info
+{
+  border-radius: 5px;
+  background-color: #9bdaff;
+  padding: 10px;
+}
+
+.text-info-bloc
+{
+  font-size: 13px;
+}
+
