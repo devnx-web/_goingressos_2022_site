@@ -9,9 +9,25 @@
               <h1>MEU CARRINHO</h1>
             </div>
             <card-carrinho
+              v-if="!tipoPagamento"
               :ingressos="ingressos"
               @removeIngresso="removeIngresso"
             />
+
+
+   <div v-if="tipoPagamento" class="card p-3">
+     <b-button v-b-modal.finaliza variant="success" class="mt-3" block
+     >Alterar forma pagamento</b-button
+     >
+     <div v-if="tipoPagamento === 'pix'">
+       Escolheu pix
+     </div>
+
+     <div v-if="tipoPagamento === 'card'">
+       Escolheu cartão
+     </div>
+   </div>
+
           </b-col>
           <b-col md="4">
             <card-resumo
@@ -19,11 +35,14 @@
               :ingressos="ingressos"
               :vt="valorTotal"
             />
+            <b-button v-if="!tipoPagamento" v-b-modal.finaliza variant="success" class="mt-3" block
+            >Finalizar Compra</b-button
+            >
           </b-col>
         </b-row>
       </div>
     </div>
-    <b-modal id="finaliza" centered title="Finalizar compra" hide-footer>
+    <b-modal ref="infos" id="finaliza" centered title="Finalizar compra" hide-footer>
       <div class="py-1">
         <div>
           <div class="bloc-info" v-if="!codigoEnviado">
@@ -36,7 +55,7 @@
               </p>
             </div>
           </div>
-          <div>
+          <div v-if="ingressos.length < 2">
             <b-form-checkbox
               id="checkbox-1"
               v-model="status"
@@ -48,7 +67,12 @@
               <p class="small mt-1">O ingresso é para outra pessoa</p>
             </b-form-checkbox>
           </div>
-          <b-row>
+          <div v-if="ingressos.length === 1 && status !== 'accepted'">
+            <p class="mt-3 small">E-mail</p>
+            <b-input   class="input-form form-control estilo-input" placeholder="e-mail"></b-input>
+          </div>
+        <div v-if="status === 'accepted' || ingressos.length > 1">
+          <b-row >
             <b-col md="6" class="pr-1">
               <div>
                 <p class="mt-3 small">Nome Completo</p>
@@ -89,14 +113,15 @@
             </b-col>
           </b-row>
         </div>
+        </div>
         <hr />
         <p>Forma de pagamento</p>
         <div class="mt-2">
           <b-row>
             <b-col md="6" class="pr-1">
-              <div class="card-pay text-center py-2">
+              <div @click="escolhePay('pix')" class="card-pay text-center py-2">
                 <div>
-                  <div>
+                  <div >
                     <img
                       src="../assets/icones/pix-106.svg"
                       height="30"
@@ -108,7 +133,7 @@
               </div>
             </b-col>
             <b-col md="6" class="pl-1">
-              <div class="card-pay text-center py-2">
+              <div @click="escolhePay('card')" class="card-pay text-center py-2">
                 <div>
                   <div>
                     <img
@@ -138,6 +163,7 @@ export default {
   components: { MenuTopo, cardCarrinho, cardResumo },
   data() {
     return {
+      tipoPagamento: '',
       codigoEnviado: false,
       whatsapp: "",
       status: "not_accepted",
@@ -150,6 +176,11 @@ export default {
     this.carregaCarrinho();
   },
   methods: {
+    escolhePay(metodo){
+      this.tipoPagamento = metodo
+      this.$refs['infos'].hide()
+    },
+
     removeIngresso(index) {
       this.ingressos.splice(index, 1);
       this.totalIngressos = this.ingressos.length;
@@ -203,21 +234,11 @@ export default {
   cursor: pointer;
 }
 
-.new-input {
-  border: solid 1px #dcdcdc;
-}
-
-.estilo-input {
-  border-radius: 10px !important;
-  overflow: hidden;
-  border: solid 1px #ececec;
-}
-
 input {
   height: 40px;
   font-size: 13px !important;
   font-family: "Poppins", sans-serif;
-  border: none;
+  border: solid 1px #e3e3e3 !important;
   border-radius: 0;
   box-shadow: none !important;
 }
@@ -233,38 +254,5 @@ input {
   background: rgb(245, 245, 245);
 }
 
-.card-ingressos {
-  border-radius: 20px;
-  border: solid 1px #e1e1e1;
-}
 
-.card-ingressos .bg-topo {
-  color: white;
-  padding: 15px 2px;
-  background: #020024;
-  background: linear-gradient(144deg, #005a8c 10%, #0c8abf);
-  border-radius: 20px 20px 0 0;
-}
-
-h3 {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  color: white;
-  font-size: 17px;
-  margin: 0;
-}
-
-h2 {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  margin: 0;
-}
-
-h1 {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  margin: 0;
-}
 </style>
