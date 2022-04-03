@@ -14,20 +14,14 @@
               @removeIngresso="removeIngresso"
             />
 
+            <div v-if="tipoPagamento" class="card p-3">
+              <b-button v-b-modal.finaliza variant="success" class="mt-3" block
+                >Alterar forma pagamento</b-button
+              >
+              <div v-if="tipoPagamento === 'pix'">Escolheu pix</div>
 
-   <div v-if="tipoPagamento" class="card p-3">
-     <b-button v-b-modal.finaliza variant="success" class="mt-3" block
-     >Alterar forma pagamento</b-button
-     >
-     <div v-if="tipoPagamento === 'pix'">
-       Escolheu pix
-     </div>
-
-     <div v-if="tipoPagamento === 'card'">
-       Escolheu cartão
-     </div>
-   </div>
-
+              <div v-if="tipoPagamento === 'card'">Escolheu cartão</div>
+            </div>
           </b-col>
           <b-col md="4">
             <card-resumo
@@ -35,14 +29,25 @@
               :ingressos="ingressos"
               :vt="valorTotal"
             />
-            <b-button v-if="!tipoPagamento" v-b-modal.finaliza variant="success" class="mt-3" block
-            >Finalizar Compra</b-button
+            <b-button
+              v-if="!tipoPagamento"
+              v-b-modal.finaliza
+              variant="success"
+              class="mt-3"
+              block
+              >Finalizar Compra</b-button
             >
           </b-col>
         </b-row>
       </div>
     </div>
-    <b-modal ref="infos" id="finaliza" centered title="Finalizar compra" hide-footer>
+    <b-modal
+      ref="infos"
+      id="finaliza"
+      centered
+      title="Finalizar compra"
+      hide-footer
+    >
       <div class="py-1">
         <div>
           <div class="bloc-info" v-if="!codigoEnviado">
@@ -69,50 +74,53 @@
           </div>
           <div v-if="ingressos.length === 1 && status !== 'accepted'">
             <p class="mt-3 small">E-mail</p>
-            <b-input   class="input-form form-control estilo-input" placeholder="e-mail"></b-input>
+            <b-input
+              class="input-form form-control estilo-input"
+              placeholder="e-mail"
+            ></b-input>
           </div>
-        <div v-if="status === 'accepted' || ingressos.length > 1">
-          <b-row >
-            <b-col md="6" class="pr-1">
-              <div>
-                <p class="mt-3 small">Nome Completo</p>
-                <b-input
-                  class="input-form form-control estilo-input"
-                  placeholder="Ex: Anderson Costa"
-                />
-              </div>
-            </b-col>
-            <b-col md="6" class="pl-1">
-              <div>
-                <p class="mt-3 small">WhatsApp</p>
-                <b-input
-                  class="input-form form-control estilo-input"
-                  placeholder="Ex: (99) 99999-9999"
-                />
-              </div>
-            </b-col>
-          </b-row>
-          <b-row class="mt-n2">
-            <b-col md="6" class="pr-1">
-              <div>
-                <p class="mt-3 small">CPF</p>
-                <b-input
-                  placeholder="CPF"
-                  class="input-form form-control estilo-input"
-                />
-              </div>
-            </b-col>
-            <b-col md="6" class="pl-1">
-              <div>
-                <p class="mt-3 small">E-mail</p>
-                <b-input
-                  placeholder="E-mail"
-                  class="input-form form-control estilo-input"
-                />
-              </div>
-            </b-col>
-          </b-row>
-        </div>
+          <div v-if="status === 'accepted' || ingressos.length > 1">
+            <b-row>
+              <b-col md="6" class="pr-1">
+                <div>
+                  <p class="mt-3 small">Nome Completo</p>
+                  <b-input
+                    class="input-form form-control estilo-input"
+                    placeholder="Ex: Anderson Costa"
+                  />
+                </div>
+              </b-col>
+              <b-col md="6" class="pl-1">
+                <div>
+                  <p class="mt-3 small">WhatsApp</p>
+                  <b-input
+                    class="input-form form-control estilo-input"
+                    placeholder="Ex: (99) 99999-9999"
+                  />
+                </div>
+              </b-col>
+            </b-row>
+            <b-row class="mt-n2">
+              <b-col md="6" class="pr-1">
+                <div>
+                  <p class="mt-3 small">CPF</p>
+                  <b-input
+                    placeholder="CPF"
+                    class="input-form form-control estilo-input"
+                  />
+                </div>
+              </b-col>
+              <b-col md="6" class="pl-1">
+                <div>
+                  <p class="mt-3 small">E-mail</p>
+                  <b-input
+                    placeholder="E-mail"
+                    class="input-form form-control estilo-input"
+                  />
+                </div>
+              </b-col>
+            </b-row>
+          </div>
         </div>
         <hr />
         <p>Forma de pagamento</p>
@@ -121,7 +129,7 @@
             <b-col md="6" class="pr-1">
               <div @click="escolhePay('pix')" class="card-pay text-center py-2">
                 <div>
-                  <div >
+                  <div>
                     <img
                       src="../assets/icones/pix-106.svg"
                       height="30"
@@ -133,7 +141,10 @@
               </div>
             </b-col>
             <b-col md="6" class="pl-1">
-              <div @click="escolhePay('card')" class="card-pay text-center py-2">
+              <div
+                @click="escolhePay('card')"
+                class="card-pay text-center py-2"
+              >
                 <div>
                   <div>
                     <img
@@ -163,7 +174,7 @@ export default {
   components: { MenuTopo, cardCarrinho, cardResumo },
   data() {
     return {
-      tipoPagamento: '',
+      tipoPagamento: "",
       codigoEnviado: false,
       whatsapp: "",
       status: "not_accepted",
@@ -176,9 +187,10 @@ export default {
     this.carregaCarrinho();
   },
   methods: {
-    escolhePay(metodo){
-      this.tipoPagamento = metodo
-      this.$refs['infos'].hide()
+    escolhePay(metodo) {
+      this.tipoPagamento = metodo;
+      this.$refs["infos"].hide();
+      this.salvarIngressos();
     },
 
     removeIngresso(index) {
@@ -188,6 +200,21 @@ export default {
         (total, ingresso) => total + parseFloat(ingresso.valor),
         0
       );
+    },
+    salvarIngressos() {
+      fetch(
+        "https://phpstack-666249-2543201.cloudwaysapps.com/api/site/surreal-producoes/evento/we-are-carnaval/pre_res_ingresso",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(this.ingressos),
+        }
+      )
+        .then((res) => res.json())
+        .then((res) => console.log(res));
     },
     carregaCarrinho() {
       const carrinho = localStorage.getItem("ingressos") || [];
@@ -253,6 +280,4 @@ input {
   border-radius: 20px;
   background: rgb(245, 245, 245);
 }
-
-
 </style>
