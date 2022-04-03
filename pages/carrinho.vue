@@ -15,9 +15,10 @@
             />
 
             <div v-if="tipoPagamento" class="card p-3">
-              <b-button v-b-modal.finaliza variant="success" class="mt-3" block
-                >Alterar forma pagamento</b-button
-              >
+              <p @click="tipoPagamento = ''" class="cursor-pointer">Voltar</p>
+              <div>
+                <b-button v-b-modal.finaliza variant="info" class="mt-1">Alterar forma pagamento</b-button>
+              </div>
               <div v-if="tipoPagamento === 'pix'">Escolheu pix</div>
 
               <div v-if="tipoPagamento === 'card'">Escolheu cartão</div>

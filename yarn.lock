@@ -7653,6 +7653,13 @@ vue-no-ssr@^1.1.1:
   resolved "https://registry.yarnpkg.com/vue-no-ssr/-/vue-no-ssr-1.1.1.tgz#875f3be6fb0ae41568a837f3ac1a80eaa137b998"
   integrity sha512-ZMjqRpWabMPqPc7gIrG0Nw6vRf1+itwf0Itft7LbMXs2g3Zs/NFmevjZGN1x7K3Q95GmIjWbQZTVerxiBxI+0g==
 
+vue-paycard@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/vue-paycard/-/vue-paycard-0.7.0.tgz#111e4f7f695e8920102f892f948078907e44c624"
+  integrity sha512-r/mk3QYPiUD0NKfn/Hz33z8fHg9Xxwlu+UfQcMZKvI7I87LPt9LxIiEw2GpLWTZW7Y3RiEwzLyS5EAa8o02Kvg==
+  dependencies:
+    vue "^2.6.14"
+
 vue-router@^3.5.1:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.5.3.tgz#041048053e336829d05dafacf6a8fb669a2e7999"

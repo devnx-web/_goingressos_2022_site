@@ -12,7 +12,7 @@
         <p>Preencha as informações abaixo para finalizar a compra!</p>
       </div>
 
-    <div class="mt-3" v-for="(ing, index) in ingressos">
+    <div class="mt-3" v-for="(ing, index) in ingressos" :key="index">
       <div>{{ ing.nomeLote }} {{ ing.nomeIng }}</div>
      <div>
        <div class="d-flex align-items-center" >
