@@ -1,75 +1,24 @@
 <template>
   <div>
-    <menu-topo/>
+    <menu-topo />
     <div class="container-fluid px-5">
       <div class="mt-5">
         <b-row>
           <b-col md="8">
             <div>
               <h1>MEU CARRINHO</h1>
-              <p class="small">ID da compra: GO-40655454</p>
             </div>
-            <div class="card-ingressos mt-2">
-              <div class="bg-topo px-3 d-flex justify-content-between align-items-center">
-             <div>
-               <h3>EVENTO EXEMPLO 1 EDIÇÃO</h3>
-               <p class="small">11/12/2022 - 12h</p>
-             </div>
-                <div>
-                  tempo restatne: 3213
-                </div>
-              </div>
-              <div class="p-3">
-                <div>
-                  <p>Preencha as informações abaixo para finalizar a compra!</p>
-                </div>
-                <div class="d-flex align-items-center mt-3">
-                  <div class="estilo-input">
-                    <b-row>
-                      <b-col class="pr-0">
-                        <b-input placeholder="Nome Completo"></b-input>
-                      </b-col>
-                      <b-col class="pl-0 pr-0 border-left">
-                        <b-input placeholder="CPF"></b-input>
-                      </b-col>
-                      <b-col class="pr-0 pl-0 border-right border-left">
-                        <the-mask v-model="whatsapp" class="input-form form-control" placeholder="Ex: (99) 99999-9999" :mask="['(##) ####-####', '(##) #####-####']" />
-                      </b-col>
-                      <b-col class="pl-0">
-                        <b-input type="date" placeholder="Data de nascimento"></b-input>
-                      </b-col>
-                    </b-row>
-                  </div>
-                  <div class="ml-3">
-                    <img height="30" src="../assets/icones/minus.svg" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
+            <card-carrinho
+              :ingressos="ingressos"
+              @removeIngresso="removeIngresso"
+            />
           </b-col>
           <b-col md="4">
-            <div>
-              <div>
-                <h2>RESUMO</h2>
-                <p class="small ml-1">(1 Ingresso)</p>
-              </div>
-
-              <div class="card-resumo mt-2">
-                <div class="p-3">
-                  <p>Ingresso Feminino</p>
-                  <p class="small">Bloco 3 Lote</p>
-                </div>
-                <div class="bg-total p-3 d-flex justify-content-between">
-                  <p>Total:</p>
-                  <p><b>00</b></p>
-                </div>
-              </div>
-
-              <div>
-                <b-button v-b-modal.finaliza variant="success" class="mt-3" block>Finalizar Compra</b-button>
-              </div>
-
-            </div>
+            <card-resumo
+              :totalIng="totalIngressos"
+              :ingressos="ingressos"
+              :vt="valorTotal"
+            />
           </b-col>
         </b-row>
       </div>
@@ -77,12 +26,14 @@
     <b-modal id="finaliza" centered title="Finalizar compra" hide-footer>
       <div class="py-1">
         <div>
-          <div class="bloc-info"  v-if="!codigoEnviado">
+          <div class="bloc-info" v-if="!codigoEnviado">
             <div class="d-flex align-items-center">
               <div>
-                <img height="37" src="../assets/icones/info.svg" alt="">
+                <img height="37" src="../assets/icones/info.svg" alt="" />
               </div>
-              <p class="ml-2 text-info-bloc">Digite seus dados e esolha uma opção de pagamento</p>
+              <p class="ml-2 text-info-bloc">
+                Digite seus dados e esolha uma opção de pagamento
+              </p>
             </div>
           </div>
           <div>
@@ -94,63 +45,83 @@
               class="mt-2"
               unchecked-value="not_accepted"
             >
-            <p class="small mt-1">O ingresso é para outra pessoa</p>
+              <p class="small mt-1">O ingresso é para outra pessoa</p>
             </b-form-checkbox>
           </div>
           <b-row>
-            <b-col md="6"  class="pr-1">
+            <b-col md="6" class="pr-1">
               <div>
                 <p class="mt-3 small">Nome Completo</p>
-                <b-input class="input-form form-control estilo-input" placeholder="Ex: Anderson Costa"/>
+                <b-input
+                  class="input-form form-control estilo-input"
+                  placeholder="Ex: Anderson Costa"
+                />
               </div>
             </b-col>
             <b-col md="6" class="pl-1">
               <div>
                 <p class="mt-3 small">WhatsApp</p>
-                <b-input class="input-form form-control estilo-input" placeholder="Ex: (99) 99999-9999" :mask="['(##) ####-####', '(##) #####-####']" />
+                <b-input
+                  class="input-form form-control estilo-input"
+                  placeholder="Ex: (99) 99999-9999"
+                />
               </div>
             </b-col>
           </b-row>
           <b-row class="mt-n2">
-            <b-col md="6"  class="pr-1">
+            <b-col md="6" class="pr-1">
               <div>
                 <p class="mt-3 small">CPF</p>
-                <b-input placeholder="CPF" class="input-form form-control estilo-input"/>
+                <b-input
+                  placeholder="CPF"
+                  class="input-form form-control estilo-input"
+                />
               </div>
             </b-col>
             <b-col md="6" class="pl-1">
               <div>
                 <p class="mt-3 small">E-mail</p>
-                <b-input placeholder="E-mail" class="input-form form-control estilo-input"/>
+                <b-input
+                  placeholder="E-mail"
+                  class="input-form form-control estilo-input"
+                />
               </div>
             </b-col>
           </b-row>
         </div>
-        <hr>
+        <hr />
         <p>Forma de pagamento</p>
         <div class="mt-2">
-         <b-row>
-           <b-col md="6" class="pr-1">
-             <div class="card-pay text-center py-2">
-              <div>
+          <b-row>
+            <b-col md="6" class="pr-1">
+              <div class="card-pay text-center py-2">
                 <div>
-                  <img src="../assets/icones/pix-106.svg" height="30" alt="">
+                  <div>
+                    <img
+                      src="../assets/icones/pix-106.svg"
+                      height="30"
+                      alt=""
+                    />
+                  </div>
+                  <p class="small mt-1">Pagar pelo PIX</p>
                 </div>
-                <p class="small mt-1">Pagar pelo PIX</p>
               </div>
-              </div>
-           </b-col>
-           <b-col md="6" class="pl-1">
-             <div class="card-pay text-center py-2">
-              <div>
+            </b-col>
+            <b-col md="6" class="pl-1">
+              <div class="card-pay text-center py-2">
                 <div>
-                  <img src="../assets/icones/credit-card-ico.png" height="40" alt="">
+                  <div>
+                    <img
+                      src="../assets/icones/credit-card-ico.png"
+                      height="40"
+                      alt=""
+                    />
+                  </div>
+                  <p class="small mt-1">Pagar pelo Cartão</p>
                 </div>
-                <p class="small mt-1">Pagar pelo Cartão</p>
               </div>
-             </div>
-           </b-col>
-         </b-row>
+            </b-col>
+          </b-row>
         </div>
       </div>
     </b-modal>
@@ -159,22 +130,65 @@
 
 <script>
 import MenuTopo from "../components/menu";
+import cardCarrinho from "./cardCarrinho.vue";
+import cardResumo from "./cardResumo.vue";
 
 export default {
   name: "carrinho",
-  components: {MenuTopo},
+  components: { MenuTopo, cardCarrinho, cardResumo },
   data() {
     return {
-      status: 'not_accepted'
-    }
-  }
-}
+      codigoEnviado: false,
+      whatsapp: "",
+      status: "not_accepted",
+      totalIngressos: 0,
+      valorTotal: 0,
+      ingressos: [],
+    };
+  },
+  beforeMount() {
+    this.carregaCarrinho();
+  },
+  methods: {
+    removeIngresso(index) {
+      this.ingressos.splice(index, 1);
+      this.totalIngressos = this.ingressos.length;
+      this.valorTotal = this.ingressos.reduce(
+        (total, ingresso) => total + parseFloat(ingresso.valor),
+        0
+      );
+    },
+    carregaCarrinho() {
+      const carrinho = localStorage.getItem("ingressos") || [];
+      const ing = [];
+      if (carrinho.length === 0) return this.$router.push("/");
+      let totalIngressos = 0;
+      let totalValor = 0;
+      const jsonCarrinho = JSON.parse(carrinho);
+      jsonCarrinho.forEach((ingresso) => {
+        for (let i = 0; i < ingresso.qtd; i++) {
+          totalIngressos++;
+          totalValor += parseFloat(ingresso.valor);
+          ing.push({
+            ...ingresso,
+            ["nome"]: "",
+            ["cpf"]: "",
+            ["nasc"]: "",
+            ["whats"]: "",
+          });
+        }
+      });
+      this.valorTotal = totalValor;
+      this.totalIngressos = totalIngressos;
+      localStorage.setItem("ingressosC", JSON.stringify(ing));
+      this.ingressos = ing;
+    },
+  },
+};
 </script>
 
 <style scoped>
-
-.card-pay
-{
+.card-pay {
   justify-content: center;
   display: flex;
   align-items: center;
@@ -189,28 +203,26 @@ export default {
   cursor: pointer;
 }
 
-
-.new-input{
+.new-input {
   border: solid 1px #dcdcdc;
 }
 
-.estilo-input
-{
+.estilo-input {
   border-radius: 10px !important;
   overflow: hidden;
   border: solid 1px #ececec;
 }
 
-input{
+input {
   height: 40px;
   font-size: 13px !important;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   border: none;
   border-radius: 0;
   box-shadow: none !important;
 }
 
-.bg-total{
+.bg-total {
   color: white;
   border-radius: 0 0 20px 20px;
   background-color: black;
@@ -235,7 +247,7 @@ input{
 }
 
 h3 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
   color: white;
   font-size: 17px;
@@ -243,17 +255,16 @@ h3 {
 }
 
 h2 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 24px;
   margin: 0;
 }
 
 h1 {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 24px;
   margin: 0;
 }
-
 </style>
