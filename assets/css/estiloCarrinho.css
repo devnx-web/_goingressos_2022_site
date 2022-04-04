@@ -1,0 +1,73 @@
+
+.bg-resumo
+{
+  font-size: 13px;
+  padding: 20px;
+  border-radius: 8px 8px 0 0;
+  background-color: #2f2f2f;
+  color: white;
+}
+
+.card-info-credit
+{
+  background-color: #f6f6f6;
+  border: solid 1px #e0e0e0;
+  border-radius: 0 0 10px 10px;
+}
+
+.label-estilo
+{
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+
+}
+
+.card-pay {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100px;
+  border-radius: 10px;
+  border: solid 1px #dedede;
+}
+
+.card-pay:hover {
+  background-color: #424242;
+  color: white;
+  cursor: pointer;
+}
+.card-mini
+{
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  padding-left: 15px;
+  font-weight: 500;
+  font-size: 13px;
+  font-family: Montserrat, sans-serif;
+  border: solid 1px #e8e8e8;
+}
+
+
+
+
+.bg-total {
+  color: white;
+  border-radius: 0 0 20px 20px;
+  background-color: black;
+}
+
+.card-resumo {
+  border-radius: 20px;
+  background: rgb(245, 245, 245);
+}
+
+.btn-pay-new
+{
+  background-color: transparent !important;
+  font-size: 13px;
+  height: 100%;
+
+}

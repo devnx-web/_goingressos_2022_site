@@ -1,18 +1,18 @@
 <template>
 <div>
-  <nav class="bg-menu navbar-expand-lg px-5 py-2">
+  <nav class="bg-menu navbar-expand-lg px-md-5 px-3 py-2 py-md-2">
     <b-row>
-      <b-col md="2" align-self="center">
+      <b-col cols="3" md="2" align-self="center">
         <div>
          <nuxt-link to="/">
            <img height="50" src="https://uni.goingressos.com.br/_nuxt/img/logouni.92cc7fe.png" alt="">
          </nuxt-link>
         </div>
         </b-col>
-        <b-col md="8" class="text-center" align-self="center">
+        <b-col cols="9" md="8" class="text-center" align-self="center">
           <b-button  v-b-modal.conta class="btn-padrao px-4">Meus Ingressos</b-button>
         </b-col>
-      <b-col md="2" align-self="center">
+      <b-col class="d-none d-md-block" md="2" align-self="center">
         <div class="ml-3">
           <img height="35" src="https://uni.goingressos.com.br/_nuxt/img/Go.f34a656.png" alt="">
         </div>
