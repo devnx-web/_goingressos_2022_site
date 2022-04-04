@@ -528,8 +528,8 @@ export default {
     },
 
     escolhePay(metodo) {
-      // this.tipoPagamento = metodo;
-      // this.$refs["infos"].hide();
+      this.tipoPagamento = metodo;
+      this.$refs["infos"].hide();
       this.salvarIngressos();
     },
 
@@ -553,6 +553,7 @@ export default {
           body: JSON.stringify({
             ingressos: this.ingressos,
             email: this.email,
+            pagamento: this.tipoPagamento,
           }),
         }
       )
