@@ -1,22 +1,22 @@
 <template>
   <div>
     <menu-topo/>
-    <div class="mt-5">
+    <div class="mt-md-5 mt-3">
       <b-container>
-        <div class="card-conta p-3">
+        <div class="card-conta p-md-3">
          <b-row>
-           <b-col md="3" class="pr-0">
-             <div class="btn-selected">
+           <b-col md="3" class="pr-md-0">
+             <div class="btn-selected rounded-0 rounded-md-left">
                <p>Meus Ingressos</p>
              </div>
 
            </b-col>
-           <b-col class="pl-0">
+           <b-col class="pl-md-0 mt-3 mt-md-0">
              <div class="border p-3">
                <p>Dados do ingresso</p>
                <p>Status: <b-badge variant="success" style="font-weight: 500;" class="px-3">Pagamento Aprovado</b-badge></p>
                <div class="bloc-info mt-2">
-                 <div class="d-flex align-items-center">
+                 <div class="d-md-flex align-items-center">
                    <div>
                      <img height="37" src="../assets/icones/info.svg" alt="" />
                    </div>
@@ -27,6 +27,14 @@
                </div>
                <hr>
                <div>
+                <b-row>
+                  <b-col align-self="center">
+                    <p>Total: R$ 50,00</p>
+                  </b-col>
+                  <b-col class="text-right align-self-centeri">
+                    <b-button variant="success" class="px-5">Reenviar Ingressos</b-button>
+                  </b-col>
+                </b-row>
                  <div class="card-ingresso mt-2">
                    <b-row>
                      <b-col class="border-right" align-self="center">
@@ -38,7 +46,7 @@
                        <p class="small">08304004941</p>
                      </b-col>
                      <b-col md="1">
-                       <div class="bg-ico d-flex justify-content-center align-items-center">
+                       <div class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
                          <img height="17" src="../assets/icones/download.svg" alt="">
                        </div>
                      </b-col>

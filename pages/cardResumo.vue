@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div>
+    <div class="d-flex">
       <h2>RESUMO</h2>
-      <p class="small ml-1">({{ totalIng }} Ingresso)</p>
+      <p class="small ml-1 mt-md-1 mt-2">({{ totalIng }} Ingresso)</p>
     </div>
 
     <div class="card-resumo mt-2">
@@ -11,7 +11,7 @@
         <div v-for="(ing, index) in ingressos" :key="index">
           <p>{{ ing.nomeIng }}</p>
           <p class="small">{{ ing.nomeLote }} - {{ ing.nome }}</p>
-          <hr>
+          <hr class="d-none d-md-block">
         </div>
       </div>
       <div class="bg-total p-3 d-flex justify-content-between">

@@ -1,174 +1,193 @@
 <template>
   <div>
-    <menu-topo />
+    <menu-topo/>
     <div class="container mt-md-5 mt-3">
-      <b-row v-if="tipoPagamento === 'card'" class="mt-2">
-        <b-col>
-          <div class="d-flex justify-content-center">
-            <div>
-              <VuePaycard
-                :inputFields="inputFields"
-                :valueFields="valueFields"
-                :labels="labels"
-              />
-              <div class="bloc-info mt-5">
-                <div class="d-flex align-items-center">
-                  <div>
-                    <img height="37" src="../assets/icones/info.svg" alt="" />
+<!--      tornar componente-->
+      <div v-if="tipoPagamento === 'card'">
+        <b-row class="mt-2">
+          <b-col cols="12" md="6">
+            <div class="d-flex justify-content-center">
+              <div>
+                <VuePaycard
+                  :inputFields="inputFields"
+                  :valueFields="valueFields"
+                  :labels="labels"
+                />
+                <div class="bloc-info mt-5 mb-3">
+                  <div class="d-flex align-items-center">
+                    <div>
+                      <img height="37" src="../assets/icones/info.svg" alt=""/>
+                    </div>
+                    <p class="ml-2 text-info-bloc">
+                      Os ingressos serão enviados automaticamente no WhatsApp e e-mail após a confirmação do pagamento
+                    </p>
                   </div>
-                  <p class="ml-2 text-info-bloc">
-                   Os ingressos serão enviados automaticamente no WhatsApp e e-mail após a confirmação do pagamento
-                  </p>
                 </div>
               </div>
             </div>
-          </div>
-        </b-col>
-        <b-col>
-          <div class="bg-resumo">
-         <b-row>
-           <b-col>
-             <p> Valor da compra: {{valorTotal | currency}}</p>
-             <p> Quantidade de ingressos: {{ totalIngressos }}</p>
-           </b-col>
-           <b-col md="6" cols="12">
-             <b-button @click="tipoPagamento = ''" block class="btn-pay-new">Alterar forma de pagamento</b-button>
-           </b-col>
-         </b-row>
-          </div>
-          <div class="card-info-credit p-3">
-            <div id="holder-name">
-              <label class="label-estilo mt-n2">Titular do cartão</label>
-              <input class="form-control number-two"
-                     :value="valueFields.cardName"
-                     placeholder="Nome do titular"
-                     @input="changeName"
-                     :id="inputFields.cardName"
-                     style="text-transform: capitalize"
-                     data-card-field
-                     autocomplete="off"
-                     id="form-checkout__cardholderName" type="text" name="cardholderName">
-            </div>
-            <div id="cpf">
-              <label class="label-estilo">CPF</label>
-              <input class="form-control" autocomplete="true"
-                     placeholder="Digite o CPF do titular"
-                     data-card-field
-                     type="text"
-                     name="cardNumber"/>
-            </div>
-            <div id="number-card">
-              <label class="label-estilo">Número do cartão</label>
-              <input class="form-control" autocomplete="true"
-                     placeholder="Digite o número do cartão"
-                     data-card-field
-                     @input="changeNumber" :id="inputFields.cardNumber" type="text"
-                     name="cardNumber"/>
-            </div>
-
-            <div id="extra">
+          </b-col>
+          <b-col>
+            <div class="bg-resumo">
               <b-row>
                 <b-col>
-                  <label class="label-estilo">Mês de vencimento</label>
-                  <input  v-model="valueFields.cardMonth"
-                          min="1"
-                          placeholder="Ex: 03"
-                          maxlength="2"
-                          :id="inputFields.cardMonth"
-                          class="form-control -select number-two"
-                          type="text"
-                          @input="changeMonth"
-                          aria-label="Card Month"
-                          title="Month"
-                          data-card-field>
+                  <p> Valor da compra: {{ valorTotal | currency }}</p>
+                  <p> Quantidade de ingressos: {{ totalIngressos }}</p>
                 </b-col>
-                <b-col>
-                  <label class="label-estilo">Ano de vencimento</label>
-                  <input
-                    min="2020"
-                    placeholder="Ex: 2027"
-                    maxlength="4"
-                    name="cardExpirationYear"
-                    v-model="valueFields.cardYear"
-                    :id="inputFields.cardYear"
-                    class="form-control -select number-two"
-                    id="form-checkout__cardExpirationYear" type="text"
-                    aria-label="Card Year"
-                    title="Year"
-                    data-card-field>
-                </b-col>
-                <b-col class="pl-0">
-                  <label class="label-estilo">CVV</label>
-                  <input
-                    title="CVV"
-                    maxlength="4"
-                    @input="changeCvv"
-                    data-card-field
-                    class="form-control number-two" :id="inputFields.cardCvv" type="tel" name="securityCode">
-
+                <b-col md="6" cols="12">
+                  <b-button @click="tipoPagamento = ''" block class="btn-pay-new">Alterar forma de pagamento</b-button>
                 </b-col>
               </b-row>
             </div>
-            <div>
-              <b-button block variant="success" class="mt-3">REALIZAR COMPRA</b-button>
+            <div class="card-info-credit p-3">
+              <div id="holder-name">
+                <label class="label-estilo mt-n2">Titular do cartão</label>
+                <input class="form-control number-two"
+                       :value="valueFields.cardName"
+                       placeholder="Nome do titular"
+                       @input="changeName"
+                       :id="inputFields.cardName"
+                       style="text-transform: capitalize"
+                       data-card-field
+                       autocomplete="off"
+                       id="form-checkout__cardholderName" type="text" name="cardholderName">
+              </div>
+              <div id="cpf">
+                <label class="label-estilo">CPF</label>
+                <input class="form-control number-two" autocomplete="true"
+                       placeholder="Digite o CPF do titular"
+                       data-card-field
+                       type="text"
+                       name="cardNumber"/>
+              </div>
+              <div id="number-card">
+                <label class="label-estilo">Número do cartão</label>
+                <input class="form-control number-two" autocomplete="true"
+                       placeholder="Digite o número do cartão"
+                       data-card-field
+                       @input="changeNumber" :id="inputFields.cardNumber" type="text"
+                       name="cardNumber"/>
+              </div>
+
+              <div id="extra">
+                <b-row>
+                  <b-col cols="6" md="4">
+                    <label class="label-estilo">Mês de vencimento</label>
+                    <input v-model="valueFields.cardMonth"
+                           min="1"
+                           placeholder="Ex: 03"
+                           maxlength="2"
+                           :id="inputFields.cardMonth"
+                           class="form-control -select number-two"
+                           type="text"
+                           @input="changeMonth"
+                           aria-label="Card Month"
+                           title="Month"
+                           data-card-field>
+                  </b-col>
+                  <b-col class="pl-0" cols="6" md="4">
+                    <label class="label-estilo">Ano de vencimento</label>
+                    <input
+                      min="2020"
+                      placeholder="Ex: 2027"
+                      maxlength="4"
+                      name="cardExpirationYear"
+                      v-model="valueFields.cardYear"
+                      @input="changeYear"
+                      :id="inputFields.cardYear"
+                      class="form-control -select number-two"
+                      id="form-checkout__cardExpirationYear" type="text"
+                      aria-label="Card Year"
+                      title="Year"
+                      data-card-field>
+                  </b-col>
+                  <b-col class="pl-md-0" cols="6" md="4">
+                    <label class="label-estilo">CVV</label>
+                    <input
+                      title="CVV"
+                      maxlength="4"
+                      @input="changeCvv"
+                      data-card-field
+                      class="form-control number-two" :id="inputFields.cardCvv" type="tel" name="securityCode">
+
+                  </b-col>
+                </b-row>
+              </div>
+              <div>
+                <b-button @click="$router.push('/meus-ingressos')" block variant="success" class="mt-3">REALIZAR COMPRA</b-button>
+              </div>
+              <div v-if="loading" class="d-flex">
+                <div>
+                  <img height="20" src="../assets/icones/loading.svg" alt="">
+                </div>
+                <p class="ml-2">Processando pagamento</p>
+              </div>
             </div>
-          </div>
-        </b-col>
-      </b-row>
-      <b-row v-if="tipoPagamento === 'pix'" class="mt-2">
-        <b-col>
-          <div>
-            <h4 class="text-center">Siga as instruções para realziar seu pagamento</h4>
-            <div class="mt-3">
-              <div class="card-mini mt-2">1.&nbsp; Acesse sua instituição financeira, selecione a
-                opção pagar com QR
-                Code, ou então PIX copia e cola;
-              </div>
-              <div class="card-mini">2. Escaneie o código e realize o pagamento, então você será
-                redirecionado para
-                baixar os ingressos
-              </div>
-              <div class="card-mini">
+          </b-col>
+        </b-row>
+      </div>
+      <div v-if="tipoPagamento === 'pix'">
+        <b-row class="mt-2">
+          <b-col md="6" cols="12">
+            <div>
+              <h5 class="text-center">Siga as instruções para realizar seu pagamento</h5>
+              <div class="mt-3">
+                <div class="card-mini mt-2">1.&nbsp; Acesse sua instituição financeira, selecione a
+                  opção pagar com QR
+                  Code, ou então PIX copia e cola;
+                </div>
+                <div class="card-mini">2. Escaneie o código e realize o pagamento, então você será
+                  redirecionado para
+                  baixar os ingressos
+                </div>
+                <div class="card-mini">
 
-                <div style="display: inline-flex">
+                  <div style="display: inline-flex">
 
-                  <div class="pr-2"><img style="width: 40px;" src="../assets/icones/whatsapp.png"
-                                         alt=""></div>
-                  <div class="pt-1 pl-1"> 3. Todos receberão o ingresso no WhatsApp cadastrado, e você
-                    poderá fazer o
-                    download no próximo passo!
+                    <div class="pr-2"><img style="width: 40px;" src="../assets/icones/whatsapp.png"
+                                           alt=""></div>
+                    <div class="pt-1 pl-1"> 3. Todos receberão o ingresso no WhatsApp cadastrado, e você
+                      poderá fazer o
+                      download no próximo passo!
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </b-col>
+          <b-col>
+            <div class="bg-resumo">
+              <b-row>
+                <b-col>
+                  <p> Valor da compra: {{ valorTotal | currency }}</p>
+                  <p> Quantidade de ingressos: {{ totalIngressos }}</p>
+                </b-col>
+                <b-col md="6" cols="12">
+                  <b-button @click="tipoPagamento = ''" class="btn-pay-new mt-2 mt-md-0">Alterar forma de pagamento
+                  </b-button>
+                </b-col>
+              </b-row>
+            </div>
+            <div class="card-info-credit p-3">
+              <div class="d-flex justify-content-center">
+                <div>
+                  <img
+                    src="https://api.paymee.com.br/resources/payments/pix/qrcode/bd062a11-ca1a-30f4-ae05-2f7f4aa17188"
+                    alt="">
+                  <p class="mt-2 text-center">Favorecido: <b>GO INGRESSOS</b></p>
+                  <div>
+                    <b-button block variant="info" class="mt-3 px-3 mb-4">
+                      <img class="mr-2" src="../assets/icones/copy.svg" height="20" alt="">
+                      Copiar Código
+                    </b-button>
                   </div>
                 </div>
-
               </div>
             </div>
-          </div>
-        </b-col>
-        <b-col>
-          <div class="bg-resumo">
-         <b-row>
-           <b-col>
-             <p> Valor da compra: {{valorTotal | currency}}</p>
-             <p> Quantidade de ingressos: {{ totalIngressos }}</p>
-           </b-col>
-           <b-col  md="6" cols="12">
-             <b-button @click="tipoPagamento = ''" class="btn-pay-new mt-2 mt-md-0">Alterar forma de pagamento</b-button>
-           </b-col>
-         </b-row>
-          </div>
-          <div class="card-info-credit p-3">
-           <div class="d-flex justify-content-center">
-            <div>
-              <img src="https://api.paymee.com.br/resources/payments/pix/qrcode/bd062a11-ca1a-30f4-ae05-2f7f4aa17188" alt="">
-              <p class="mt-2 text-center">Favorecido: <b>GO INGRESSOS</b></p>
-              <div>
-                <b-button block variant="info" class="mt-3 px-3 mb-4">COPIAR CÓDIGO</b-button>
-              </div>
-            </div>
-           </div>
-          </div>
-        </b-col>
-      </b-row>
+          </b-col>
+        </b-row>
+      </div>
+<!--fim-->
     </div>
     <div class="container-fluid px-md-5" v-if="!tipoPagamento">
       <div class="mt-md-5">
@@ -200,9 +219,10 @@
               v-if="!tipoPagamento"
               v-b-modal.finaliza
               variant="success"
-              class="mt-3"
+              class="mt-3 mb-4"
               block
-              >Finalizar Compra</b-button
+            >Finalizar Compra
+            </b-button
             >
           </b-col>
         </b-row>
@@ -220,7 +240,7 @@
           <div class="bloc-info" v-if="!codigoEnviado">
             <div class="d-flex align-items-center">
               <div>
-                <img height="37" src="../assets/icones/info.svg" alt="" />
+                <img height="37" src="../assets/icones/info.svg" alt=""/>
               </div>
               <p class="ml-2 text-info-bloc">
                 Digite seus dados e esolha uma opção de pagamento
@@ -289,11 +309,11 @@
             </b-row>
           </div>
         </div>
-        <hr />
+        <hr/>
         <p>Forma de pagamento</p>
         <div class="mt-2">
           <b-row>
-            <b-col md="6" cols="12" class="pr-md-1">
+            <b-col md="6" cols="6" class="pr-1">
               <div @click="escolhePay('pix')" class="card-pay text-center py-2">
                 <div>
                   <div>
@@ -307,7 +327,7 @@
                 </div>
               </div>
             </b-col>
-            <b-col md="6" class="pl-md-1 mt-2 mt-md-0" cols="12">
+            <b-col md="6" class="pl-1" cols="6">
               <div
                 @click="escolhePay('card')"
                 class="card-pay text-center py-2"
@@ -335,17 +355,25 @@
 import MenuTopo from "../components/menu";
 import cardCarrinho from "./cardCarrinho.vue";
 import cardResumo from "./cardResumo.vue";
+
 import('../assets/css/estiloCarrinho.css')
 
 export default {
   name: "carrinho",
-  components: { MenuTopo, cardCarrinho, cardResumo },
+  components: {MenuTopo, cardCarrinho, cardResumo},
   data() {
     return {
+      loading: true,
       minCardMonth: '',
       ano: '',
       titular: '',
-      inputFields: { cardNumber: 'v-card-number', cardName: 'v-card-name', cardMonth: 'v-card-month', cardYear: 'v-card-year', cardCvv: 'v-card-cvv' },
+      inputFields: {
+        cardNumber: 'v-card-number',
+        cardName: 'v-card-name',
+        cardMonth: 'v-card-month',
+        cardYear: 'v-card-year',
+        cardCvv: 'v-card-cvv'
+      },
       tipoPagamento: "",
       codigoEnviado: false,
       whatsapp: "",
@@ -364,11 +392,14 @@ export default {
         cardYear: "",
         cardCvv: "",
       },
-
-      dadosCard: {
-        titular: ''
-      },
-      labels: { cardName: 'Nome Completo', cardHolder: 'Titular do cartão', cardMonth: 'MM', cardYear: 'YY', cardExpires: 'Vencimento', cardCvv: 'CVV' }
+      labels: {
+        cardName: 'Nome Completo',
+        cardHolder: 'Titular do cartão',
+        cardMonth: 'MM',
+        cardYear: 'YY',
+        cardExpires: 'Vencimento',
+        cardCvv: 'CVV'
+      }
     };
   },
   beforeMount() {
@@ -384,7 +415,7 @@ export default {
   },
   methods: {
 
-    changeNumber (e) {
+    changeNumber(e) {
       this.valueFields.cardNumber = e.target.value
       const value = this.valueFields.cardNumber.replace(/\D/g, '')
       // american express, 15 digits
@@ -405,28 +436,30 @@ export default {
       if (e.inputType == 'deleteContentBackward') {
         const lastChar = this.valueFields.cardNumber.substring(this.valueFields.cardNumber.length, this.valueFields.cardNumber.length - 1)
 
-        if (lastChar == ' ') { this.valueFields.cardNumber = this.valueFields.cardNumber.substring(0, this.valueFields.cardNumber.length - 1) }
+        if (lastChar == ' ') {
+          this.valueFields.cardNumber = this.valueFields.cardNumber.substring(0, this.valueFields.cardNumber.length - 1)
+        }
       }
       this.$emit('input-card-number', this.valueFields.cardNumber)
     },
 
-    changeMonth () {
+    changeMonth() {
       this.$emit('input-card-month', this.valueFields.cardMonth)
     },
-    changeYear () {
+    changeYear() {
       this.$emit('input-card-year', this.valueFields.cardYear)
     },
-    changeCvv (e) {
+    changeCvv(e) {
       this.valueFields.cardCvv = e.target.value
       this.$emit('input-card-cvv', this.valueFields.cardCvv)
     },
 
-    changeName (e) {
+    changeName(e) {
       this.valueFields.cardName = e.target.value
       this.$emit('input-card-name', this.valueFields.cardName)
     },
 
-    generateMonthValue (n) {
+    generateMonthValue(n) {
       return n < 10 ? `0${n}` : n
     },
 
