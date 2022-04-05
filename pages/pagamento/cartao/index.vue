@@ -43,16 +43,51 @@
         </div>
         <div>
           <form id="form-checkout" >
-            <input type="text" name="cardNumber" class="form-control" :maxlength="cardNumberMaxLength" data-card-field @input="changeNumber" :id="inputFields.cardNumber"/>
-            <input type="text" name="cardExpirationDate" id="form-checkout__cardExpirationDate" class="form-control"/>
-            <input type="text" name="cardholderName" @input="changeName" :id="inputFields.cardName" data-card-field class="form-control" />
-            <input type="email" name="cardholderEmail" id="form-checkout__cardholderEmail" class="form-control"/>
-            <input data-card-field  maxlength="4" @input="changeCvv" :id="inputFields.cardCvv" type="text" name="securityCode" id="form-checkout__securityCode" class="form-control"/>
-            <select hidden name="issuer" id="form-checkout__issuer"></select>
-            <select hidden name="identificationType" id="form-checkout__identificationType"></select>
-            <input class="form-control" type="text" name="identificationNumber" id="form-checkout__identificationNumber"/>
-            <select class="form-control" name="installments" id="form-checkout__installments"></select>
-            <button class="form-control" type="submit" id="form-checkout__submit">Pagar</button>
+            <div class="card-info-credit p-3">
+              <b-row>
+                <b-col md="12">
+                  <div class="label-estilo">Número do cartão</div>
+                  <input type="text" name="cardNumber" class="form-control" :maxlength="cardNumberMaxLength" data-card-field @input="changeNumber" :id="inputFields.cardNumber"/>
+                </b-col>
+              </b-row>
+
+              <b-row class="mt-2">
+                <b-col class="pr-0">
+                  <div class="label-estilo">Vencimento</div>
+                  <input type="text" name="cardExpirationDate" maxlength="7" id="form-checkout__cardExpirationDate" class="form-control"/>
+                </b-col>
+
+                <b-col>
+                  <div class="label-estilo">Código de segurança</div>
+                  <input data-card-field  maxlength="4" @input="changeCvv" :id="inputFields.cardCvv" type="text" name="securityCode" id="form-checkout__securityCode" class="form-control"/>
+
+                </b-col>
+              </b-row>
+
+              <b-row class="mt-2">
+                <b-col class="pr-0">
+                  <div class="label-estilo">Nome do titular</div>
+                  <input type="text" name="cardholderName" @input="changeName" :id="inputFields.cardName" data-card-field class="form-control" />
+                </b-col>
+                <b-col>
+                  <div class="label-estilo">E-mail</div>
+                  <input type="email" name="cardholderEmail" id="form-checkout__cardholderEmail" class="form-control"/>
+
+                </b-col>
+              </b-row>
+              <select hidden name="issuer" id="form-checkout__issuer"></select>
+              <select hidden name="identificationType" id="form-checkout__identificationType"></select>
+              <b-row class="mt-2">
+                <b-col class="pr-0">
+                  <input class="form-control" type="text" name="identificationNumber" id="form-checkout__identificationNumber"/>
+                </b-col>
+                <b-col>
+                  <select class="form-control" name="installments" id="form-checkout__installments"></select>
+                </b-col>
+              </b-row>
+
+              <button class="form-control btn-compra mt-2" type="submit" id="form-checkout__submit">Pagar</button>
+            </div>
             {{infoCard}}
           </form>
         </div>
@@ -140,7 +175,7 @@ export default {
         },
         cardExpirationDate: {
           id: "form-checkout__cardExpirationDate",
-          placeholder: "Data de vencimento (MM/YYYY)",
+          placeholder: "(MM/YYYY)",
         },
         securityCode: {
           id: "form-checkout__securityCode",
@@ -249,10 +284,10 @@ export default {
                   this.$toast.error('Confira seu documento.')
                   break;
                 case "325":
-                  this.$toast.error('Confira a data.')
+                  this.$toast.error('Confira a data de vencimento.')
                   break;
                 case "326":
-                  this.$toast.error('Confira a data.')
+                  this.$toast.error('Confira a data de vencimento.')
                   break;
                 default:
                   this.$toast.error('Dados incorretos')
@@ -425,6 +460,11 @@ export default {
   background-color: white;
 }
 
+input {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+}
 
 .btn-pay-new
 {

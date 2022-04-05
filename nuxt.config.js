@@ -25,6 +25,7 @@ export default {
   css: ["~assets/css/global.css"],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: './plugins/echo', mode: 'client' },
     { src: "~/plugins/vue-toast.js", mode: "client" },
     { src: "~/plugins/vue-pay-card", mode: "client" },
     { src: "~/plugins/vue-the-mask.js", mode: "client" },

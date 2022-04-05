@@ -63,6 +63,57 @@ export default {
       codigo: '',
     }
   },
+  async mounted() {
+    let idGo = localStorage.getItem('id_go');
+    if (!idGo) {
+      idGo = 'GO-' + Math.floor((Math.random() * 9123030) + 31230)
+      await localStorage.setItem('id_go', JSON.stringify(idGo))
+    }
+    this.chave = idGo
+    this.$echo.channel(this.chave).on('pagamento', (e) => {
+      console.log(e)
+      localStorage.setItem('pago', JSON.stringify(this.ingressos))
+
+      if (screen.width < 640 || screen.height < 480) {
+
+        if (e.pagamento === true) {
+          this.$router.push('/ingressos')
+          this.$toast.success('Pagamento aprovado e ingressos enviados')
+          this.mostraico = 1
+          localStorage.setItem('ingressos', JSON.stringify(this.ingressos))
+          localStorage.setItem('pago', JSON.stringify(this.ingressos))
+          this.controledown = 1
+          this.controlepix = 1
+          this.controlec = 1
+
+
+        }
+      }
+
+      else {
+
+        if (e.pagamento === true) {
+
+          this.$toast.success('Pagamento aprovado e ingressos enviados')
+          this.mostraico = 1
+          this.controledown = 0
+          this.controlepix = 1
+          this.controlec = 1
+          localStorage.setItem('pago', JSON.stringify(this.ingressos))
+          localStorage.setItem('ingressos', JSON.stringify(this.ingressos))
+        }
+
+      }
+
+    })
+
+
+    // let pago = await localStorage.getItem('id_go');
+    // if (!pago) {
+    //   this.mostraimprime = 1
+    // }
+
+  },
   methods: {
     enviaVerifica(c){
       if (c) {
