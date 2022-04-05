@@ -6,6 +6,8 @@
       <b-col cols="12" md="6">
        <div>
          <vue-paycard   :inputFields="inputFields"
+                        :labels="labelsFields"
+                        :isCardNumberMasked="false"
                         :valueFields="valueFields" />
        </div>
         <div class="d-flex justify-content-center">
@@ -44,6 +46,8 @@
         <div>
           <form id="form-checkout" >
             <div class="card-info-credit p-3">
+              <p>Insira dos dados do cartão</p>
+              <hr>
               <b-row>
                 <b-col md="12">
                   <div class="label-estilo">Número do cartão</div>
@@ -79,14 +83,16 @@
               <select hidden name="identificationType" id="form-checkout__identificationType"></select>
               <b-row class="mt-2">
                 <b-col class="pr-0">
+                  <div class="label-estilo">CPF</div>
                   <input class="form-control" type="text" name="identificationNumber" id="form-checkout__identificationNumber"/>
                 </b-col>
                 <b-col>
+                  <div class="label-estilo">Pagamento</div>
                   <select class="form-control" name="installments" id="form-checkout__installments"></select>
                 </b-col>
               </b-row>
 
-              <button class="form-control btn-compra mt-2" type="submit" id="form-checkout__submit">Pagar</button>
+              <button class="form-control btn-compra mt-2" type="submit" id="form-checkout__submit">Efetuar Pagamento</button>
             </div>
             {{infoCard}}
           </form>
@@ -122,6 +128,7 @@ export default {
         cardCvv: 'form-checkout__securityCode',
         identificationNumber: 'form-checkout__identificationNumber'
       },
+      labelsFields: { cardName: 'Nome Completo', cardHolder: 'Titular do cartão', cardMonth: 'MM', cardYear: 'YY', cardExpires: 'Vencimento', cardCvv: 'CVV' },
       minCardYear: new Date().getFullYear(),
       mainCardNumber: '',
       cardNumberMaxLength: 19,
@@ -427,6 +434,12 @@ export default {
 
 <style scoped>
 
+.btn-compra
+{
+  background-color: #05b767;
+  color: white;
+}
+
 .bg-resumo
 {
   font-size: 13px;
@@ -445,7 +458,7 @@ export default {
 
 .label-estilo
 {
-  margin-top: 10px;
+  margin-top: 0;
   margin-bottom: 0;
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
