@@ -2,7 +2,7 @@
 <div>
   <menu-topo/>
   <div class="container mt-md-5">
-    <b-row class="mt-2">
+    <b-row class="mt-4">
       <b-col cols="12" md="6">
        <div>
          <vue-paycard   :inputFields="inputFields"
@@ -12,7 +12,7 @@
        </div>
         <div class="d-flex justify-content-center">
           <div>
-            <div class="bloc-info mt-5 mb-3">
+            <div class="bloc-info mt-md-5 mt-3 mb-3">
               <div class="d-flex align-items-center">
                 <div>
                   <img height="37" src="../../../assets/icones/info.svg" alt="" />
@@ -33,7 +33,7 @@
               <p>Valor da compra: {{ valorTotal | currency }}</p>
               <p>Quantidade de ingressos: {{ totalIngressos }}</p>
             </b-col>
-            <b-col md="6" cols="12">
+            <b-col md="6" cols="12" class="d-none d-md-block">
               <b-button
                 @click="$router.push('/carrinho')"
                 block
@@ -44,12 +44,12 @@
           </b-row>
         </div>
         <div>
-          <form id="form-checkout" >
+          <form id="form-checkout" class="mb-5">
             <div class="card-info-credit p-3">
-              <p>Insira dos dados do cartão</p>
+              <p style="font-size: 15px !important">Insira dos dados do cartão</p>
               <hr>
               <b-row>
-                <b-col md="12">
+                <b-col md="12" cols="12">
                   <div class="label-estilo">Número do cartão</div>
                   <input type="text" name="cardNumber" class="form-control" :maxlength="cardNumberMaxLength" data-card-field @input="changeNumber" :id="inputFields.cardNumber"/>
                 </b-col>
@@ -69,11 +69,11 @@
               </b-row>
 
               <b-row class="mt-2">
-                <b-col class="pr-0">
+                <b-col class="pr-md-0" md="6" cols="12">
                   <div class="label-estilo">Nome do titular</div>
                   <input type="text" name="cardholderName" @input="changeName" :id="inputFields.cardName" data-card-field class="form-control" />
                 </b-col>
-                <b-col>
+                <b-col class="mt-2 mt-md-0">
                   <div class="label-estilo">E-mail</div>
                   <input type="email" name="cardholderEmail" id="form-checkout__cardholderEmail" class="form-control"/>
 
@@ -82,11 +82,11 @@
               <select hidden name="issuer" id="form-checkout__issuer"></select>
               <select hidden name="identificationType" id="form-checkout__identificationType"></select>
               <b-row class="mt-2">
-                <b-col class="pr-0">
+                <b-col class="pr-0"  md="6" cols="12">
                   <div class="label-estilo">CPF</div>
                   <input class="form-control" type="text" name="identificationNumber" id="form-checkout__identificationNumber"/>
                 </b-col>
-                <b-col>
+                <b-col class="mt-2 mt-md-0">
                   <div class="label-estilo">Pagamento</div>
                   <select class="form-control" name="installments" id="form-checkout__installments"></select>
                 </b-col>

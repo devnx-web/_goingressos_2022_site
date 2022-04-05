@@ -282,7 +282,7 @@ export default {
       this.$refs["infos"].hide();
       this.salvarIngressos();
       if (metodo === 'card') {
-        this.$router.push('/pagamento/cartao')
+        window.location.replace('/pagamento/cartao')
       }
     },
 
