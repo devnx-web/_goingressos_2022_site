@@ -221,20 +221,15 @@ export default {
     escolhePay(metodo) {
       this.tipoPagamento = metodo;
       this.$refs["infos"].hide();
-<<<<<<< Updated upstream
-      this.salvarIngressos();
       if (metodo === "card") {
         window.location.replace("/pagamento/cartao");
-=======
-      if (metodo === 'card') {
-        window.location.replace('/pagamento/cartao')
-    }
+      }
       if (metodo === 'pix') {
         localStorage.setItem('ingressos', JSON.stringify(this.ingressos))
         this.$router.push('/pagamento/pix')
->>>>>>> Stashed changes
       }
     },
+
 
     removeIngresso(index) {
       this.ingressos.splice(index, 1);
