@@ -33,16 +33,23 @@
                     </div>
                   </div>
                 </div>
-                {{ ingressos }}
 
-                <div v-for="(c, index) in ingressos" :key="index">
-                  {{ c.nomeLote }}
+                <div class="mt-3">
+                  <p>Confira os ingressos</p>
+                  <div v-for="c in ingressos">
+                   <div class="card-ing">
+                     <div>
+                       {{c.nomeIng}} - {{ c.nomeLote }}
+                     </div>
+                     <div>Quantidade: {{c.qtd}} Valor: {{c.qtd * c.valor | currency}}</div>
+                   </div>
+                  </div>
                 </div>
               </div>
             </div>
           </b-col>
           <b-col>
-            <div class="bg-resumo">
+            <div class="bg-resumo d-none d-md-block">
               <b-row>
                 <b-col>
                   <p>Valor da compra: {{ valorTotal | currency }}</p>
@@ -57,7 +64,7 @@
                 </b-col>
               </b-row>
             </div>
-            <div class="card-info-credit p-3">
+            <div class="card-info-credit p-3 mt-3 mt-md-0 mb-5">
               <div class="d-flex justify-content-center">
                 <div>
                   <div style="width: 300px">
@@ -149,10 +156,12 @@ export default {
     copiaCod() {
       console.log("dd");
 
-      if (!this.dadosretorna.qrcode) {
+      if (!this.dadosretorna.qr_code) {
         this.$toast.error("Aguarde o QR Code ser gerado para copiar o código");
+        return
       }
       navigator.clipboard.writeText(this.dadosretorna.qr_code);
+      this.$toast.info('Código copiado com sucesso')
     },
     pagarCard() {
       window.location.replace("/pagamento/cartao");
@@ -178,14 +187,14 @@ export default {
 </script>
 
 <style scoped>
-.op0 {
-  opacity: 0;
-  transition: 2s ease-in-out;
-}
 
-.op1 {
-  opacity: 1;
-  transition: 2.5s linear;
+.card-ing
+{
+  padding: 10px;
+  border: solid 1px #e0e0e0;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
 }
 
 .bg-resumo {
