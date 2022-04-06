@@ -14,7 +14,7 @@
            <b-col class="pl-md-0 mt-3 mt-md-0">
              <div class="border p-3">
                <p>Dados do ingresso</p>
-               <p>Status: <b-badge variant="success" style="font-weight: 500;" class="px-3">Pagamento Aprovado</b-badge></p>
+               <p>Status: <b-badge variant="success" style="font-weight: 500; padding-top: 4px; padding-bottom: 4px; font-size: 12px" class="px-3">Pagamento Aprovado</b-badge></p>
                <div class="bloc-info mt-2">
                  <div class="d-md-flex align-items-center">
                    <div>
@@ -31,8 +31,8 @@
                   <b-col align-self="center">
                     <p>Total: R$ 50,00</p>
                   </b-col>
-                  <b-col class="text-right align-self-centeri">
-                    <b-button variant="success" class="px-5">Reenviar Ingressos</b-button>
+                  <b-col cols="8" class="text-right align-self-centeri">
+                    <b-button variant="success" class="px-3">Reenviar Ingressos</b-button>
                   </b-col>
                 </b-row>
                  <div class="card-ingresso mt-2">

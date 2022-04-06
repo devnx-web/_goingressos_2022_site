@@ -39,7 +39,7 @@
                 <img height="37" src="../assets/icones/info.svg" alt="" />
               </div>
               <p class="ml-2 text-info-bloc">
-                Para ver os ingressos comprados insira o WhatsApp do comprador
+                Para ver os ingressos comprados insira o seu WhatsApp
               </p>
             </div>
           </div>
@@ -62,11 +62,8 @@
           <b-input
             class="mt-2 input-form"
             placeholder="Digite o código"
-            :disabled="!codigoEnviado"
+            v-if="codigoEnviado"
           ></b-input>
-          <p class="txt-info" v-if="!codigoEnviado">
-            Aperte em enviar código antes!
-          </p>
         </div>
         <div class="mt-2">
           <b-button

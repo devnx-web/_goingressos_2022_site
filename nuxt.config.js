@@ -3,9 +3,9 @@ export default {
     port: 8000 // default: 3000
   },
   head: {
-    title: 'goingressos_2022_site',
+    title: 'We Are Carnaval',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'pt-br'
     },
     meta: [
       { charset: 'utf-8' },

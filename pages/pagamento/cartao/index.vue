@@ -47,7 +47,7 @@
               </b-col>
               <b-col md="6" cols="12" class="d-none d-md-block">
                 <b-button
-                  @click="$router.push('/pagamento/pix')"
+                  v-b-modal.pix
                   block
                   class="btn-pay-new"
                   style="color: white !important"
@@ -171,6 +171,55 @@
         </b-col>
       </b-row>
     </div>
+    <b-modal
+      ref="pix"
+      id="pix"
+      centered
+      title="Finalizar compra"
+      hide-footer
+    >
+      <div class="py-1">
+        <div>
+          <div class="bloc-info">
+            <div class="d-flex align-items-center">
+              <div>
+                <img height="37" src="../../../assets/icones/info.svg" alt="" />
+              </div>
+              <p class="ml-2 text-info-bloc">
+                Digite seu e-mail para continuar
+              </p>
+            </div>
+          </div>
+          <div>
+            <p class="mt-3 small">E-mail</p>
+            <b-input
+              v-model="email"
+              class="input-form form-control estilo-input"
+              placeholder="Digite seu e-mail"
+            ></b-input>
+          </div>
+        </div>
+        <hr />
+        <div class="mt-2">
+          <b-row>
+            <b-col md="12" cols="12">
+              <div @click="escolhePay('pix')" class="card-pay text-center py-2">
+                <div>
+                  <div>
+                    <img
+                      src="../../../assets/icones/pix-106.svg"
+                      height="30"
+                      alt=""
+                    />
+                  </div>
+                  <p class="small mt-1">Efetuar pagamento</p>
+                </div>
+              </div>
+            </b-col>
+          </b-row>
+        </div>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -434,6 +483,17 @@ export default {
     }
   },
   methods: {
+    escolhePay(metodo) {
+      if (!this.email) {
+        this.$toast.error('Digite um e-mail para continuar')
+        return
+      }
+      localStorage.setItem("email", JSON.stringify(this.email));
+      this.tipoPagamento = metodo;
+      if (metodo === "pix") {
+        this.$router.push("/pagamento/pix");
+      }
+    },
     changeName(e) {
       this.valueFields.cardName = e.target.value;
       this.$emit("input-card-name", this.valueFields.cardName);
@@ -567,12 +627,6 @@ export default {
   font-size: 14px;
 }
 
-.number-two {
-  font-family: "Poppins", sans-serif;
-  font-size: 13px;
-  background-color: white;
-}
-
 input {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
@@ -583,5 +637,20 @@ input {
   background-color: transparent !important;
   font-size: 13px;
   color: black;
+}
+
+.card-pay {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100px;
+  border-radius: 10px;
+  border: solid 1px #dedede;
+}
+
+.card-pay:hover {
+  background-color: #424242;
+  color: white;
+  cursor: pointer;
 }
 </style>
