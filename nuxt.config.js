@@ -45,6 +45,7 @@ export default {
   modules: [
     // 'nuxt-socket-io',
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
     ['vue-currency-filter/nuxt', {
       symbol: 'R$', thousandsSeparator: '.', thousandCount: 3,
       fractionCount: 2, fractionSeparator: ',', symbolPosition: 'front', symbolSpacing: true

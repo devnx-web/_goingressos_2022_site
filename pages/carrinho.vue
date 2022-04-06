@@ -1,85 +1,9 @@
 <template>
-  <div>
+  <div class="mb-5">
     <menu-topo />
+    <b-button @click="conulta()">ver</b-button>
     <div class="container mt-md-5 mt-3">
       <!--      tornar componente-->
-      <div v-if="tipoPagamento === 'pix'">
-        <b-row class="mt-2">
-          <b-col md="6" cols="12">
-            <div>
-              <h5 class="text-center">
-                Siga as instruções para realizar seu pagamento
-              </h5>
-              <div class="mt-3">
-                <div class="card-mini mt-2">
-                  1.&nbsp; Acesse sua instituição financeira, selecione a opção
-                  pagar com QR Code, ou então PIX copia e cola;
-                </div>
-                <div class="card-mini">
-                  2. Escaneie o código e realize o pagamento, então você será
-                  redirecionado para baixar os ingressos
-                </div>
-                <div class="card-mini">
-                  <div style="display: inline-flex">
-                    <div class="pr-2">
-                      <img
-                        style="width: 40px"
-                        src="../assets/icones/whatsapp.png"
-                        alt=""
-                      />
-                    </div>
-                    <div class="pt-1 pl-1">
-                      3. Todos receberão o ingresso no WhatsApp cadastrado, e
-                      você poderá fazer o download no próximo passo!
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </b-col>
-          <b-col>
-            <div class="bg-resumo">
-              <b-row>
-                <b-col>
-                  <p>Valor da compra: {{ valorTotal | currency }}</p>
-                  <p>Quantidade de ingressos: {{ totalIngressos }}</p>
-                </b-col>
-                <b-col md="6" cols="12">
-                  <b-button
-                    @click="tipoPagamento = ''"
-                    class="btn-pay-new mt-2 mt-md-0"
-                    >Alterar forma de pagamento
-                  </b-button>
-                </b-col>
-              </b-row>
-            </div>
-            <div class="card-info-credit p-3">
-              <div class="d-flex justify-content-center">
-                <div>
-                  <img
-                    src="https://api.paymee.com.br/resources/payments/pix/qrcode/bd062a11-ca1a-30f4-ae05-2f7f4aa17188"
-                    alt=""
-                  />
-                  <p class="mt-2 text-center">
-                    Favorecido: <b>GO INGRESSOS</b>
-                  </p>
-                  <div>
-                    <b-button block variant="info" class="mt-3 px-3 mb-4">
-                      <img
-                        class="mr-2"
-                        src="../assets/icones/copy.svg"
-                        height="20"
-                        alt=""
-                      />
-                      Copiar Código
-                    </b-button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </b-col>
-        </b-row>
-      </div>
       <!--fim-->
     </div>
     <div class="container-fluid px-md-5" v-if="!tipoPagamento">
@@ -96,6 +20,7 @@
               <h1>MEU CARRINHO</h1>
             </div>
             <card-carrinho
+              @none="none"
               v-if="!tipoPagamento"
               :ingressos="ingressos"
               @removeIngresso="removeIngresso"
@@ -109,8 +34,8 @@
               :vt="valorTotal"
             />
             <b-button
-              v-if="!tipoPagamento"
               v-b-modal.finaliza
+              v-if="!tipoPagamento"
               variant="success"
               class="mt-3 mb-4"
               @click="testaSocket"
@@ -156,7 +81,6 @@
             <p class="mt-3 small">E-mail</p>
             <b-input
               class="input-form form-control estilo-input"
-              v-model="email"
               placeholder="Digite seu e-mail"
             ></b-input>
           </div>
@@ -258,6 +182,7 @@ export default {
   data() {
     return {
       loading: true,
+      desabilita: true,
       tipoPagamento: "",
       codigoEnviado: false,
       whatsapp: "",
@@ -279,12 +204,35 @@ export default {
     }
   },
   methods: {
+    conulta() {
+      this.ingressos.forEach(index)
+      {
+        let valida
+        valida = false
+      }
+      console.log(this.ingressos)
+    },
+
+    none() {
+      this.desabilita = false
+      console.log('ddd')
+    },
+
     escolhePay(metodo) {
       this.tipoPagamento = metodo;
       this.$refs["infos"].hide();
+<<<<<<< Updated upstream
       this.salvarIngressos();
       if (metodo === "card") {
         window.location.replace("/pagamento/cartao");
+=======
+      if (metodo === 'card') {
+        window.location.replace('/pagamento/cartao')
+    }
+      if (metodo === 'pix') {
+        localStorage.setItem('ingressos', JSON.stringify(this.ingressos))
+        this.$router.push('/pagamento/pix')
+>>>>>>> Stashed changes
       }
     },
 
@@ -295,25 +243,6 @@ export default {
         (total, ingresso) => total + parseFloat(ingresso.valor),
         0
       );
-    },
-    salvarIngressos() {
-      fetch(
-        "https://phpstack-666249-2543201.cloudwaysapps.com/api/site/surreal-producoes/evento/we-are-carnaval/pre_res_ingresso",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ingressos: this.ingressos,
-            email: this.email,
-            pagamento: this.tipoPagamento,
-          }),
-        }
-      )
-        .then((res) => res.json())
-        .then((res) => console.log(res));
     },
     carregaCarrinho() {
       const carrinho = localStorage.getItem("ingressos") || [];
@@ -332,6 +261,7 @@ export default {
             ["cpf"]: "",
             ["nasc"]: "",
             ["whats"]: "",
+            ["valida"]: false,
           });
         }
       });

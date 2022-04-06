@@ -10,6 +10,11 @@
                         :isCardNumberMasked="false"
                         :valueFields="valueFields" />
        </div>
+        <b-button
+          block
+          @click="$router.push('/pagamento/pix')"
+          class="btn-pay-new mt-3 d-md-none"
+        >Alterar forma de pagamento</b-button>
         <div class="d-flex justify-content-center">
           <div>
             <div class="bloc-info mt-md-5 mt-3 mb-3">
@@ -35,10 +40,11 @@
             </b-col>
             <b-col md="6" cols="12" class="d-none d-md-block">
               <b-button
-                @click="$router.push('/carrinho')"
+                @click="$router.push('/pagamento/pix')"
                 block
                 class="btn-pay-new"
-              >Alterar forma de pagamento</b-button
+                style="color: white !important"
+              >Pagar com pix</b-button
               >
             </b-col>
           </b-row>
@@ -76,13 +82,12 @@
                 <b-col class="mt-2 mt-md-0">
                   <div class="label-estilo">E-mail</div>
                   <input type="email" name="cardholderEmail" id="form-checkout__cardholderEmail" class="form-control"/>
-
                 </b-col>
               </b-row>
               <select hidden name="issuer" id="form-checkout__issuer"></select>
               <select hidden name="identificationType" id="form-checkout__identificationType"></select>
               <b-row class="mt-2">
-                <b-col class="pr-0"  md="6" cols="12">
+                <b-col class="pr-md-0"  md="6" cols="12">
                   <div class="label-estilo">CPF</div>
                   <input class="form-control" type="text" name="identificationNumber" id="form-checkout__identificationNumber"/>
                 </b-col>
@@ -483,7 +488,7 @@ input {
 {
   background-color: transparent !important;
   font-size: 13px;
-  height: 100%;
+  color: black;
 
 }
 

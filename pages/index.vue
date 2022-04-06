@@ -1,6 +1,6 @@
 <template>
   <div>
-    <menu-topo class="d-none d-md-block"/>
+    <menu-topo/>
     <div style="overflow: hidden">
       <div class="bg-banner d-none d-md-block"></div>
     </div>

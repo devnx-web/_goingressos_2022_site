@@ -128,6 +128,7 @@
         </div>
       </div>
     </div>
+    <b-button @click="testar()">oss</b-button>
   </div>
 </template>
 <script>
@@ -138,9 +139,11 @@ export default {
       type: Array,
       required: true,
     },
+    desabilita: Boolean,
   },
   data() {
     return {
+      controle: {},
       verifica: {
         cpf: false,
         nome: false,
@@ -150,24 +153,43 @@ export default {
       //   ingressosP: [],
     };
   },
+  created() {
+    console.log(this.ingressos)
+  },
   methods: {
+    testar(index) {
+      this.ingressos[index].valida = true
+    },
     validaCampo(campo, index) {
+      let valida
+      valida = false
       if (campo === "nome") {
         if (this.ingressos[index].nome.length < 5) {
           this.verifica.nome = true;
           return;
         }
+        valida = true
         this.verifica.nome = false;
       }
+      valida = false
       if (campo === "cpf") {
         if (this.ingressos[index].cpf.length === 11) {
           if (!this.validarCPF(this.ingressos[index].cpf)) {
+            valida = false
             this.$toast.error("Digite um cpf válido!");
             this.verifica.cpf = true;
             return;
           }
+          else {
+            valida = true
+          }
           this.verifica.cpf = false;
         }
+      }
+      console.log(valida)
+      console.log(this.ingressos)
+      if (valida) {
+        this.testar(index)
       }
     },
 
