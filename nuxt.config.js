@@ -17,10 +17,8 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      {
-        src: 'https://sdk.mercadopago.com/js/v2',
-        src: 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js',
-      }
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js'},
+      { src: 'https://sdk.mercadopago.com/js/v2',}
     ]
   },
 

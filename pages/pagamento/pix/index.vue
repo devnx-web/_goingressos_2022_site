@@ -66,7 +66,7 @@
                    </div>
                    <div v-if="!dadosretorna.qr_code">
                      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-                     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_q30c1wrm.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px; margin-top: -50px" autoplay></lottie-player>
+                     <lottie-player name="lottie" src="https://assets4.lottiefiles.com/packages/lf20_q30c1wrm.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px; margin-top: -50px" autoplay></lottie-player>
                    </div>
                  </div>
                  <p class="mt-2 text-center">
