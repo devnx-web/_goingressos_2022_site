@@ -1,7 +1,6 @@
 <template>
   <div class="mb-5">
     <menu-topo />
-    <b-button @click="conulta()">ver</b-button>
     <div class="container mt-md-5 mt-3">
       <!--      tornar componente-->
       <!--fim-->
@@ -38,7 +37,6 @@
               v-if="!tipoPagamento"
               variant="success"
               class="mt-3 mb-4"
-              @click="testaSocket"
               block
               >Finalizar Compra
             </b-button>

@@ -128,7 +128,6 @@
         </div>
       </div>
     </div>
-    <b-button @click="testar()">oss</b-button>
   </div>
 </template>
 <script>
