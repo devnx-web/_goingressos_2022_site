@@ -34,6 +34,7 @@
             />
             <b-button
               v-b-modal.finaliza
+              @click="salvaDadosCarrinho"
               v-if="!tipoPagamento"
               variant="success"
               class="mt-3 mb-4"
@@ -202,33 +203,24 @@ export default {
     }
   },
   methods: {
-    conulta() {
-      this.ingressos.forEach(index)
-      {
-        let valida
-        valida = false
-      }
-      console.log(this.ingressos)
+    salvaDadosCarrinho() {
+      localStorage.setItem("ingressosC", JSON.stringify(this.ingressos));
     },
-
     none() {
-      this.desabilita = false
-      console.log('ddd')
+      this.desabilita = false;
+      console.log("ddd");
     },
-
     escolhePay(metodo) {
       this.tipoPagamento = metodo;
       this.$refs["infos"].hide();
       if (metodo === "card") {
         window.location.replace("/pagamento/cartao");
       }
-      if (metodo === 'pix') {
-        localStorage.setItem('ingressos', JSON.stringify(this.ingressos))
-        this.$router.push('/pagamento/pix')
+      if (metodo === "pix") {
+        localStorage.setItem("ingressos", JSON.stringify(this.ingressos));
+        this.$router.push("/pagamento/pix");
       }
     },
-
-
     removeIngresso(index) {
       this.ingressos.splice(index, 1);
       this.totalIngressos = this.ingressos.length;
