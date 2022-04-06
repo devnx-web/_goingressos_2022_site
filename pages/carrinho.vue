@@ -113,6 +113,7 @@
               v-b-modal.finaliza
               variant="success"
               class="mt-3 mb-4"
+              @click="testaSocket"
               block
               >Finalizar Compra
             </b-button>
@@ -260,6 +261,7 @@ export default {
       tipoPagamento: "",
       codigoEnviado: false,
       whatsapp: "",
+      email: "",
       status: "not_accepted",
       totalIngressos: 0,
       valorTotal: 0,
@@ -281,8 +283,8 @@ export default {
       this.tipoPagamento = metodo;
       this.$refs["infos"].hide();
       this.salvarIngressos();
-      if (metodo === 'card') {
-        window.location.replace('/pagamento/cartao')
+      if (metodo === "card") {
+        window.location.replace("/pagamento/cartao");
       }
     },
 

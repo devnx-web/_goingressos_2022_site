@@ -1,5 +1,7 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  server: {
+    port: 8000 // default: 3000
+  },
   head: {
     title: 'goingressos_2022_site',
     htmlAttrs: {
@@ -17,6 +19,7 @@ export default {
     script: [
       {
         src: 'https://sdk.mercadopago.com/js/v2',
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js',
       }
     ]
   },
@@ -25,7 +28,7 @@ export default {
   css: ["~assets/css/global.css"],
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: './plugins/echo', mode: 'client' },
+    // { src: "~/plugins/socket.js", mode: "client" },
     { src: "~/plugins/vue-toast.js", mode: "client" },
     { src: "~/plugins/vue-pay-card", mode: "client" },
     { src: "~/plugins/vue-the-mask.js", mode: "client" },
@@ -40,13 +43,16 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/bootstrap
+    // 'nuxt-socket-io',
     'bootstrap-vue/nuxt',
     ['vue-currency-filter/nuxt', {
       symbol: 'R$', thousandsSeparator: '.', thousandCount: 3,
       fractionCount: 2, fractionSeparator: ',', symbolPosition: 'front', symbolSpacing: true
     }],
   ],
+  // io: {
+  //   sockets: [{ name: 'home', url: 'http://localhost:5000' }]
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
