@@ -64,66 +64,13 @@
               </p>
             </div>
           </div>
-          <div v-if="ingressos.length < 2">
-            <b-form-checkbox
-              id="checkbox-1"
-              v-model="status"
-              name="checkbox-1"
-              value="accepted"
-              class="mt-2"
-              unchecked-value="not_accepted"
-            >
-              <p class="small mt-1">O ingresso é para outra pessoa</p>
-            </b-form-checkbox>
-          </div>
-          <div v-if="ingressos.length === 1 && status !== 'accepted'">
+          <div>
             <p class="mt-3 small">E-mail</p>
             <b-input
+              v-model="email"
               class="input-form form-control estilo-input"
               placeholder="Digite seu e-mail"
             ></b-input>
-          </div>
-          <div v-if="status === 'accepted' || ingressos.length > 1">
-            <b-row>
-              <b-col md="6" class="pr-md-1">
-                <div>
-                  <p class="mt-3 small">Nome Completo</p>
-                  <b-input
-                    class="input-form form-control estilo-input"
-                    placeholder="Ex: Anderson Costa"
-                  />
-                </div>
-              </b-col>
-              <b-col md="6" class="pl-md-1">
-                <div>
-                  <p class="mt-3 small">WhatsApp</p>
-                  <b-input
-                    class="input-form form-control estilo-input"
-                    placeholder="Ex: (99) 99999-9999"
-                  />
-                </div>
-              </b-col>
-            </b-row>
-            <b-row class="mt-n2">
-              <b-col md="6" class="pr-md-1">
-                <div>
-                  <p class="mt-3 small">CPF</p>
-                  <b-input
-                    placeholder="CPF"
-                    class="input-form form-control estilo-input"
-                  />
-                </div>
-              </b-col>
-              <b-col md="6" class="pl-md-1">
-                <div>
-                  <p class="mt-3 small">E-mail</p>
-                  <b-input
-                    placeholder="E-mail"
-                    class="input-form form-control estilo-input"
-                  />
-                </div>
-              </b-col>
-            </b-row>
           </div>
         </div>
         <hr />
@@ -211,6 +158,7 @@ export default {
       console.log("ddd");
     },
     escolhePay(metodo) {
+      localStorage.setItem("email", JSON.stringify(this.email));
       this.tipoPagamento = metodo;
       this.$refs["infos"].hide();
       if (metodo === "card") {

@@ -71,9 +71,7 @@
                       />
                     </div>
                     <div v-if="!dadosretorna.qr_code">
-                      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
                       <lottie-player
-                        name="lottie"
                         src="https://assets4.lottiefiles.com/packages/lf20_q30c1wrm.json"
                         background="transparent"
                         speed="1"
@@ -127,10 +125,12 @@ export default {
     };
   },
   async beforeMount() {
+    let email = localStorage.getItem("email") || [];
+    email = JSON.parse(email)
     await this.carregaCarrinho();
     const obj = {
       ingressos: this.ingressos,
-      email: "matheus8739sc@gmail.com",
+      email: email,
       pagamento: "pix",
     };
     this.$axios
