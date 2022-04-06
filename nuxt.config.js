@@ -53,5 +53,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+  axios: {baseURL: 'https://viamaisback.devnx.com.br/api/st/'},
 }
