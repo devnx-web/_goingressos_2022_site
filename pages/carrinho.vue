@@ -5,7 +5,7 @@
       <!--      tornar componente-->
       <!--fim-->
     </div>
-    <div class="container-fluid px-md-5" v-if="!tipoPagamento">
+    <div class="container-fluid px-md-5">
       <div class="mt-md-5">
         <b-row>
           <b-col md="8">
@@ -20,7 +20,6 @@
             </div>
             <card-carrinho
               @none="none"
-              v-if="!tipoPagamento"
               :ingressos="ingressos"
               @removeIngresso="removeIngresso"
             />
@@ -35,7 +34,6 @@
             <b-button
               v-b-modal.finaliza
               @click="salvaDadosCarrinho"
-              v-if="!tipoPagamento"
               variant="success"
               class="mt-3 mb-4"
               block
@@ -158,13 +156,19 @@ export default {
       console.log("ddd");
     },
     escolhePay(metodo) {
-      localStorage.setItem("email", JSON.stringify(this.email));
       this.tipoPagamento = metodo;
-      this.$refs["infos"].hide();
       if (metodo === "card") {
         window.location.replace("/pagamento/cartao");
       }
       if (metodo === "pix") {
+        localStorage.setItem("email", JSON.stringify(this.email));
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))
+        {
+        } else {
+          this.$toast.error('Digite um e-mail válido')
+          return
+        }
+        this.$refs["infos"].hide();
         localStorage.setItem("ingressos", JSON.stringify(this.ingressos));
         this.$router.push("/pagamento/pix");
       }

@@ -491,6 +491,15 @@ export default {
       localStorage.setItem("email", JSON.stringify(this.email));
       this.tipoPagamento = metodo;
       if (metodo === "pix") {
+        localStorage.setItem("email", JSON.stringify(this.email));
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))
+        {
+        } else {
+          this.$toast.error('Digite um e-mail válido')
+          return
+        }
+        this.$refs["infos"].hide();
+        localStorage.setItem("ingressos", JSON.stringify(this.ingressos));
         this.$router.push("/pagamento/pix");
       }
     },
