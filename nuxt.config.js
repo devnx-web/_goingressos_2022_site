@@ -17,16 +17,14 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js'},
-      { src: 'https://sdk.mercadopago.com/js/v2',}
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js' },
+      { src: 'https://sdk.mercadopago.com/js/v2', }
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["~assets/css/global.css"],
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    // { src: "~/plugins/socket.js", mode: "client" },
+    { src: "~/plugins/lottie-player.js", mode: "client" },
     { src: "~/plugins/vue-toast.js", mode: "client" },
     { src: "~/plugins/vue-pay-card", mode: "client" },
     { src: "~/plugins/vue-the-mask.js", mode: "client" },

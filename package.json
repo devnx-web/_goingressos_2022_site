@@ -9,6 +9,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@lottiefiles/lottie-player": "^1.5.6",
+    "@nuxt/builder": "^2.15.8",
     "@nuxtjs/axios": "^5.13.6",
     "bootstrap": "^4.6.1",
     "bootstrap-vue": "^2.21.2",

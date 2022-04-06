@@ -1,14 +1,24 @@
 <template>
   <div>
-    <menu-topo/>
+    <menu-topo />
     <div style="overflow: hidden">
       <div class="bg-banner d-none d-md-block"></div>
     </div>
 
     <div class="d-flex justify-content-center">
-      <img class="estilo-banner d-none d-md-block" :src="evento.banner" :alt="evento.nome" />
+      <img
+        class="estilo-banner d-none d-md-block"
+        :src="evento.banner"
+        :alt="evento.nome"
+      />
     </div>
-    <div class="d-md-none"><img style="width: 100%" src="https://arquivos.devnx.com.br/goingressos/uploads/universi/21/12/17/banner.jpg" alt=""></div>
+    <div class="d-md-none">
+      <img
+        style="width: 100%"
+        src="https://arquivos.devnx.com.br/goingressos/uploads/universi/21/12/17/banner.jpg"
+        alt=""
+      />
+    </div>
     <b-container>
       <div class="mb-5 padding-banner mt-4 mt-md-0">
         <div>
@@ -24,9 +34,7 @@
             <div v-for="(c, index) in ingressos" :key="index">
               <hr class="mt-0 mb-0" />
 
-              <div
-                class="p-3"
-              >
+              <div class="p-3">
                 <div>
                   <p>{{ c.nomeIng }}</p>
                   <p class="small">
@@ -41,7 +49,10 @@
                     src="../assets/icones/minus.svg"
                     alt=""
                   />
-                  <p class="px-2" style="font-size: 22px !important; margin-top: -4px">
+                  <p
+                    class="px-2"
+                    style="font-size: 22px !important; margin-top: -4px"
+                  >
                     {{ c.qtd }}
                   </p>
                   <img
@@ -74,7 +85,7 @@
                     ></b-form-input>
                     <b-input-group-append>
                       <b-button style="font-size: 13px" variant="success"
-                      >Aplicar</b-button
+                        >Aplicar</b-button
                       >
                     </b-input-group-append>
                   </b-input-group>
@@ -98,7 +109,7 @@
                     variant="success"
                     block
                     @click="compraIng()"
-                  >Comprar Ingressos</b-button
+                    >Comprar Ingressos</b-button
                   >
                 </b-col>
               </b-row>
@@ -126,7 +137,11 @@
                     </div>
                     <a class="d-flex mt-2" href="#" target="_blank">
                       <div>
-                        <img height="20" src="../assets/icones/link.svg" alt="" />
+                        <img
+                          height="20"
+                          src="../assets/icones/link.svg"
+                          alt=""
+                        />
                       </div>
                       <p class="ml-2" style="color: #25b3ff">Abrir no Maps</p>
                     </a>
@@ -143,20 +158,20 @@
                   >
                     <div
                       class="
-                      bloc-bg
-                      d-flex
-                      align-items-center
-                      justify-content-center
-                    "
+                        bloc-bg
+                        d-flex
+                        align-items-center
+                        justify-content-center
+                      "
                     >
                       <p>1</p>
                     </div>
                   </b-col>
                   <b-col class="pr-md-0">
                     <div>
-                      <p class="txt-tutorial  mt-2 mt-md-0">
-                        Escolha os ingressos que deseja comprar, você também pode
-                        usar um cupom caso tenha
+                      <p class="txt-tutorial mt-2 mt-md-0">
+                        Escolha os ingressos que deseja comprar, você também
+                        pode usar um cupom caso tenha
                       </p>
                     </div>
                   </b-col>
@@ -169,18 +184,18 @@
                   >
                     <div
                       class="
-                      bloc-bg
-                      d-flex
-                      align-items-center
-                      justify-content-center
-                    "
+                        bloc-bg
+                        d-flex
+                        align-items-center
+                        justify-content-center
+                      "
                     >
                       <p>2</p>
                     </div>
                   </b-col>
                   <b-col>
                     <div>
-                      <p class="txt-tutorial  mt-2 mt-md-0">
+                      <p class="txt-tutorial mt-2 mt-md-0">
                         Preencha as informações com os dados e em seguida clique
                         em “Comprar”
                       </p>
@@ -195,20 +210,20 @@
                   >
                     <div
                       class="
-                      bloc-bg
-                      d-flex
-                      align-items-center
-                      justify-content-center
-                    "
+                        bloc-bg
+                        d-flex
+                        align-items-center
+                        justify-content-center
+                      "
                     >
                       <p>1</p>
                     </div>
                   </b-col>
                   <b-col>
                     <div>
-                      <p class="txt-tutorial  mt-2 mt-md-0">
-                        Scaneie o QR Code pelo seu banco para realizar o pagamento
-                        via PIX, ou pague pelo seu cartão de crédito
+                      <p class="txt-tutorial mt-2 mt-md-0">
+                        Scaneie o QR Code pelo seu banco para realizar o
+                        pagamento via PIX, ou pague pelo seu cartão de crédito
                       </p>
                     </div>
                   </b-col>
@@ -219,7 +234,13 @@
                     class="d-flex justify-content-md-center pr-md-0"
                     md="2"
                   >
-                    <div class="d-flex align-items-center md-justify-content-center">
+                    <div
+                      class="
+                        d-flex
+                        align-items-center
+                        md-justify-content-center
+                      "
+                    >
                       <img
                         src="../assets/icones/whatsapp.png"
                         height="50"
@@ -248,7 +269,12 @@
                   <hr class="mt-0 mb-0" />
 
                   <div
-                    class="p-3 d-flex justify-content-between align-items-center"
+                    class="
+                      p-3
+                      d-flex
+                      justify-content-between
+                      align-items-center
+                    "
                   >
                     <div>
                       <p>{{ c.nomeIng }}</p>
@@ -297,7 +323,7 @@
                         ></b-form-input>
                         <b-input-group-append>
                           <b-button style="font-size: 13px" variant="success"
-                          >Aplicar</b-button
+                            >Aplicar</b-button
                           >
                         </b-input-group-append>
                       </b-input-group>
@@ -321,7 +347,7 @@
                         variant="success"
                         block
                         @click="compraIng()"
-                      >Comprar Ingressos</b-button
+                        >Comprar Ingressos</b-button
                       >
                     </b-col>
                   </b-row>
@@ -357,7 +383,7 @@ export default {
       ingressosCompra: [],
     };
   },
-  created() {
+  beforeMount() {
     this.carregaIngressos();
   },
   methods: {
