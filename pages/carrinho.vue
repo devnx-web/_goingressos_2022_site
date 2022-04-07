@@ -149,12 +149,11 @@ export default {
     },
     escolhePay(metodo) {
       this.tipoPagamento = metodo;
+      this.salvaDadosCarrinho()
       if (metodo === "card") {
-        this.salvaDadosCarrinho()
         window.location.href = "/pagamento/cartao";
       }
       if (metodo === "pix") {
-        this.salvaDadosCarrinho()
         localStorage.setItem("email", JSON.stringify(this.email));
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))
         {
@@ -163,7 +162,7 @@ export default {
           return
         }
         this.$refs["infos"].hide();
-        // this.$router.push('/pagamento/pix')
+        this.$router.push('/pagamento/pix')
         window.location.href = "/pagamento/pix";
       }
     },

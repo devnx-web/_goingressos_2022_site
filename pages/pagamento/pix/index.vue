@@ -182,14 +182,13 @@ export default {
       let totalValor = 0;
       const jsonCarrinho = JSON.parse(carrinho);
       jsonCarrinho.forEach((ingresso) => {
-        for (let i = 0; i < ingresso.qtd; i++) {
           totalIngressos++;
           totalValor += parseFloat(ingresso.valor);
-        }
       });
       this.valorTotal = totalValor;
       this.totalIngressos = totalIngressos;
       this.ingressos = jsonCarrinho;
+      console.log(this.ingressos)
     },
   },
 };

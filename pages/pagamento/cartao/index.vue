@@ -50,7 +50,7 @@
                 <div><img width="20" src="../../../assets/icones/arrow.svg" alt=""></div>
               </div>
               <b-collapse id="collapse-2">
-                <div  v-for="c in ingressos" :key="index">
+                <div  v-for="c in ingressos">
                   <hr class="mt-0 mb-0">
                   <div class="p-2">
                     <p>    {{c.nomeIng}} - {{ c.nomeLote }}:</p>
@@ -501,7 +501,11 @@ export default {
     }
   },
   methods: {
+    salvaDadosCarrinho() {
+      localStorage.setItem("ingressosC", JSON.stringify(this.ingressos));
+    },
     escolhePay(metodo) {
+      this.salvaDadosCarrinho()
       if (!this.email) {
         this.$toast.error('Digite um e-mail para continuar')
         return
@@ -516,7 +520,6 @@ export default {
           this.$toast.error('Digite um e-mail válido')
           return
         }
-        this.$refs["infos"].hide();
         localStorage.setItem("ingressos", JSON.stringify(this.ingressos));
         this.$router.push("/pagamento/pix");
       }
@@ -613,10 +616,8 @@ export default {
       let totalValor = 0;
       const jsonCarrinho = JSON.parse(carrinho);
       jsonCarrinho.forEach((ingresso) => {
-        for (let i = 0; i < ingresso.qtd; i++) {
           totalIngressos++;
           totalValor += parseFloat(ingresso.valor);
-        }
       });
       this.valorTotal = totalValor;
       this.totalIngressos = totalIngressos;
