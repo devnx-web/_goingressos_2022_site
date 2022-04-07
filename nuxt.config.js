@@ -3,7 +3,6 @@ export default {
     port: 8000 // default: 3000
   },
   head: {
-    title: 'We Are Carnaval',
     htmlAttrs: {
       lang: 'pt-br'
     },

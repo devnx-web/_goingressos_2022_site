@@ -379,12 +379,18 @@ export default {
         data: new Date(),
       },
       cupom: "",
+      titulo: "",
       ingressos: [],
       ingressosCompra: [],
     };
   },
+  head() {
+    return {
+      title: `${this.evento.nome}`,
+    }
+  },
   beforeMount() {
-    console.log()
+    console.log(process.env.NOME_EMP)
     this.carregaIngressos();
   },
   methods: {
