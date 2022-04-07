@@ -146,22 +146,18 @@ export default {
   },
   async beforeMount() {
     let email = localStorage.getItem("email") || [];
+    let idGo = JSON.parse(localStorage.getItem("id_go"));
     email = JSON.parse(email)
     await this.carregaCarrinho();
     const obj = {
       ingressos: this.ingressos,
       email: email,
       pagamento: "pix",
+      idGo
     };
-    this.$axios
-      .post(
-        "https://phpstack-666249-2543201.cloudwaysapps.com/api/site/surreal-producoes/evento/we-are-carnaval/pre_res_ingresso",
-        obj
-      )
-      .then((resp) => {
-        this.dadosretorna = resp.data;
-        this.apareceqr = 1;
-      });
+    const {data } = await this.$axios.post("evento/we-are-carnaval/pre_res_ingresso", obj)
+    this.dadosretorna = data;
+    this.apareceqr = 1;
     console.log(this.dadosretorna);
   },
 

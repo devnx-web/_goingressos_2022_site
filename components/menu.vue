@@ -103,7 +103,16 @@ export default {
     };
   },
   async mounted() {
-    // var socket = io("http://localhost:3000");
+    let idGo = JSON.parse(localStorage.getItem("id_go"));
+    if (!idGo) {
+      idGo = "GO-" + Math.floor(Math.random() * 9123030 + 4564564657879);
+      await localStorage.setItem("id_go", JSON.stringify(idGo));
+    }
+    var socket = io("http://ws.devnx.com.br/");
+    console.log(idGo)
+    socket.on(idGo, (e) => {
+      console.log(e);
+    })
     // console.log(socket);
     // function renderMessage(message) {
     //   var $message = $('<div class="message"></div>');
