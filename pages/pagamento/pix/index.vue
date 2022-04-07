@@ -6,6 +6,10 @@
         <b-row class="mt-2">
           <b-col md="6" cols="12">
             <div>
+              <div @click="$router.go(-1)" class="d-flex cursor-pointer">
+                <img src="../../../assets/icones/back.svg" height="25px" alt="">
+                <p class="ml-2 mb-3">Voltar</p>
+              </div>
               <h5 class="text-center">
                 Siga as instruções para realizar seu pagamento
               </h5>
@@ -35,14 +39,23 @@
                 </div>
 
                 <div class="mt-3">
-                  <p>Confira os ingressos</p>
-                  <div v-for="c in ingressos">
-                   <div class="card-ing">
-                     <div>
-                       {{c.nomeIng}} - {{ c.nomeLote }}
-                     </div>
-                     <div>Quantidade: {{c.qtd}} Valor: {{c.qtd * c.valor | currency}}</div>
-                   </div>
+                  <div class="btn-ver-ing">
+                    <div v-b-toggle.collapse-2 class="m-1 d-flex justify-content-between p-2">
+                      <div>Meus Ingressos - <b>{{valorTotal | currency}}</b></div>
+                      <div><img width="20" src="../../../assets/icones/arrow.svg" alt=""></div>
+                    </div>
+                    <b-collapse id="collapse-2">
+                      <div  v-for="c in ingressos" :key="index">
+                        <hr class="mt-0 mb-0">
+                        <div class="p-2">
+                          <p>    {{c.nomeIng}} - {{ c.nomeLote }}:</p>
+                          <p>Nome: <b>{{c.nome}}</b></p>
+                          <p>Valor: {{c.valor | currency}}</p>
+                          <p>CPF: {{c.cpf}}</p>
+                        </div>
+                        <hr class="mt-0 mb-0">
+                      </div>
+                    </b-collapse>
                   </div>
                 </div>
               </div>
@@ -74,7 +87,7 @@
                         style="height: 300px"
                         :src="
                           `data:image/png;base64,` + dadosretorna.qr_code_base64
-                        "
+                      "
                       />
                     </div>
                     <div v-if="!dadosretorna.qr_code">

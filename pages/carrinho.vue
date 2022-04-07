@@ -31,16 +31,33 @@
               :ingressos="ingressos"
               :vt="valorTotal"
             />
-            <b-button
-              v-b-modal.finaliza
-              @click="salvaDadosCarrinho"
-              variant="success"
-              class="mt-3 mb-4"
-              block
-              >Finalizar Compra
-            </b-button>
-          </b-col>
-        </b-row>
+            <p class="mt-2">Forma de pagamento</p>
+                <div v-b-modal.finaliza class="card-pay text-center mt-2">
+                  <div class="d-flex align-items-center">
+                        <div>
+                          <img
+                            src="../assets/icones/pix-branco.png"
+                            height="30"
+                            alt=""
+                          />
+                        </div>
+                    <p class="ml-3 text-light" style="font-size: 15px !important">Pagar com PIX</p>
+                  </div>
+                </div>
+                <div @click="escolhePay('card')" class="card-pay-credit cursor-pointer text-center mt-2">
+                  <div class="d-flex align-items-center">
+                    <div>
+                      <img
+                        src="../assets/icones/cartao.png"
+                        height="30"
+                        alt=""
+                      />
+                    </div>
+                    <p class="ml-3 text-light" style="font-size: 15px !important">Pagar com cartão de crédito</p>
+                  </div>
+                </div>
+              </b-col>
+            </b-row>
       </div>
     </div>
     <b-modal
@@ -72,39 +89,14 @@
           </div>
         </div>
         <hr />
-        <p>Forma de pagamento</p>
         <div class="mt-2">
           <b-row>
-            <b-col md="6" cols="6" class="pr-1">
-              <div @click="escolhePay('pix')" class="card-pay text-center py-2">
+            <b-col>
+              <b-button variant="success" block @click="escolhePay('pix')" class="text-center">
                 <div>
-                  <div>
-                    <img
-                      src="../assets/icones/pix-106.svg"
-                      height="30"
-                      alt=""
-                    />
-                  </div>
-                  <p class="small mt-1">Pagar pelo PIX</p>
+                  <p class="small">Finalizar Compra</p>
                 </div>
-              </div>
-            </b-col>
-            <b-col md="6" class="pl-1" cols="6">
-              <div
-                @click="escolhePay('card')"
-                class="card-pay text-center py-2"
-              >
-                <div>
-                  <div>
-                    <img
-                      src="../assets/icones/credit-card-ico.png"
-                      height="40"
-                      alt=""
-                    />
-                  </div>
-                  <p class="small mt-1">Pagar pelo Cartão</p>
-                </div>
-              </div>
+              </b-button>
             </b-col>
           </b-row>
         </div>
@@ -158,9 +150,11 @@ export default {
     escolhePay(metodo) {
       this.tipoPagamento = metodo;
       if (metodo === "card") {
-        window.location.replace("/pagamento/cartao");
+        this.salvaDadosCarrinho()
+        window.location.href = "/pagamento/cartao";
       }
       if (metodo === "pix") {
+        this.salvaDadosCarrinho()
         localStorage.setItem("email", JSON.stringify(this.email));
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))
         {
@@ -169,8 +163,8 @@ export default {
           return
         }
         this.$refs["infos"].hide();
-        localStorage.setItem("ingressos", JSON.stringify(this.ingressos));
-        this.$router.push("/pagamento/pix");
+        // this.$router.push('/pagamento/pix')
+        window.location.href = "/pagamento/pix";
       }
     },
     removeIngresso(index) {

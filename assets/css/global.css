@@ -34,6 +34,7 @@ h3 {
   margin: 0;
 }
 
+
 h2 {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -109,3 +110,17 @@ p {
   font-size: 13px;
 }
 
+.btn-ver-ing
+{
+  border: solid 1px #dadada;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.bg-insira
+{
+  background-color: #326faf;
+  color: white;
+}

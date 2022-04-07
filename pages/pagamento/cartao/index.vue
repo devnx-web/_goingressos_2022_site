@@ -12,15 +12,21 @@
               :valueFields="valueFields"
             />
           </div>
-          <b-button
-            block
-            @click="$router.push('/pagamento/pix')"
-            class="btn-pay-new mt-3 d-md-none"
-            >Alterar forma de pagamento</b-button
-          >
+          <div v-b-modal.pix class="card-pay text-center mt-4">
+            <div class="d-flex align-items-center">
+              <div>
+                <img
+                  src="../../../assets/icones/pix-branco.png"
+                  height="25"
+                  alt=""
+                />
+              </div>
+              <p class="ml-3 text-light" style="font-size: 15px !important">Mudar para PIX</p>
+            </div>
+          </div>
           <div class="d-flex justify-content-center">
             <div>
-              <div class="bloc-info mt-md-5 mt-3 mb-3">
+              <div class="bloc-info mt-md-4 mt-3 mb-3">
                 <div class="d-flex align-items-center">
                   <div>
                     <img
@@ -37,135 +43,154 @@
               </div>
             </div>
           </div>
+          <div class="mb-2">
+            <div class="btn-ver-ing">
+              <div v-b-toggle.collapse-2 class="m-1 d-flex justify-content-between p-2">
+                <div>Meus Ingressos - <b>{{valorTotal | currency}}</b></div>
+                <div><img width="20" src="../../../assets/icones/arrow.svg" alt=""></div>
+              </div>
+              <b-collapse id="collapse-2">
+                <div  v-for="c in ingressos" :key="index">
+                  <hr class="mt-0 mb-0">
+                  <div class="p-2">
+                    <p>    {{c.nomeIng}} - {{ c.nomeLote }}:</p>
+                    <p>Nome: <b>{{c.nome}}</b></p>
+                    <p>Valor: {{c.valor | currency}}</p>
+                    <p>CPF: {{c.cpf}}</p>
+                  </div>
+                  <hr class="mt-0 mb-0">
+                </div>
+              </b-collapse>
+            </div>
+          </div>
+
         </b-col>
         <b-col>
-          <div class="bg-resumo">
+          <div @click="$router.go(-1)" class="d-flex cursor-pointer">
+            <img src="../../../assets/icones/back.svg" height="25px" alt="">
+            <p class="ml-2 mb-3">Voltar</p>
+          </div>
+          <div class="bg-resumo d-none d-md-block">
             <b-row>
               <b-col>
                 <p>Valor da compra: {{ valorTotal | currency }}</p>
                 <p>Quantidade de ingressos: {{ totalIngressos }}</p>
               </b-col>
-              <b-col md="6" cols="12" class="d-none d-md-block">
-                <b-button
-                  v-b-modal.pix
-                  block
-                  class="btn-pay-new"
-                  style="color: white !important"
-                  >Pagar com pix</b-button
-                >
-              </b-col>
             </b-row>
           </div>
           <div>
             <form id="form-checkout" class="mb-5">
-              <div class="card-info-credit p-3">
+              <div class="card-info-credit">
+              <div class="bg-insira p-3">
                 <p style="font-size: 15px !important">
-                  Insira dos dados do cartão
+                  Insira os dados do cartão
                 </p>
-                <hr />
-                <b-row>
-                  <b-col md="12" cols="12">
-                    <div class="label-estilo">Número do cartão</div>
-                    <input
-                      type="text"
-                      name="cardNumber"
-                      class="form-control"
-                      :maxlength="cardNumberMaxLength"
-                      data-card-field
-                      @input="changeNumber"
-                      :id="inputFields.cardNumber"
-                    />
-                  </b-col>
-                </b-row>
-
-                <b-row class="mt-2">
-                  <b-col class="pr-0">
-                    <div class="label-estilo">Vencimento</div>
-                    <input
-                      type="text"
-                      name="cardExpirationDate"
-                      maxlength="7"
-                      id="form-checkout__cardExpirationDate"
-                      class="form-control"
-                    />
-                  </b-col>
-
-                  <b-col>
-                    <div class="label-estilo">Código de segurança</div>
-                    <input
-                      data-card-field
-                      maxlength="4"
-                      @input="changeCvv"
-                      id="form-checkout__securityCode"
-                      :id="inputFields.cardCvv"
-                      type="text"
-                      name="securityCode"
-                      class="form-control"
-                    />
-                  </b-col>
-                </b-row>
-
-                <b-row class="mt-2">
-                  <b-col class="pr-md-0" md="6" cols="12">
-                    <div class="label-estilo">Nome do titular</div>
-                    <input
-                      type="text"
-                      name="cardholderName"
-                      @input="changeName"
-                      :id="inputFields.cardName"
-                      data-card-field
-                      class="form-control"
-                    />
-                  </b-col>
-                  <b-col class="mt-2 mt-md-0">
-                    <div class="label-estilo">E-mail</div>
-                    <input
-                      type="email"
-                      name="cardholderEmail"
-                      id="form-checkout__cardholderEmail"
-                      class="form-control"
-                    />
-                  </b-col>
-                </b-row>
-                <select
-                  hidden
-                  name="issuer"
-                  id="form-checkout__issuer"
-                ></select>
-                <select
-                  hidden
-                  name="identificationType"
-                  id="form-checkout__identificationType"
-                ></select>
-                <b-row class="mt-2">
-                  <b-col class="pr-md-0" md="6" cols="12">
-                    <div class="label-estilo">CPF</div>
-                    <input
-                      class="form-control"
-                      type="text"
-                      name="identificationNumber"
-                      id="form-checkout__identificationNumber"
-                    />
-                  </b-col>
-                  <b-col class="mt-2 mt-md-0">
-                    <div class="label-estilo">Pagamento</div>
-                    <select
-                      class="form-control"
-                      name="installments"
-                      id="form-checkout__installments"
-                    ></select>
-                  </b-col>
-                </b-row>
-
-                <button
-                  class="form-control btn-compra mt-2"
-                  type="submit"
-                  id="form-checkout__submit"
-                >
-                  Efetuar Pagamento
-                </button>
               </div>
-              {{ infoCard }}
+                <div class="p-3">
+                  <b-row>
+                    <b-col md="12" cols="12">
+                      <div class="label-estilo">Número do cartão</div>
+                      <input
+                        type="text"
+                        name="cardNumber"
+                        class="form-control"
+                        :maxlength="cardNumberMaxLength"
+                        data-card-field
+                        @input="changeNumber"
+                        :id="inputFields.cardNumber"
+                      />
+                    </b-col>
+                  </b-row>
+
+                  <b-row class="mt-2">
+                    <b-col class="pr-0">
+                      <div class="label-estilo">Vencimento</div>
+                      <input
+                        type="text"
+                        name="cardExpirationDate"
+                        maxlength="7"
+                        id="form-checkout__cardExpirationDate"
+                        class="form-control"
+                      />
+                    </b-col>
+
+                    <b-col>
+                      <div class="label-estilo">Código de segurança</div>
+                      <input
+                        data-card-field
+                        maxlength="4"
+                        @input="changeCvv"
+                        id="form-checkout__securityCode"
+                        :id="inputFields.cardCvv"
+                        type="text"
+                        name="securityCode"
+                        class="form-control"
+                      />
+                    </b-col>
+                  </b-row>
+
+                  <b-row class="mt-2">
+                    <b-col class="pr-md-0" md="6" cols="12">
+                      <div class="label-estilo">Nome do titular</div>
+                      <input
+                        type="text"
+                        name="cardholderName"
+                        @input="changeName"
+                        :id="inputFields.cardName"
+                        data-card-field
+                        class="form-control"
+                      />
+                    </b-col>
+                    <b-col class="mt-2 mt-md-0">
+                      <div class="label-estilo">E-mail</div>
+                      <input
+                        type="email"
+                        name="cardholderEmail"
+                        id="form-checkout__cardholderEmail"
+                        class="form-control"
+                      />
+                    </b-col>
+                  </b-row>
+                  <select
+                    hidden
+                    name="issuer"
+                    id="form-checkout__issuer"
+                  ></select>
+                  <select
+                    hidden
+                    name="identificationType"
+                    id="form-checkout__identificationType"
+                  ></select>
+                  <b-row class="mt-2">
+                    <b-col class="pr-md-0" md="6" cols="12">
+                      <div class="label-estilo">CPF</div>
+                      <input
+                        class="form-control"
+                        type="text"
+                        name="identificationNumber"
+                        id="form-checkout__identificationNumber"
+                      />
+                    </b-col>
+                    <b-col class="mt-2 mt-md-0">
+                      <div class="label-estilo">Pagamento</div>
+                      <select
+                        class="form-control"
+                        name="installments"
+                        id="form-checkout__installments"
+                      ></select>
+                    </b-col>
+                  </b-row>
+
+                  <button
+                    class="form-control btn-compra mt-2"
+                    type="submit"
+                    id="form-checkout__submit"
+                  >
+                    Efetuar Pagamento
+                  </button>
+                </div>
+                {{ infoCard }}
+                </div>
             </form>
           </div>
         </b-col>
@@ -203,18 +228,11 @@
         <div class="mt-2">
           <b-row>
             <b-col md="12" cols="12">
-              <div @click="escolhePay('pix')" class="card-pay text-center py-2">
+              <b-button variant="success" block @click="escolhePay('pix')" class="text-center">
                 <div>
-                  <div>
-                    <img
-                      src="../../../assets/icones/pix-106.svg"
-                      height="30"
-                      alt=""
-                    />
-                  </div>
-                  <p class="small mt-1">Efetuar pagamento</p>
+                  <p class="small">Finalizar Compra</p>
                 </div>
-              </div>
+              </b-button>
             </b-col>
           </b-row>
         </div>
@@ -603,7 +621,6 @@ export default {
       this.valorTotal = totalValor;
       this.totalIngressos = totalIngressos;
       this.ingressos = jsonCarrinho;
-      console.log(this.ingressos);
     },
   },
 };
@@ -628,7 +645,15 @@ export default {
   border: solid 1px #e0e0e0;
   border-radius: 0 0 10px 10px;
 }
-
+.card-pay {
+  background: linear-gradient(144deg,#2fbdaf,#5fe2d5);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+}
 .label-estilo {
   margin-top: 0;
   margin-bottom: 0;
@@ -645,21 +670,7 @@ input {
 .btn-pay-new {
   background-color: transparent !important;
   font-size: 13px;
-  color: black;
+  color: #000000;
 }
 
-.card-pay {
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  height: 100px;
-  border-radius: 10px;
-  border: solid 1px #dedede;
-}
-
-.card-pay:hover {
-  background-color: #424242;
-  color: white;
-  cursor: pointer;
-}
 </style>

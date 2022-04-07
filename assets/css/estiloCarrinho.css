@@ -25,12 +25,23 @@
 }
 
 .card-pay {
+  background: linear-gradient(144deg,#2fbdaf,#5fe2d5);
   justify-content: center;
   display: flex;
   align-items: center;
-  height: 100px;
+  height: 60px;
   border-radius: 10px;
-  border: solid 1px #dedede;
+  border: none;
+}
+
+.card-pay-credit {
+  background: linear-gradient(144deg, #2f8bbd, #5fbbe2);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  border-radius: 10px;
+  border: none;
 }
 
 .card-pay:hover {
