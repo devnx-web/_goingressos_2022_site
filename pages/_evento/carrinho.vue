@@ -173,7 +173,7 @@ export default {
       this.tipoPagamento = metodo;
       this.salvaDadosCarrinho()
       if (metodo === "card") {
-        window.location.href = "/pagamento/cartao";
+        window.location.href = `/${this.$route.params.evento}/pagamento/cartao`;
       }
       if (metodo === "pix") {
         localStorage.setItem("email", JSON.stringify(this.email));
@@ -184,8 +184,7 @@ export default {
           return
         }
         this.$refs["finalizaPg"].hide();
-        this.$router.push('/pagamento/pix')
-        window.location.href = "/pagamento/pix";
+        this.$router.push(`/${this.$route.params.evento}/pagamento/pix`)
       }
     },
     removeIngresso(index) {
@@ -204,7 +203,7 @@ export default {
         this.evento = evento
       }
 
-      if (jsonCarrinho.length === 0) return this.$router.push("/");
+      if (jsonCarrinho.length === 0) return this.$router.push(`/${this.$route.params.evento}`);
       let totalIngressos = 0;
       let totalValor = 0;
       let ingressoArray = [];

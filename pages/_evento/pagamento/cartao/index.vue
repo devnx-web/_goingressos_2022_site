@@ -510,7 +510,7 @@ export default {
           return
         }
         localStorage.setItem("ingressos", JSON.stringify(this.ingressos));
-        this.$router.push("/pagamento/pix");
+        this.$router.push(`/${this.$route.params.evento}/pagamento/pix`);
       }
     },
     changeName(e) {

@@ -155,7 +155,7 @@ export default {
       pagamento: "pix",
       idGo
     };
-    const {data } = await this.$axios.post("evento/we-are-carnaval/pre_res_ingresso", obj)
+    const {data } = await this.$axios.post(`evento/${this.$route.params.evento}/pre_res_ingresso`, obj)
     this.dadosretorna = data;
     this.apareceqr = 1;
     console.log(this.dadosretorna);
@@ -173,7 +173,7 @@ export default {
       this.$toast.info('Código copiado com sucesso')
     },
     pagarCard() {
-      window.location.replace("/pagamento/cartao");
+      window.location.replace(`${this.$route.params.evento}/pagamento/cartao`);
     },
     carregaCarrinho() {
       const carrinho = localStorage.getItem("ingressosC") || [];
