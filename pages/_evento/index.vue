@@ -8,14 +8,14 @@
     <div class="d-flex justify-content-center">
       <img
         class="estilo-banner d-none d-md-block"
-        :src="evento.banner"
+        :src="`https://arquivos.devnx.com.br/goingressos/uploads/${evento.banner}`"
         :alt="evento.nome"
       />
     </div>
     <div class="d-md-none">
       <img
         style="width: 100%"
-        src="https://arquivos.devnx.com.br/goingressos/uploads/universi/21/12/17/banner.jpg"
+        :src="`https://arquivos.devnx.com.br/goingressos/uploads/${evento.banner}`"
         alt=""
       />
     </div>
@@ -476,7 +476,7 @@ export default {
   height: 350px;
   width: 990px;
   position: absolute;
-  top: 66px;
+  top: 64px;
   left: 50%;
   transform: translateX(-50%);
   border-bottom-left-radius: 10px;

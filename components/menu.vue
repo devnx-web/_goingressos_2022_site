@@ -140,6 +140,7 @@ export default {
 
 <style scoped>
 .bg-menu {
+  height: 64px;
   background-color: black;
   color: white;
 }
