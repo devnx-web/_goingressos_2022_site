@@ -4,7 +4,7 @@
       <b-row>
         <b-col cols="3" md="2" align-self="center">
           <div>
-            <nuxt-link :to=`/${this.$route.params.evento}`>
+            <nuxt-link :to="`/${this.$route.params.evento}`">
               <img
                 height="50"
                 :src="`https://arquivos.devnx.com.br/goingressos/uploads/${evento.logo}`"
