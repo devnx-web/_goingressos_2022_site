@@ -47,7 +47,7 @@
                        <p class="small">  Ingresso {{ ing.tipo }} - {{ ing.lote }}</p>
                      </b-col>
                      <b-col  align-self="center" md="5">
-                       <p>{{ ing.telefone  | VMask('(##) ###-####') }}</p>
+                       <p>{{ ing.telefone  | VMask('(##) #########') }}</p>
                      </b-col>
                      <b-col md="1">
                        <div v-if="ing.pg" class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
@@ -79,9 +79,70 @@ export default {
   beforeMount() {
     this.buscaIngressos();
   },
+  async mounted() {
+    let idGo = JSON.parse(localStorage.getItem("id_go"));
+    if (!idGo) {
+      idGo = "GO-" + Math.floor(Math.random() * 9123030 + 4564564657879);
+      await localStorage.setItem("id_go", JSON.stringify(idGo));
+    }
+    var socket = io("http://ws.devnx.com.br/");
+    console.log(idGo)
+    socket.on(idGo, (e) => {
+      console.log(e);
+      this.resultado = e.status
+      if (this.resultado) {
+        document.location.reload(true);
+      }
+    })
+
+
+    // console.log(socket);
+    // function renderMessage(message) {
+    //   var $message = $('<div class="message"></div>');
+    //   $message.text(message.author + ": " + message.message);
+    //   $(".messages").append($message);
+    // }
+    // let idGo = localStorage.getItem("id_go");
+    // if (!idGo) {
+    //   idGo = "GO-" + Math.floor(Math.random() * 9123030 + 31230);
+    //   await localStorage.setItem("id_go", JSON.stringify(idGo));
+    // }
+    // this.chave = idGo;
+    // this.$echo.channel(this.chave).on("pagamento", (e) => {
+    //   console.log(e);
+    //   localStorage.setItem("pago", JSON.stringify(this.ingressos));
+    //   if (screen.width < 640 || screen.height < 480) {
+    //     if (e.pagamento === true) {
+    //       this.$router.push("/ingressos");
+    //       this.$toast.success("Pagamento aprovado e ingressos enviados");
+    //       this.mostraico = 1;
+    //       localStorage.setItem("ingressos", JSON.stringify(this.ingressos));
+    //       localStorage.setItem("pago", JSON.stringify(this.ingressos));
+    //       this.controledown = 1;
+    //       this.controlepix = 1;
+    //       this.controlec = 1;
+    //     }
+    //   } else {
+    //     if (e.pagamento === true) {
+    //       this.$toast.success("Pagamento aprovado e ingressos enviados");
+    //       this.mostraico = 1;
+    //       this.controledown = 0;
+    //       this.controlepix = 1;
+    //       this.controlec = 1;
+    //       localStorage.setItem("pago", JSON.stringify(this.ingressos));
+    //       localStorage.setItem("ingressos", JSON.stringify(this.ingressos));
+    //     }
+    //   }
+    // });
+    // let pago = await localStorage.getItem('id_go');
+    // if (!pago) {
+    //   this.mostraimprime = 1
+    // }
+  },
   methods: {
     async buscaIngressos() {
-      const { data } = await this.$axios.get('ingressos/GO-4564568309850')
+      let idGo = JSON.parse(localStorage.getItem("id_go"));
+      const { data } = await this.$axios.get(`ingressos/${idGo}`)
       this.ingressos = data
       console.log(data)
     }
