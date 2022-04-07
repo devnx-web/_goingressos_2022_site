@@ -454,7 +454,7 @@ export default {
           event.preventDefault();
           const cardData = cardForm.getCardFormData();
           this.infoCard = cardData;
-          let idGo = localStorage.getItem("id_go");
+          let idGo = JSON.parse.(localStorage.getItem("id_go"));
           if (!idGo) {
             idGo = "GO-" + Math.floor(Math.random() * 9123030 + 31230);
             localStorage.setItem("id_go", JSON.stringify(idGo));
