@@ -45,7 +45,7 @@
                       <div><img width="20" src="../../../assets/icones/arrow.svg" alt=""></div>
                     </div>
                     <b-collapse id="collapse-2">
-                      <div  v-for="c in ingressos" :key="index">
+                      <div  v-for="(c, index) in ingressos" :key="index">
                         <hr class="mt-0 mb-0">
                         <div class="p-2">
                           <p>    {{c.nomeIng}} - {{ c.nomeLote }}:</p>

@@ -32,7 +32,9 @@
               :vt="valorTotal"
             />
             <p class="mt-2">Forma de pagamento</p>
-                <div v-b-modal.finaliza class="card-pay text-center mt-2">
+                <div 
+                @click="validaCampos"
+                class="card-pay text-center mt-2">
                   <div class="d-flex align-items-center">
                         <div>
                           <img
@@ -61,7 +63,7 @@
       </div>
     </div>
     <b-modal
-      ref="infos"
+      ref="finalizaPg"
       id="finaliza"
       centered
       title="Finalizar compra"
@@ -140,6 +142,20 @@ export default {
     }
   },
   methods: {
+    validaCampos() {
+      let erro = false;
+      this.ingressos.forEach(ing => {
+        if (ing.nome === "" || ing.cpf === "" || ing.whats === "" || ing.nasc === "") {
+          erro = true;
+          this.$toast.error("Preencha todos os campos");
+        }
+      })
+      if(!erro) {
+         this.$refs['finalizaPg'].show()
+        return true
+      }
+      return false
+    },
     salvaDadosCarrinho() {
       localStorage.setItem("ingressosC", JSON.stringify(this.ingressos));
     },
@@ -148,6 +164,7 @@ export default {
       console.log("ddd");
     },
     escolhePay(metodo) {
+      if(!this.validaCampos()) return
       this.tipoPagamento = metodo;
       this.salvaDadosCarrinho()
       if (metodo === "card") {
@@ -161,7 +178,7 @@ export default {
           this.$toast.error('Digite um e-mail válido')
           return
         }
-        this.$refs["infos"].hide();
+        this.$refs["finalizaPg"].hide();
         this.$router.push('/pagamento/pix')
         window.location.href = "/pagamento/pix";
       }
@@ -175,30 +192,39 @@ export default {
       );
     },
     carregaCarrinho() {
-      const carrinho = localStorage.getItem("ingressos") || [];
-      const ing = [];
-      if (carrinho.length === 0) return this.$router.push("/");
+      const jsonCarrinho = JSON.parse(localStorage.getItem("ingressos")) || [];
+      const ingressosC = JSON.parse(localStorage.getItem("ingressosC")) || [];
+      
+      if (jsonCarrinho.length === 0) return this.$router.push("/");
       let totalIngressos = 0;
       let totalValor = 0;
-      const jsonCarrinho = JSON.parse(carrinho);
-      jsonCarrinho.forEach((ingresso) => {
-        for (let i = 0; i < ingresso.qtd; i++) {
+      let ingressoArray = [];
+      if(ingressosC.length === 0) {
+        jsonCarrinho.forEach((ingresso) => {
+          for (let i = 0; i < ingresso.qtd; i++) {
+            totalIngressos++;
+            totalValor += parseFloat(ingresso.valor);
+            ingressoArray.push({
+              ...ingresso,
+              ["nome"]: "",
+              ["cpf"]: "",
+              ["nasc"]: "",
+              ["whats"]: "",
+              ["valida"]: false,
+            });
+          }
+        });
+        localStorage.setItem("ingressosC", JSON.stringify(ingressoArray));
+      } else {
+        ingressoArray = ingressosC;
+        ingressoArray.forEach((ingresso) => { 
           totalIngressos++;
           totalValor += parseFloat(ingresso.valor);
-          ing.push({
-            ...ingresso,
-            ["nome"]: "",
-            ["cpf"]: "",
-            ["nasc"]: "",
-            ["whats"]: "",
-            ["valida"]: false,
-          });
-        }
-      });
+        });
+      }
       this.valorTotal = totalValor;
       this.totalIngressos = totalIngressos;
-      localStorage.setItem("ingressosC", JSON.stringify(ing));
-      this.ingressos = ing;
+      this.ingressos = ingressoArray;
     },
   },
 };

@@ -96,12 +96,12 @@
                 </div>
                 <b-row>
                   <b-col md="4" class="pl-0">
-                    <p class="small text-danger ml-md-4" v-if="verifica.nome">
+                    <p class="small text-danger ml-md-4" v-if="verifica.nome && index === keyAviso">
                       Nome muito curto
                     </p></b-col
                   >
                   <b-col md="2" class="pl-0">
-                    <p class="small text-danger ml-md-n1" v-if="verifica.cpf">
+                    <p class="small text-danger ml-md-n1" v-if="verifica.cpf && index === keyAviso">
                       CPF inválido!
                     </p></b-col
                   >
@@ -143,6 +143,7 @@ export default {
   data() {
     return {
       controle: {},
+      keyAviso: 0,
       verifica: {
         cpf: false,
         nome: false,
@@ -157,6 +158,7 @@ export default {
       this.ingressos[index].valida = true;
     },
     validaCampo(campo, index) {
+      this.keyAviso = index;
       let valida;
       valida = false;
       if (campo === "nome") {
