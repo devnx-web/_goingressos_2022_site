@@ -199,6 +199,7 @@ export default {
       const jsonCarrinho = JSON.parse(localStorage.getItem("ingressos")) || [];
       const ingressosC = JSON.parse(localStorage.getItem("ingressosC")) || [];
       const evento = JSON.parse(localStorage.getItem("evento")) || [];
+
       if (evento) {
         this.evento = evento
       }

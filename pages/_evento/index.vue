@@ -395,6 +395,7 @@ export default {
         this.evento = response.data;
         this.ingressos = response.data.ingressos;
       });
+      localStorage.setItem("evento", JSON.stringify(this.evento));
     },
     compraIng() {
       if (this.total === 0) {

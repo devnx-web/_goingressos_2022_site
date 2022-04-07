@@ -4,10 +4,10 @@
       <b-row>
         <b-col cols="3" md="2" align-self="center">
           <div>
-            <nuxt-link to="/">
+            <nuxt-link :to=`/${this.$route.params.evento}`>
               <img
                 height="50"
-                src="https://uni.goingressos.com.br/_nuxt/img/logouni.92cc7fe.png"
+                :src="`https://arquivos.devnx.com.br/goingressos/uploads/${evento.logo}`"
                 alt=""
               />
             </nuxt-link>
@@ -101,9 +101,14 @@ export default {
       whatsapp: "",
       codigo: "",
       resultado: '',
+      evento: []
     };
   },
   async mounted() {
+    const evento = JSON.parse(localStorage.getItem("evento")) || [];
+    if (evento) {
+      this.evento = evento
+    }
     let idGo = JSON.parse(localStorage.getItem("id_go"));
     if (!idGo) {
       idGo = "GO-" + Math.floor(Math.random() * 9123030 + 4564564657879);
