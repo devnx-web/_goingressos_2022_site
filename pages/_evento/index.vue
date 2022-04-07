@@ -1,6 +1,6 @@
 <template>
   <div>
-    <menu-topo />
+    <menu-topo :evento="evento" />
     <div style="overflow: hidden">
       <div class="bg-banner d-none d-md-block"></div>
     </div>
@@ -397,11 +397,10 @@ export default {
     async carregaIngressos() {
       localStorage.removeItem("ingressos");
       localStorage.removeItem("ingressosC");
-      this.$axios.get(`evento/${this.$route.params.evento}`).then((response) => {
-        this.evento = response.data;
-        this.ingressos = response.data.ingressos;
-      });
-      localStorage.setItem("evento", JSON.stringify(this.evento));
+      const { data } = await this.$axios.get(`evento/${this.$route.params.evento}`)
+      this.evento = data;
+      this.ingressos = data.ingressos;
+      localStorage.setItem("evento", JSON.stringify(data));
     },
     compraIng() {
       if (this.total === 0) {

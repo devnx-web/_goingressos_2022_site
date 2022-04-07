@@ -95,6 +95,12 @@
 <script>
 export default {
   name: "menuTopo",
+  props: {
+    evento: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       codigoEnviado: false,
@@ -105,10 +111,6 @@ export default {
     };
   },
   async mounted() {
-    const evento = JSON.parse(localStorage.getItem("evento")) || [];
-    if (evento) {
-      this.evento = evento
-    }
     let idGo = JSON.parse(localStorage.getItem("id_go"));
     if (!idGo) {
       idGo = "GO-" + Math.floor(Math.random() * 9123030 + 4564564657879);
