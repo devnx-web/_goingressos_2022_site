@@ -4,8 +4,8 @@
       class="bg-topo px-3 d-md-flex justify-content-between align-items-center"
     >
       <div>
-        <h3>EVENTO EXEMPLO 1 EDIÇÃO</h3>
-        <p class="small">11/12/2022 - 12h</p>
+        <h3>{{evento.nome}}</h3>
+        <p class="small">{{ evento.data }}</p>
       </div>
       <div hidden>tempo restatne: 3213</div>
     </div>
@@ -134,6 +134,7 @@
 export default {
   name: "cardCarrinho",
   props: {
+    evento: [],
     ingressos: {
       type: Array,
       required: true,

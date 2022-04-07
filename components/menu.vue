@@ -14,7 +14,7 @@
           </div>
         </b-col>
         <b-col cols="9" md="8" class="text-center" align-self="center">
-          <b-button v-b-modal.conta class="btn-padrao px-4"
+          <b-button @click="$router.push('/meus-ingressos')" class="btn-padrao px-4"
             >Meus Ingressos</b-button
           >
         </b-col>

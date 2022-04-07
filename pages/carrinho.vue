@@ -19,6 +19,7 @@
               <h1>MEU CARRINHO</h1>
             </div>
             <card-carrinho
+              :evento="evento"
               @none="none"
               :ingressos="ingressos"
               @removeIngresso="removeIngresso"
@@ -32,7 +33,7 @@
               :vt="valorTotal"
             />
             <p class="mt-2">Forma de pagamento</p>
-                <div 
+                <div
                 @click="validaCampos"
                 class="card-pay text-center mt-2">
                   <div class="d-flex align-items-center">
@@ -129,6 +130,7 @@ export default {
       totalIngressos: 0,
       valorTotal: 0,
       ingressos: [],
+      evento: [],
     };
   },
   beforeMount() {
@@ -142,7 +144,7 @@ export default {
     }
   },
   methods: {
-    validaCampos() {
+    validaCampos(metodo) {
       let erro = false;
       this.ingressos.forEach(ing => {
         if (ing.nome === "" || ing.cpf === "" || ing.whats === "" || ing.nasc === "") {
@@ -150,6 +152,9 @@ export default {
           this.$toast.error("Preencha todos os campos");
         }
       })
+      if(!erro && metodo === 'card') {
+        return true
+      }
       if(!erro) {
          this.$refs['finalizaPg'].show()
         return true
@@ -164,7 +169,7 @@ export default {
       console.log("ddd");
     },
     escolhePay(metodo) {
-      if(!this.validaCampos()) return
+      if(!this.validaCampos(metodo)) return
       this.tipoPagamento = metodo;
       this.salvaDadosCarrinho()
       if (metodo === "card") {
@@ -194,7 +199,11 @@ export default {
     carregaCarrinho() {
       const jsonCarrinho = JSON.parse(localStorage.getItem("ingressos")) || [];
       const ingressosC = JSON.parse(localStorage.getItem("ingressosC")) || [];
-      
+      const evento = JSON.parse(localStorage.getItem("evento")) || [];
+      if (evento) {
+        this.evento = evento
+      }
+
       if (jsonCarrinho.length === 0) return this.$router.push("/");
       let totalIngressos = 0;
       let totalValor = 0;
@@ -217,7 +226,7 @@ export default {
         localStorage.setItem("ingressosC", JSON.stringify(ingressoArray));
       } else {
         ingressoArray = ingressosC;
-        ingressoArray.forEach((ingresso) => { 
+        ingressoArray.forEach((ingresso) => {
           totalIngressos++;
           totalValor += parseFloat(ingresso.valor);
         });

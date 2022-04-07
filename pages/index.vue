@@ -393,6 +393,7 @@ export default {
       this.$axios.get("evento/we-are-carnaval").then((response) => {
         this.evento = response.data;
         this.ingressos = response.data.ingressos;
+        localStorage.setItem("evento", JSON.stringify(this.evento));
       });
     },
     compraIng() {
