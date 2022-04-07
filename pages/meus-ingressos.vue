@@ -9,47 +9,45 @@
              <div class="btn-selected rounded-0 rounded-md-left">
                <p>Meus Ingressos</p>
              </div>
-
            </b-col>
            <b-col class="pl-md-0 mt-3 mt-md-0">
-               <div class="bloc-info mt-2">
-                 <div class="d-md-flex align-items-center">
-                   <div>
-                     <img height="37" src="../assets/icones/info.svg" alt="" />
+               <div class="px-2">
+                 <div class="bloc-info">
+                   <div class="d-md-flex align-items-center">
+                     <div>
+                       <img height="37" src="../assets/icones/info.svg" alt="" />
+                     </div>
+                     <p class="ml-2 text-info-bloc">
+                       Os ingressos serão enviados automaticamente no WhatsApp e e-mail após a confirmação do pagamento, se o pagamento estiver como recusado, realize uma nova compra, use outro cartão ou então pague via PIX
+                     </p>
                    </div>
-                   <p class="ml-2 text-info-bloc">
-                     Os ingressos serão enviados automaticamente no WhatsApp e e-mail após a confirmação do pagamento, se o pagamento estiver como recusado, realize uma nova compra, use outro cartão ou então pague via PIX
-                   </p>
                  </div>
                </div>
-             <div class="border p-3" v-for="(ing, index) in ingressos" :key="index">
-               <p>Dados do ingresso</p>
-               <p>Status: <b-badge :variant="ing.pg ? 'success' : 'dark'" 
-               style="font-weight: 500; padding-top: 4px; padding-bottom: 4px; font-size: 12px" class="px-3">
-               Pagamento {{ ing.pg ? 'Aprovado' : 'Pendente' }}
-               </b-badge>
-               </p>
-               <hr>
+             <div class="border p-3 mt-3" v-for="(ing, index) in ingressos" :key="index">
                <div>
                 <b-row>
                   <b-col align-self="center">
                     <p>Valor: R$ {{ ing.valor }}</p>
                     <p class="small">Método de pagamento: {{ ing.mtdPg }}</p>
-
                   </b-col>
-                  <b-col v-if="ing.pg" cols="8" md="6" class="text-right align-self-centeri">
+                  <b-col>
+                    <p class="small">Status:  </p>
+                    <b-badge :variant="ing.pg ? 'success' : 'dark'" class="px-3 bar-status">
+                      Pagamento {{ ing.pg ? 'Aprovado' : 'Pendente' }}
+                    </b-badge>
+                  </b-col>
+                  <b-col hidden v-if="ing.pg" cols="8" md="6" class="text-right align-self-centeri">
                     <b-button variant="success" class="px-3">Reenviar Ingressos</b-button>
                   </b-col>
                 </b-row>
                  <div class="card-ingresso mt-2">
                    <b-row>
                      <b-col class="border-right" align-self="center">
-                       <p>  Ingresso {{ ing.tipo }} - {{ ing.lote }}</p>
-                       <p class="small"> R$ {{ ing.valor }}</p>
+                       <p> {{ ing.nome }}</p>
+                       <p class="small">  Ingresso {{ ing.tipo }} - {{ ing.lote }}</p>
                      </b-col>
                      <b-col  align-self="center" md="5">
-                       <p>{{ ing.nome }}</p>
-                       <p class="small">{{ ing.telefone }}</p>
+                       <p>{{ ing.telefone  | VMask('(##) ###-####') }}</p>
                      </b-col>
                      <b-col md="1">
                        <div v-if="ing.pg" class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
@@ -93,6 +91,10 @@ export default {
 
 <style scoped>
 
+.bar-status
+{
+  font-weight: 500; padding-top: 4px; padding-bottom: 4px; font-size: 12px
+}
 
 .btn-selected
 {
