@@ -119,8 +119,7 @@
                       v-if="verifica.nascimento"
                     >
                       Apenas maior de idade!
-                    </p></b-col
-                  >
+                    </p></b-col>
                 </b-row>
               </div>
             </b-col>
