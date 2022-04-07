@@ -23,6 +23,23 @@
                    </div>
                  </div>
                </div>
+
+             <div v-if="carrega" class="text-center mt-3 mb-2">
+               <div class="border py-3">
+                 <p> Carregando compras</p>
+                 <img class="mt-3" src="../../assets/icones/ingressoicone.png" alt="">
+               </div>
+             </div>
+
+
+
+             <div v-if="ingressos.length === 0 && !carrega" class="text-center mt-3 mb-2">
+               <div class="border py-3">
+                 <p> Você não possui nenhuma compra!</p>
+                 <img class="mt-3" src="../../assets/icones/ingressoicone.png" alt="">
+               </div>
+             </div>
+
              <div class="border p-3 mt-3" v-for="(ing, index) in ingressos" :key="index">
                <div>
                 <b-row>
@@ -73,6 +90,7 @@ export default {
   components: {MenuTopo},
   data() {
     return {
+      carrega: true,
       ingressos: [],
     };
   },
@@ -144,6 +162,7 @@ export default {
       let idGo = JSON.parse(localStorage.getItem("id_go"));
       const { data } = await this.$axios.get(`ingressos/${idGo}`)
       this.ingressos = data
+      this.carrega = false
       console.log(data)
     }
   }
