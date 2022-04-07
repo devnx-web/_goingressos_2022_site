@@ -54,5 +54,5 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-  axios: {baseURL: 'https://viamaisback.devnx.com.br/api/st/'},
+  axios: { baseURL: 'https://back.goingressos.com.br/api/site/surreal-producoes/' },
 }

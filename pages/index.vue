@@ -390,12 +390,10 @@ export default {
     async carregaIngressos() {
       localStorage.removeItem("ingressos");
       localStorage.removeItem("ingressosC");
-      const data = await fetch(
-        "https://phpstack-666249-2543201.cloudwaysapps.com/api/site/surreal-producoes/evento/we-are-carnaval"
-      );
-      const evJson = await data.json();
-      this.evento = evJson;
-      this.ingressos = evJson.ingressos;
+      this.$axios.get("evento/we-are-carnaval").then((response) => {
+        this.evento = response.data;
+        this.ingressos = response.data.ingressos;
+      });
     },
     compraIng() {
       if (this.total === 0) {
