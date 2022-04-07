@@ -7,7 +7,7 @@
           <b-col md="6" cols="12">
             <div>
               <div @click="$router.go(-1)" class="d-flex cursor-pointer">
-                <img src="../../../assets/icones/back.svg" height="25px" alt="">
+                <img src="../../../../assets/icones/back.svg" height="25px" alt="">
                 <p class="ml-2 mb-3">Voltar</p>
               </div>
               <h5 class="text-center">
@@ -27,7 +27,7 @@
                     <div class="pr-2">
                       <img
                         style="width: 40px"
-                        src="../../../assets/icones/whatsapp.png"
+                        src="../../../../assets/icones/whatsapp.png"
                         alt=""
                       />
                     </div>
@@ -42,7 +42,7 @@
                   <div class="btn-ver-ing">
                     <div v-b-toggle.collapse-2 class="m-1 d-flex justify-content-between p-2">
                       <div>Meus Ingressos - <b>{{valorTotal | currency}}</b></div>
-                      <div><img width="20" src="../../../assets/icones/arrow.svg" alt=""></div>
+                      <div><img width="20" src="../../../../assets/icones/arrow.svg" alt=""></div>
                     </div>
                     <b-collapse id="collapse-2">
                       <div  v-for="(c, index) in ingressos" :key="index">
@@ -112,7 +112,7 @@
                     >
                       <img
                         class="mr-2"
-                        src="../../../assets/icones/copy.svg"
+                        src="../../../../assets/icones/copy.svg"
                         height="20"
                         alt=""
                       />
@@ -130,7 +130,7 @@
 </template>
 
 <script>
-import MenuTopo from "../../../components/menu";
+import MenuTopo from "../../../../components/menu";
 export default {
   name: "index",
   components: { MenuTopo },
