@@ -30,8 +30,10 @@
                 <b-row>
                   <b-col align-self="center">
                     <p>Total: R$ 50,00</p>
+                    <p class="small">Método de pagamento: Cartão de crédito</p>
+
                   </b-col>
-                  <b-col cols="8" class="text-right align-self-centeri">
+                  <b-col cols="8" md="6" class="text-right align-self-centeri">
                     <b-button variant="success" class="px-3">Reenviar Ingressos</b-button>
                   </b-col>
                 </b-row>
