@@ -100,6 +100,7 @@ export default {
       codigoEnviado: false,
       whatsapp: "",
       codigo: "",
+      resultado: '',
     };
   },
   async mounted() {
@@ -112,7 +113,14 @@ export default {
     console.log(idGo)
     socket.on(idGo, (e) => {
       console.log(e);
+      this.resultado = e.status
+      if (this.resultado) {
+        this.$alert("Seu pagamento foi confirmado e seus ingressos se encontram disponiveis para download, também foram enviados no e-mail cadastrado e WhatsApp de cada ingresso", "Pagamento Confirmado", 'success');
+        this.$router.push("/meus-ingressos");
+      }
     })
+
+
     // console.log(socket);
     // function renderMessage(message) {
     //   var $message = $('<div class="message"></div>');
