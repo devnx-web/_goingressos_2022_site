@@ -4,7 +4,7 @@
       <b-row>
         <b-col cols="3" md="2" align-self="center">
           <div>
-            <nuxt-link :to="`/${this.$route.params.evento}`">
+            <nuxt-link :to="`/${$route.params.evento}`">
               <img
                 height="50"
                 :src="`https://arquivos.devnx.com.br/goingressos/uploads/${evento.logo}`"
@@ -14,9 +14,9 @@
           </div>
         </b-col>
         <b-col cols="9" md="8" class="text-center" align-self="center">
-          <b-button @click="$router.push('/meus-ingressos')" class="btn-padrao px-4"
-            >Meus Ingressos</b-button
-          >
+          <b-button @click="$router.push(`/${$route.params.evento}/meus-ingressos`)" class="btn-padrao px-4"
+            >Meus Ingressos
+          </b-button>
         </b-col>
         <b-col class="d-none d-md-block" md="2" align-self="center">
           <div class="ml-3">
@@ -95,12 +95,6 @@
 <script>
 export default {
   name: "menuTopo",
-  props: {
-    evento: {
-      type: Object,
-      required: true,
-    },
-  },
   data() {
     return {
       codigoEnviado: false,
@@ -111,6 +105,8 @@ export default {
     };
   },
   async mounted() {
+    console.log(this.evento, 'dd')
+    this.evento = JSON.parse(localStorage.getItem("evento"));
     let idGo = JSON.parse(localStorage.getItem("id_go"));
     if (!idGo) {
       idGo = "GO-" + Math.floor(Math.random() * 9123030 + 4564564657879);
@@ -123,9 +119,13 @@ export default {
       this.resultado = e.status
       if (this.resultado) {
         this.$alert("Seu pagamento foi confirmado e seus ingressos se encontram disponiveis para download, também foram enviados no e-mail cadastrado e WhatsApp de cada ingresso", "Pagamento Confirmado", 'success');
-        this.$router.push("/meus-ingressos");
+        this.$router.push(`/${this.$route.params.evento}/meus-ingressos`);
       }
     })
+  },
+  async created() {
+    const {data} = await this.$axios.get(`evento/${this.$route.params.evento}`)
+    this.evento = data;
   },
   methods: {
     enviaVerifica(c) {

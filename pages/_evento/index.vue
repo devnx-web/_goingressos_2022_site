@@ -1,8 +1,8 @@
 <template>
   <div>
-    <menu-topo :evento="evento" />
+    <menu-topo/>
     <div style="overflow: hidden">
-      <div class="bg-banner d-none d-md-block"></div>
+      <div class="d-none bg-banner d-md-block" :style="`background-image: url('https://arquivos.devnx.com.br/goingressos/uploads/${evento.banner}')`"></div>
     </div>
 
     <div class="d-flex justify-content-center">
@@ -488,7 +488,6 @@ export default {
 }
 
 .bg-banner {
-  background-image: url("https://arquivos.devnx.com.br/goingressos/uploads/universi/21/12/17/banner.jpg");
   background-size: cover;
   height: 270px;
   -o-object-fit: cover;
