@@ -12,9 +12,6 @@
 
            </b-col>
            <b-col class="pl-md-0 mt-3 mt-md-0">
-             <div class="border p-3">
-               <p>Dados do ingresso</p>
-               <p>Status: <b-badge variant="success" style="font-weight: 500; padding-top: 4px; padding-bottom: 4px; font-size: 12px" class="px-3">Pagamento Aprovado</b-badge></p>
                <div class="bloc-info mt-2">
                  <div class="d-md-flex align-items-center">
                    <div>
@@ -25,30 +22,37 @@
                    </p>
                  </div>
                </div>
+             <div class="border p-3" v-for="(ing, index) in ingressos" :key="index">
+               <p>Dados do ingresso</p>
+               <p>Status: <b-badge :variant="ing.pg ? 'success' : 'dark'" 
+               style="font-weight: 500; padding-top: 4px; padding-bottom: 4px; font-size: 12px" class="px-3">
+               Pagamento {{ ing.pg ? 'Aprovado' : 'Pendente' }}
+               </b-badge>
+               </p>
                <hr>
                <div>
                 <b-row>
                   <b-col align-self="center">
-                    <p>Total: R$ 50,00</p>
-                    <p class="small">Método de pagamento: Cartão de crédito</p>
+                    <p>Valor: R$ {{ ing.valor }}</p>
+                    <p class="small">Método de pagamento: {{ ing.mtdPg }}</p>
 
                   </b-col>
-                  <b-col cols="8" md="6" class="text-right align-self-centeri">
+                  <b-col v-if="ing.pg" cols="8" md="6" class="text-right align-self-centeri">
                     <b-button variant="success" class="px-3">Reenviar Ingressos</b-button>
                   </b-col>
                 </b-row>
                  <div class="card-ingresso mt-2">
                    <b-row>
                      <b-col class="border-right" align-self="center">
-                       <p>  Ingresso Masculino - Lote Promocional</p>
-                       <p class="small"> R$ 50,00</p>
+                       <p>  Ingresso {{ ing.tipo }} - {{ ing.lote }}</p>
+                       <p class="small"> R$ {{ ing.valor }}</p>
                      </b-col>
                      <b-col  align-self="center" md="5">
-                       <p>Matheus Sartori</p>
-                       <p class="small">08304004941</p>
+                       <p>{{ ing.nome }}</p>
+                       <p class="small">{{ ing.telefone }}</p>
                      </b-col>
                      <b-col md="1">
-                       <div class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
+                       <div v-if="ing.pg" class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
                          <img height="17" src="../assets/icones/download.svg" alt="">
                        </div>
                      </b-col>
@@ -68,7 +72,22 @@
 import MenuTopo from "../components/menu";
 export default {
   name: "meusIngressos",
-  components: {MenuTopo}
+  components: {MenuTopo},
+  data() {
+    return {
+      ingressos: [],
+    };
+  },
+  beforeMount() {
+    this.buscaIngressos();
+  },
+  methods: {
+    async buscaIngressos() {
+      const { data } = await this.$axios.get('ingressos/GO-4564568309850')
+      this.ingressos = data
+      console.log(data)
+    }
+  }
 }
 </script>
 
