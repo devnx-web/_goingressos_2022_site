@@ -473,6 +473,7 @@ export default {
 }
 
 .estilo-banner {
+  object-fit: cover;
   height: 350px;
   width: 990px;
   position: absolute;
