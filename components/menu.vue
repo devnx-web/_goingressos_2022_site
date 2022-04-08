@@ -1,5 +1,16 @@
 <template>
   <div>
+    <!-- Hotjar Tracking Code for surrealcwb.com.br -->
+    <script>
+      (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1954685,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
     <nav class="bg-menu navbar-expand-lg px-md-5 px-3 py-2 py-md-2">
       <b-row>
         <b-col cols="3" md="2" align-self="center">

@@ -13,7 +13,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicone.ico' }
     ],
     script: [
       { src: 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js' },
