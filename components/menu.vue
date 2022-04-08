@@ -113,11 +113,11 @@ export default {
       await localStorage.setItem("id_go", JSON.stringify(idGo));
     }
     var socket = io("http://ws.devnx.com.br/");
-    socket.on(idGo, (e) => {
+    socket.on(idGo, async (e) => {
       this.resultado = e.status
       if (this.resultado) {
         this.$alert("Seu pagamento foi confirmado e seus ingressos se encontram disponiveis para download, também foram enviados no e-mail cadastrado e WhatsApp de cada ingresso", "Pagamento Confirmado", 'success');
-        this.$router.push(`/${this.$route.params.evento}/meus-ingressos`);
+        this.mudaPage()
       }
     })
   },
@@ -126,6 +126,9 @@ export default {
     this.evento = data;
   },
   methods: {
+    async mudaPage() {
+      setTimeout(() => { this.$router.push(`/${this.$route.params.evento}/meus-ingressos`); }, 2000);
+    },
     enviaVerifica(c) {
       if (c) alert("verificando...")
       this.codigoEnviado = true;

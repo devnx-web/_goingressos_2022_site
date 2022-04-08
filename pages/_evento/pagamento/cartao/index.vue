@@ -36,7 +36,7 @@
                     />
                   </div>
                   <p class="ml-2 text-info-bloc">
-                    Os ingressos serão enviados automaticamente no WhatsApp e
+                    ssos serão enviados automaticamente no WhatsApp e
                     e-mail após a confirmação do pagamento
                   </p>
                 </div>
@@ -476,7 +476,7 @@ export default {
   methods: {
     async aplicaPagamento() {
 
-      let idGo = localStorage.getItem("id_go");
+      let idGo = JSON.parse(localStorage.getItem("id_go"));
       if (!idGo) {
         idGo = "GO-" + Math.floor(Math.random() * 9123030 + 31230);
         localStorage.setItem("id_go", JSON.stringify(idGo));
