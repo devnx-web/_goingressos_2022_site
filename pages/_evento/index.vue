@@ -135,7 +135,7 @@
                     <div>
                       {{ evento.endereco }}
                     </div>
-                    <a class="d-flex mt-2" href="#" target="_blank">
+                    <a v-if="evento.mostrarmapa" class="d-flex mt-2" href="#" target="_blank">
                       <div>
                         <img
                           height="20"

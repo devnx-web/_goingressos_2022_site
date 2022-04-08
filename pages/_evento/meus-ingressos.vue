@@ -91,7 +91,7 @@
                </div>
                <div class="d-flex justify-content-between">
                  <p class="small mt-2">CPF: {{ing.documento | VMask('###.###.###.##') }}</p>
-                 <p class="small mt-2">Última alteração: {{ing.updated_at  | moment("DD/MM - h:mm") }}</p>
+                 <p class="small mt-2">Última alteração: {{ing.updated_at  | moment("DD/MM - H:mm") }}</p>
                </div>
              </div>
            </div>
