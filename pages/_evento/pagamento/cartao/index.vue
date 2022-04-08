@@ -171,7 +171,7 @@
                         id="form-checkout__identificationNumber"
                       />
                     </b-col>
-                    <b-col hidden class="mt-2 mt-md-0">
+                    <b-col class="mt-2 mt-md-0">
                       <div class="label-estilo">Pagamento</div>
                       <select
                         class="form-control"

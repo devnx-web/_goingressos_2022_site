@@ -5,7 +5,7 @@
     >
       <div>
         <h3>{{evento.nome}}</h3>
-        <p class="small">{{evento.data  | moment("DD/MM")}}</p>
+        <p class="small">{{evento.data}}</p>
       </div>
       <div hidden>tempo restatne: 3213</div>
     </div>
