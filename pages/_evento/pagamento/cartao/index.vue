@@ -171,7 +171,7 @@
                         id="form-checkout__identificationNumber"
                       />
                     </b-col>
-                    <b-col class="mt-2 mt-md-0">
+                    <b-col hidden class="mt-2 mt-md-0">
                       <div class="label-estilo">Pagamento</div>
                       <select
                         class="form-control"
@@ -180,7 +180,6 @@
                       ></select>
                     </b-col>
                   </b-row>
-
                   <button
                     class="form-control btn-compra mt-2"
                     type="submit"
@@ -194,7 +193,6 @@
                   <div class="ml-2" style="font-size: 15px; margin-top: 3px; font-family: Montserrat, sans-serif; font-weight: 500">Efetuando pagamento...</div>
 
                 </div>
-                {{ infoCard }}
                 </div>
             </form>
           </div>
@@ -507,11 +505,11 @@ export default {
 
           if (data.msg.message === "Invalid card_token_id") {
             this.$toast.info('Tempo expirado, digite os dados novamente')
-            window.location.replace(`/${this.$route.params.evento}/meus-ingressos`);
+            window.location.replace(`/${this.$route.params.evento}/carrinho`);
             return
           }
           this.$toast.info('Tempo expirado, digite os dados novamente')
-          window.location.replace(`/${this.$route.params.evento}/meus-ingressos`);
+          window.location.replace(`/${this.$route.params.evento}/carrinho`);
           this.mostraico = 0
           return;
         }

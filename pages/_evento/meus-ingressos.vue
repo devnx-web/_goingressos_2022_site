@@ -50,9 +50,17 @@
                  </b-col>
                  <b-col>
                    <p class="small">Status:  </p>
-                   {{ing}}
-                   <b-badge :variant="ing.pg ? 'success' : 'dark'" class="px-3 bar-status">
-                     Pagamento {{ ing.pg ? 'Aprovado' : 'Pendente' }}
+                   <b-badge v-if="ing.pg === 0" class="px-3 bar-status">
+                     Pagamento pendente
+                   </b-badge>
+                   <b-badge v-if="ing.pg === 1" variant="success" class="px-3 bar-status">
+                     Pagamento aprovado
+                   </b-badge>
+                   <b-badge v-if="ing.pg === 2" variant="info" class="px-3 bar-status">
+                     Pagamento em processamento
+                   </b-badge>
+                   <b-badge v-if="ing.pg === 3" variant="danger" class="px-3 bar-status">
+                     Pagamento Recusado
                    </b-badge>
                  </b-col>
                  <b-col hidden v-if="ing.pg" cols="8" md="6" class="text-right align-self-centeri">
