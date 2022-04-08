@@ -5,7 +5,7 @@
     >
       <div>
         <h3>{{evento.nome}}</h3>
-        <p class="small">{{evento.data}}</p>
+        <p class="small">{{evento.data  | moment("DD/MM")}}</p>
       </div>
       <div hidden>tempo restatne: 3213</div>
     </div>
@@ -213,7 +213,7 @@ export default {
     removeIngresso(index) {
       this.$emit("removeIngresso", index);
       if (this.ingressos.length <= 0) {
-        this.$router.push("/");
+        this.$router.push(`/${this.$route.params.evento}`);
         this.$toast.error("Adicione ingressos para comprar!");
       }
     },
