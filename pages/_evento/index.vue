@@ -23,8 +23,7 @@
       <div class="mb-5 padding-banner mt-4 mt-md-0">
         <div>
           <h1>{{ evento.nome }}</h1>
-          <p>
-            {{ evento.descricao }}
+          <p v-html="evento.descricao">
           </p>
           <hr />
           <div class="card-ingresso-venda d-md-none">
@@ -376,7 +375,7 @@ export default {
         banner: "",
         endereco: "",
         classicicacao: "",
-        data: new Date(),
+        data: "",
       },
       cupom: "",
       titulo: "",
