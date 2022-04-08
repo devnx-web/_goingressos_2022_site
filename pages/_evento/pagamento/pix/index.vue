@@ -162,7 +162,6 @@ export default {
       this.$toast.error(data.error)
       this.$router.push(`/${this.$route.params.evento}/carrinho`)
     }
-    console.log(this.dadosretorna);
   },
 
   methods: {
@@ -190,7 +189,6 @@ export default {
       this.valorTotal = totalValor;
       this.totalIngressos = totalIngressos;
       this.ingressos = jsonCarrinho;
-      console.log(this.ingressos)
     },
   },
 };

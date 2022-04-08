@@ -298,7 +298,6 @@ export default {
     };
   },
   async beforeMount() {
-    console.log(`evento/${this.$route.params.evento}/pre_res_ingresso`)
     await this.carregaCarrinho();
     let ano = [];
 
@@ -306,8 +305,6 @@ export default {
       ano.push(i);
     }
     this.ano = ano;
-    // eslint-disable-next-line no-undef
-
     const mp = new MercadoPago("TEST-7c5e58c7-7f93-4e07-8fcd-d4afe81bf3c1", {
       locale: "pt-BR",
     });
@@ -364,7 +361,6 @@ export default {
           if (error) {
             return console.warn("Form Unmounted handling error: ", error);
           }
-          console.log("Form unmounted");
         },
         onIdentificationTypesReceived: (error, identificationTypes) => {
           if (error) {
@@ -375,25 +371,21 @@ export default {
           if (error) {
             return console.warn("paymentMethods handling error: ", error);
           }
-          console.log("Payment Methods available: ", paymentMethods);
         },
         onIssuersReceived: (error, issuers) => {
           if (error) {
             return console.warn("issuers handling error: ", error);
           }
-          console.log("Issuers available: ", issuers);
         },
         onInstallmentsReceived: (error, installments) => {
           if (error) {
             return console.warn("installments handling error: ", error);
           }
-          console.log("Installments available: ", installments);
         },
 
         onCardTokenReceived: (error, token) => {
           if (error) {
             error.forEach((e) => {
-              console.log(e);
               switch (e.code) {
                 case "205":
                   this.$toast.error("Digite o número do seu cartão.");
@@ -465,9 +457,6 @@ export default {
         },
       },
       onFetching: (resource) => {
-        console.log("Fetching resource: ", resource);
-
-        // Animate progress bar
         const progressBar = document.querySelector(".progress-bar");
         progressBar.removeAttribute("value");
 
@@ -581,31 +570,21 @@ export default {
             this.mostraico = 0
             break;
 
-
           case "cc_rejected_card_error":
             this.$toast.error('Não conseguimos processar seu pagamento.')
             this.mostraico = 0
             break;
-
 
           case "cc_rejected_max_attempts":
             this.$toast.error('Você atingiu o limite de tentativas permitido. Escolha outro cartão ou outra forma de pagamento.')
             this.mostraico = 0
             break;
 
-
-
-
-
           default:
             this.$toast.error('Não foi possível processar seu pagamento, tente outro método')
             this.mostraico = 0
-
-          // code block
         }
       }
-      console.log(data.msg)
-
     },
 
     salvaDadosCarrinho() {

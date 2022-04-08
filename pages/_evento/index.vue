@@ -390,7 +390,6 @@ export default {
     }
   },
   beforeMount() {
-    console.log(process.env.NOME_EMP)
     this.carregaIngressos();
   },
   methods: {

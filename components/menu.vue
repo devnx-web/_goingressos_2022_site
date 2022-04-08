@@ -106,7 +106,6 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.evento, 'dd')
     this.evento = JSON.parse(localStorage.getItem("evento"));
     let idGo = JSON.parse(localStorage.getItem("id_go"));
     if (!idGo) {
@@ -114,9 +113,7 @@ export default {
       await localStorage.setItem("id_go", JSON.stringify(idGo));
     }
     var socket = io("http://ws.devnx.com.br/");
-    console.log(idGo)
     socket.on(idGo, (e) => {
-      console.log(e);
       this.resultado = e.status
       if (this.resultado) {
         this.$alert("Seu pagamento foi confirmado e seus ingressos se encontram disponiveis para download, também foram enviados no e-mail cadastrado e WhatsApp de cada ingresso", "Pagamento Confirmado", 'success');
@@ -130,9 +127,7 @@ export default {
   },
   methods: {
     enviaVerifica(c) {
-      if (c) {
-        console.log("verificando...");
-      }
+      if (c) alert("verificando...")
       this.codigoEnviado = true;
     },
   },

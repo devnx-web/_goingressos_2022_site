@@ -210,10 +210,6 @@ export default {
       if (resto !== parseInt(inputCPF.substring(10, 11))) return false;
       return true;
     },
-
-    Confere() {
-      console.log(this.ingressos);
-    },
     removeIngresso(index) {
       this.$emit("removeIngresso", index);
       if (this.ingressos.length <= 0) {

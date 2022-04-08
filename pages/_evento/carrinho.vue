@@ -166,7 +166,6 @@ export default {
     },
     none() {
       this.desabilita = false;
-      console.log("ddd");
     },
     escolhePay(metodo) {
       if(!this.validaCampos(metodo)) return
