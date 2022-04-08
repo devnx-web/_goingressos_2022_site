@@ -117,7 +117,7 @@ export default {
     socket.on(idGo, (e) => {
       this.resultado = e.status
       if (this.resultado) {
-        this.carregaIng
+        this.buscaIngressos()
       }
     })
   },

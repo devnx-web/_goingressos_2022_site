@@ -51,7 +51,7 @@
                           <p>    {{c.nomeIng}} - {{ c.nomeLote }}:</p>
                           <p>Nome: <b>{{c.nome}}</b></p>
                           <p>Valor: {{c.valor | currency}}</p>
-                          <p>CPF: {{c.cpf}}</p>
+                          <p>CPF: {{c.cpf | VMask("###.###.###-##")}}</p>
                         </div>
                         <hr class="mt-0 mb-0">
                       </div>
@@ -174,7 +174,7 @@ export default {
       this.$toast.info('Código copiado com sucesso')
     },
     pagarCard() {
-      window.location.replace(`${this.$route.params.evento}/pagamento/cartao`);
+      window.location.replace(`/${this.$route.params.evento}/pagamento/cartao`);
     },
     carregaCarrinho() {
       const carrinho = localStorage.getItem("ingressosC") || [];
