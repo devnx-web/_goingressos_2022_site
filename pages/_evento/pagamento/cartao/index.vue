@@ -303,7 +303,7 @@ export default {
       ano.push(i);
     }
     this.ano = ano;
-    const mp = new MercadoPago("TEST-7c5e58c7-7f93-4e07-8fcd-d4afe81bf3c1", {
+    const mp = new MercadoPago("APP_USR-5431736360968934-110503-3d8dcffe78c97dff088a8937a9f52f6e-1012064537", {
       locale: "pt-BR",
     });
     const cardForm = mp.cardForm({
