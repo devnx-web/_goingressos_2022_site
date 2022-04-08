@@ -495,6 +495,12 @@ export default {
         this.$router.push(`/${this.$route.params.evento}/meus-ingressos`)
       }
 
+      if (data.error) {
+        this.$toast.error(data.error)
+        this.$router.push(`/${this.$route.params.evento}/carrinho`)
+        return
+      }
+
       if (data.pago === false) {
 
         if (data.msg.message) {

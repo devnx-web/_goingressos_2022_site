@@ -406,7 +406,7 @@ export default {
         this.$toast.error("Adicione ingressos para comprar!");
         return;
       }
-      this.$router.push(`${this.$route.params.evento}/carrinho`);
+      this.$router.push(`/${this.$route.params.evento}/carrinho`);
       this.$toast.info("Insira os dados dos ingressos");
     },
     somaIngressos() {

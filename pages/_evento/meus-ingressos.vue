@@ -50,6 +50,7 @@
                  </b-col>
                  <b-col>
                    <p class="small">Status:  </p>
+                   {{ing}}
                    <b-badge :variant="ing.pg ? 'success' : 'dark'" class="px-3 bar-status">
                      Pagamento {{ ing.pg ? 'Aprovado' : 'Pendente' }}
                    </b-badge>
