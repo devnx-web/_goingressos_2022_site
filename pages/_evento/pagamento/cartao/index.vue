@@ -495,7 +495,7 @@ export default {
 
       if (data.error) {
         this.$toast.error(data.error)
-        this.$router.push(`/${this.$route.params.evento}/carrinho`)
+        this.$router.push(`/${this.$route.params.evento}/pagamento/cartao`)
         return
       }
 
@@ -505,11 +505,11 @@ export default {
 
           if (data.msg.message === "Invalid card_token_id") {
             this.$toast.info('Tempo expirado, digite os dados novamente')
-            window.location.replace(`/${this.$route.params.evento}/carrinho`);
+            window.location.replace(`/${this.$route.params.evento}/pagamento/cartao`);
             return
           }
           this.$toast.info('Tempo expirado, digite os dados novamente')
-          window.location.replace(`/${this.$route.params.evento}/carrinho`);
+          window.location.replace(`/${this.$route.params.evento}/pagamento/cartao`);
           this.mostraico = 0
           return;
         }

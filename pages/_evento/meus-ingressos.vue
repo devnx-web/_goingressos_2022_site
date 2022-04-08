@@ -73,11 +73,16 @@
                      <p> {{ ing.nome }}</p>
                      <p class="small">  Ingresso {{ ing.tipo }} - {{ ing.lote }}</p>
                    </b-col>
-                   <b-col  align-self="center" md="5">
-                     <p class="mini-label">WhatsApp</p>
+                   <b-col  align-self="center" md="4">
+                     <p class="mini-label mt-2 mt-md-0">WhatsApp</p>
                      <p>{{ ing.telefone  | VMask('(##) #########') }}</p>
                    </b-col>
-                   <b-col md="1">
+                   <b-col md="3" align-self="center" v-if="!ing.img && ing.pg === 1">
+                     <div class="mt-2 mt-md-0">
+                       <p class="small">Gerando ingresso, volte em alguns minutos</p>
+                     </div>
+                   </b-col>
+                   <b-col md="1" v-else>
                      <b-button block :href="`https://arquivos.devnx.com.br${ing.img}`" target="_blank" v-if="ing.img" class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
                        <img height="17" src="../../assets/icones/download.svg" alt="">
                      </b-button>

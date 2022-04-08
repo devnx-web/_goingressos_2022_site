@@ -67,7 +67,7 @@
             </div>
             <hr class="mt-0 mb-0" />
             <div class="p-3">
-              <b-row>
+              <b-row hidden>
                 <b-col md="4" align-self="center">
                   <p
                     @click="cupom = true"
@@ -305,7 +305,7 @@
                 </div>
                 <hr class="mt-0 mb-0" />
                 <div class="p-3">
-                  <b-row>
+                  <b-row hidden>
                     <b-col md="4" align-self="center">
                       <p
                         @click="cupom = true"
