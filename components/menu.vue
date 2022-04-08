@@ -123,7 +123,7 @@ export default {
       idGo = "GO-" + Math.floor(Math.random() * 9123030 + 4564564657879);
       await localStorage.setItem("id_go", JSON.stringify(idGo));
     }
-    var socket = io("http://ws.devnx.com.br/");
+    var socket = io("https://ws.devnx.com.br/");
     socket.on(idGo, async (e) => {
       this.resultado = e.status
       if (this.resultado) {

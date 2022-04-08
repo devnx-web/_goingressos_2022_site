@@ -83,7 +83,7 @@
                      </div>
                    </b-col>
                    <b-col md="1" v-else>
-                     <b-button block :href="`https://arquivos.devnx.com.br${ing.img}`" target="_blank" v-if="ing.img" class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
+                     <b-button block :href="`https://arquivos.devnx.com.br/goingressos/uploads/${ing.img}`" target="_blank" v-if="ing.img" class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
                        <img height="17" src="../../assets/icones/download.svg" alt="">
                      </b-button>
                    </b-col>
@@ -126,7 +126,7 @@ export default {
       idGo = "GO-" + Math.floor(Math.random() * 9123030 + 4564564657879);
       await localStorage.setItem("id_go", JSON.stringify(idGo));
     }
-    var socket = io("http://ws.devnx.com.br/");
+    var socket = io("https://ws.devnx.com.br/");
     console.log(idGo)
     socket.on(idGo, (e) => {
       this.resultado = e.status

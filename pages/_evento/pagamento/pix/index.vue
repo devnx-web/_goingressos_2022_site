@@ -101,7 +101,7 @@
                     </div>
                   </div>
                   <p class="mt-2 text-center">
-                    Favorecido: <b>GO INGRESSOS</b>
+                    Favorecido: <b>DEVN-X DESENVOLVIMENTO</b>
                   </p>
                   <div>
                     <b-button
