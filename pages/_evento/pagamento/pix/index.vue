@@ -158,13 +158,15 @@ export default {
     const {data } = await this.$axios.post(`evento/${this.$route.params.evento}/pre_res_ingresso`, obj)
     this.dadosretorna = data;
     this.apareceqr = 1;
+    if (data.error){
+      this.$toast.error(data.error)
+      this.$router.push(`/${this.$route.params.evento}/carrinho`)
+    }
     console.log(this.dadosretorna);
   },
 
   methods: {
     copiaCod() {
-      console.log("dd");
-
       if (!this.dadosretorna.qr_code) {
         this.$toast.error("Aguarde o QR Code ser gerado para copiar o código");
         return

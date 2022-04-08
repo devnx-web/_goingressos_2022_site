@@ -6,6 +6,7 @@
           <div>
             <nuxt-link :to="`/${$route.params.evento}`">
               <img
+                v-if="evento"
                 height="50"
                 :src="`https://arquivos.devnx.com.br/goingressos/uploads/${evento.logo}`"
                 alt=""

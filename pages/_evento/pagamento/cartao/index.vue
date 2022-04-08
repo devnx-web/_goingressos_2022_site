@@ -189,6 +189,11 @@
                     Efetuar Pagamento
                   </button>
                 </div>
+                <div style="text-align: left; margin-top: 10px; display: inline-flex" v-if="mostraico">
+                  <img src="../../../../assets/icones/loading.svg" width="30px" alt="">
+                  <div class="ml-2" style="font-size: 15px; margin-top: 3px; font-family: Montserrat, sans-serif; font-weight: 500">Efetuando pagamento...</div>
+
+                </div>
                 {{ infoCard }}
                 </div>
             </form>
@@ -248,6 +253,7 @@ export default {
   components: { MenuTopo },
   data() {
     return {
+      mostraico: false,
       valueFields: {
         cardName: "",
         cardNumber: "",
@@ -450,23 +456,12 @@ export default {
           }
           // this.tokenCartao = token.token
         },
-        onSubmit: (event) => {
+        onSubmit: async (event) => {
+          this.mostraico = true
           event.preventDefault();
           const cardData = cardForm.getCardFormData();
           this.infoCard = cardData;
-          let idGo = localStorage.getItem("id_go");
-          if (!idGo) {
-            idGo = "GO-" + Math.floor(Math.random() * 9123030 + 31230);
-            localStorage.setItem("id_go", JSON.stringify(idGo));
-          }
-          const obj = {
-            ingressos: this.ingressos,
-            email: cardData.cardholderEmail,
-            pagamento: "credit-card",
-            chave: idGo,
-            card: cardData,
-          };
-          this.$axios.post(`evento/${this.$route.params.evento}/pre_res_ingresso`, obj)
+          this.aplicaPagamento('credit-card')
         },
       },
       onFetching: (resource) => {
@@ -490,6 +485,129 @@ export default {
     }
   },
   methods: {
+    async aplicaPagamento() {
+
+      let idGo = localStorage.getItem("id_go");
+      if (!idGo) {
+        idGo = "GO-" + Math.floor(Math.random() * 9123030 + 31230);
+        localStorage.setItem("id_go", JSON.stringify(idGo));
+      }
+      const obj = {
+        ingressos: this.ingressos,
+        email: this.infoCard.cardholderEmail,
+        pagamento: "credit-card",
+        idGo,
+        card: this.infoCard,
+      }
+      const {data} = await this.$axios.post(`evento/${this.$route.params.evento}/pre_res_ingresso`, obj)
+
+      if (data.pago === true) {
+        this.$toast.success(data.msg)
+        this.$router.push(`/${this.$route.params.evento}/meus-ingressos`)
+      }
+
+      if (data.pago === false) {
+
+        if (data.msg.message) {
+
+          if (data.msg.message === "Invalid card_token_id") {
+            this.$toast.info('Tempo expirado, digite os dados novamente')
+            window.location.replace(`/${this.$route.params.evento}/meus-ingressos`);
+            return
+          }
+          this.$toast.info('Tempo expirado, digite os dados novamente')
+          window.location.replace(`/${this.$route.params.evento}/meus-ingressos`);
+          this.mostraico = 0
+          return;
+        }
+        switch (data.msg.status_detail) {
+          case "cc_rejected_high_risk":
+            this.$toast.error('Seu pagamento foi recusado. Tente pagar via PIX')
+            this.mostraico = 0
+            break;
+
+          case "cc_rejected_insufficient_amount":
+            this.$toast.error('Saldo insuficiente')
+            this.mostraico = 0
+            break;
+
+          case "cc_rejected_duplicated_payment":
+            this.$toast.error('Você já efetuou um pagamento com esse valor. Caso precise pagar novamente, utilize outro cartão ou outra forma de pagamento.')
+            this.mostraico = 0
+            break;
+
+
+          case "pending_contingency":
+            this.$toast.info('Processando pagamento, em menos de 2 dias úteis informaremos se foi creditado.')
+            this.$router.push(`/${this.$route.params.evento}/meus-ingressos`)
+            this.mostraico = 0
+            break;
+
+
+          case "pending_review_manual":
+            this.$toast.info('Processando pagamento, em menos de 2 dias úteis informaremos se foi creditado ou se necessitamos de mais informação.')
+            this.$router.push(`/${this.$route.params.evento}/meus-ingressos`)
+            this.mostraico = 0
+            break;
+
+
+          case "cc_rejected_bad_filled_date":
+            this.$toast.error('Revise a data de vencimento.')
+            this.mostraico = 0
+            break;
+
+          case "cc_rejected_bad_filled_other":
+            this.$toast.error('Revise os dados.')
+            this.mostraico = 0
+            break;
+
+          case "cc_rejected_bad_filled_security_code":
+            this.$toast.error('Revise o código de segurança do cartão.')
+            this.mostraico = 0
+            break;
+
+          case "cc_rejected_blacklist":
+            this.$toast.error('Não pudemos processar seu pagamento.')
+            this.mostraico = 0
+            break;
+
+          case "cc_rejected_call_for_authorize":
+            this.$toast.error('Você deve autorizar o cartão de crédio a efetuar o pagamento ao Mercado Pago.')
+            this.mostraico = 0
+            break;
+
+          case "cc_rejected_card_disabled":
+            this.$toast.error('Ligue para a operadora do cartão para ativar seu cartão. O telefone está no verso do seu cartão.')
+            this.mostraico = 0
+            break;
+
+
+          case "cc_rejected_card_error":
+            this.$toast.error('Não conseguimos processar seu pagamento.')
+            this.mostraico = 0
+            break;
+
+
+          case "cc_rejected_max_attempts":
+            this.$toast.error('Você atingiu o limite de tentativas permitido. Escolha outro cartão ou outra forma de pagamento.')
+            this.mostraico = 0
+            break;
+
+
+
+
+
+          default:
+            this.$toast.error('Não foi possível processar seu pagamento, tente outro método')
+            this.mostraico = 0
+
+          // code block
+        }
+      }
+      console.log(data.msg)
+
+    },
+
     salvaDadosCarrinho() {
       localStorage.setItem("ingressosC", JSON.stringify(this.ingressos));
     },

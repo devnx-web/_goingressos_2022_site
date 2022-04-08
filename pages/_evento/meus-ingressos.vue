@@ -67,9 +67,9 @@
                        <p>{{ ing.telefone  | VMask('(##) #########') }}</p>
                      </b-col>
                      <b-col md="1">
-                       <div v-if="ing.pg" class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
+                       <b-button block :href="`https://arquivos.devnx.com.br${ing.img}`" target="_blank" v-if="ing.img" class="bg-ico d-flex justify-content-center align-items-center mt-2 mt-md-0 cursor-pointer">
                          <img height="17" src="../../assets/icones/download.svg" alt="">
-                       </div>
+                       </b-button>
                      </b-col>
                    </b-row>
                  </div>
