@@ -26,6 +26,7 @@ export default {
     { src: "~/plugins/lottie-player.js", mode: "client" },
     { src: "~/plugins/vue-toast.js", mode: "client" },
     { src: "~/plugins/vue-mask.js", mode: "client" },
+    { src: "~/plugins/vue-moment.js", mode: "client" },
     { src: "~/plugins/vue-alert.js", mode: "client" },
     { src: "~/plugins/vue-pay-card", mode: "client" },
     { src: "~/plugins/vue-the-mask.js", mode: "client" },
