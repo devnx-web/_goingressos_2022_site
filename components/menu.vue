@@ -1,6 +1,12 @@
 <template>
   <div>
-    <!-- Hotjar Tracking Code for surrealcwb.com.br -->
+    <div>
+      <div style="position: fixed; bottom: 20px; right: 20px">
+        <a target="_blank" href="https://wa.me/5541997778887">
+          <img style="width: 70px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/479px-WhatsApp.svg.png" alt="" />
+        </a>
+      </div>
+    </div>
     <script>
       (function(h,o,t,j,a,r){
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
