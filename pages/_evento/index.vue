@@ -397,7 +397,9 @@ export default {
     async aplicaCupom() {
       const {data} = await this.$axios.get(`https://phpstack-666249-2556159.cloudwaysapps.com/api/site/surreal-producoes/evento/${this.$route.params.evento}?cupom=${this.cupom}`)
       console.log(data)
-      this.$toast.success('Cupom aplicado com sucesso!')
+      if (data.ingressos[0].valorOrigin){
+        this.$toast.success('Cupom aplicado com sucesso!')
+      }
       this.evento = data;
       this.ingressos = data.ingressos;
     },
