@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-      <div style="position: fixed; bottom: 20px; right: 20px">
-        <a target="_blank" href="https://wa.me/5541997778887">
+      <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999">
+        <a target="_blank" :href="`https://api.whatsapp.com/send?phone=554187550164&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20surreal%20e%20tenho%20algumas%20d%C3%BAvidas%20meu%20id%20%C3%A9%20${idGo}`">
           <img style="width: 70px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/479px-WhatsApp.svg.png" alt="" />
         </a>
       </div>
@@ -117,6 +117,7 @@ export default {
     return {
       codigoEnviado: false,
       whatsapp: "",
+      idGo: '',
       codigo: "",
       resultado: '',
       evento: []
@@ -129,6 +130,7 @@ export default {
       idGo = "GO-" + Math.floor(Math.random() * 9123030 + 4564564657879);
       await localStorage.setItem("id_go", JSON.stringify(idGo));
     }
+    this.idGo = idGo
     var socket = io("https://ws.devnx.com.br/");
     socket.on(idGo, async (e) => {
       this.resultado = e.status

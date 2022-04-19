@@ -120,7 +120,7 @@
                 <b-row>
                   <b-col>
                     <div class="small">Data do evento</div>
-                    <div>{{ evento.data }}</div>
+                    <div>{{evento.data}}</div>
                   </b-col>
                   <b-col>
                     <div class="small">Classificação</div>
