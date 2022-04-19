@@ -1,0 +1,15 @@
+curl 'https://back.goingressos.com.br/api/painel/evento/vendasp/we-are-carnaval?search=&dir=desc&length=25&page=1' \
+  -H 'authority: back.goingressos.com.br' \
+  -H 'accept: application/json, text/plain, /' \
+  -H 'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7,hr;q=0.6' \
+  -H 'authorization: Bearer  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYmRlcGlsaG91c2UuZGV2bnguY29tLmJyXC9hcGlcL3BhaW5lbFwvYXV0aFwvbG9naW4iLCJpYXQiOjE2NDk3OTEyMzksImV4cCI6MTY3MTM5MTIzOSwibmJmIjoxNjQ5NzkxMjM5LCJqdGkiOiJkVXZvQTI3S1JXNkpkYmJaIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Is_kl7iq0N4YbUXMKtMQk3xdxeBFhuVYpdgLc8LAf8o' \
+  -H 'origin: http://localhost:3000' \
+  -H 'referer: http://localhost:3000/' \
+  -H 'sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="100", "Google Chrome";v="100"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: cross-site' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36' \
+  --compressed
