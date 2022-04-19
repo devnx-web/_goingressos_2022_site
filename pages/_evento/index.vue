@@ -409,7 +409,7 @@ export default {
   methods: {
     async aplicaCupom() {
       const { data } = await this.$axios.get(
-        `https://phpstack-666249-2556159.cloudwaysapps.com/api/site/surreal-producoes/evento/${this.$route.params.evento}?cupom=${this.cupom}`
+        `evento/${this.$route.params.evento}?cupom=${this.cupom}`
       );
       console.log(data);
       if (data.ingressos[0].valorOrigin) {
