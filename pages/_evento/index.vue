@@ -1,8 +1,11 @@
 <template>
   <div>
-    <menu-topo/>
+    <menu-topo />
     <div style="overflow: hidden">
-      <div class="d-none bg-banner d-md-block" :style="`background-image: url('https://arquivos.devnx.com.br/goingressos/uploads/${evento.banner}')`"></div>
+      <div
+        class="d-none bg-banner d-md-block"
+        :style="`background-image: url('https://arquivos.devnx.com.br/goingressos/uploads/${evento.banner}')`"
+      ></div>
     </div>
 
     <div class="d-flex justify-content-center">
@@ -23,8 +26,7 @@
       <div class="mb-5 padding-banner mt-4 mt-md-0">
         <div>
           <h1>{{ evento.nome }}</h1>
-          <p v-html="evento.descricao">
-          </p>
+          <p v-html="evento.descricao"></p>
           <hr />
           <div class="card-ingresso-venda d-md-none">
             <div class="text-center bg-dark text-light py-1">
@@ -84,7 +86,10 @@
                       placeholder="Digite aqui..."
                     ></b-form-input>
                     <b-input-group-append>
-                      <b-button @click="aplicaCupom()" style="font-size: 13px" variant="success"
+                      <b-button
+                        @click="aplicaCupom()"
+                        style="font-size: 13px"
+                        variant="success"
                         >Aplicar</b-button
                       >
                     </b-input-group-append>
@@ -121,7 +126,7 @@
                 <b-row>
                   <b-col>
                     <div class="small">Data do evento</div>
-                    <div>{{evento.data}}</div>
+                    <div>{{ evento.data }}</div>
                   </b-col>
                   <b-col>
                     <div class="small">Classificação</div>
@@ -135,7 +140,12 @@
                     <div>
                       {{ evento.endereco }}
                     </div>
-                    <a v-if="evento.mostrarmapa" class="d-flex mt-2" href="#" target="_blank">
+                    <a
+                      v-if="evento.mostrarmapa"
+                      class="d-flex mt-2"
+                      href="#"
+                      target="_blank"
+                    >
                       <div>
                         <img
                           height="20"
@@ -323,7 +333,10 @@
                           placeholder="Digite aqui..."
                         ></b-form-input>
                         <b-input-group-append>
-                          <b-button @click="aplicaCupom()" style="font-size: 13px" variant="success"
+                          <b-button
+                            @click="aplicaCupom()"
+                            style="font-size: 13px"
+                            variant="success"
                             >Aplicar</b-button
                           >
                         </b-input-group-append>
@@ -388,25 +401,31 @@ export default {
   head() {
     return {
       title: `${this.evento.nome}`,
-    }
+    };
   },
   beforeMount() {
     this.carregaIngressos();
   },
   methods: {
     async aplicaCupom() {
-      const {data} = await this.$axios.get(`https://phpstack-666249-2556159.cloudwaysapps.com/api/site/surreal-producoes/evento/${this.$route.params.evento}?cupom=${this.cupom}`)
-      console.log(data)
-      if (data.ingressos[0].valorOrigin){
-        this.$toast.success('Cupom aplicado com sucesso!')
+      const { data } = await this.$axios.get(
+        `https://phpstack-666249-2556159.cloudwaysapps.com/api/site/surreal-producoes/evento/${this.$route.params.evento}?cupom=${this.cupom}`
+      );
+      console.log(data);
+      if (data.ingressos[0].valorOrigin) {
+        this.$toast.success("Cupom aplicado com sucesso!");
       }
+      localStorage.setItem("cupom", this.cupom);
       this.evento = data;
       this.ingressos = data.ingressos;
     },
     async carregaIngressos() {
       localStorage.removeItem("ingressos");
+      localStorage.removeItem("cupom");
       localStorage.removeItem("ingressosC");
-      const { data } = await this.$axios.get(`evento/${this.$route.params.evento}`)
+      const { data } = await this.$axios.get(
+        `evento/${this.$route.params.evento}`
+      );
       this.evento = data;
       this.ingressos = data.ingressos;
       localStorage.setItem("evento", JSON.stringify(data));

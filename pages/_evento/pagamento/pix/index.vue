@@ -7,7 +7,11 @@
           <b-col md="6" cols="12">
             <div>
               <div @click="$router.go(-1)" class="d-flex cursor-pointer">
-                <img src="../../../../assets/icones/back.svg" height="25px" alt="">
+                <img
+                  src="../../../../assets/icones/back.svg"
+                  height="25px"
+                  alt=""
+                />
                 <p class="ml-2 mb-3">Voltar</p>
               </div>
               <h5 class="text-center">
@@ -40,20 +44,33 @@
 
                 <div class="mt-3">
                   <div class="btn-ver-ing">
-                    <div v-b-toggle.collapse-2 class="m-1 d-flex justify-content-between p-2">
-                      <div>Meus Ingressos - <b>{{valorTotal | currency}}</b></div>
-                      <div><img width="20" src="../../../../assets/icones/arrow.svg" alt=""></div>
+                    <div
+                      v-b-toggle.collapse-2
+                      class="m-1 d-flex justify-content-between p-2"
+                    >
+                      <div>
+                        Meus Ingressos - <b>{{ valorTotal | currency }}</b>
+                      </div>
+                      <div>
+                        <img
+                          width="20"
+                          src="../../../../assets/icones/arrow.svg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                     <b-collapse id="collapse-2">
-                      <div  v-for="(c, index) in ingressos" :key="index">
-                        <hr class="mt-0 mb-0">
+                      <div v-for="(c, index) in ingressos" :key="index">
+                        <hr class="mt-0 mb-0" />
                         <div class="p-2">
-                          <p>    {{c.nomeIng}} - {{ c.nomeLote }}:</p>
-                          <p>Nome: <b>{{c.nome}}</b></p>
-                          <p>Valor: {{c.valor | currency}}</p>
-                          <p>CPF: {{c.cpf | VMask("###.###.###-##")}}</p>
+                          <p>{{ c.nomeIng }} - {{ c.nomeLote }}:</p>
+                          <p>
+                            Nome: <b>{{ c.nome }}</b>
+                          </p>
+                          <p>Valor: {{ c.valor | currency }}</p>
+                          <p>CPF: {{ c.cpf | VMask("###.###.###-##") }}</p>
                         </div>
-                        <hr class="mt-0 mb-0">
+                        <hr class="mt-0 mb-0" />
                       </div>
                     </b-collapse>
                   </div>
@@ -87,7 +104,7 @@
                         style="height: 300px"
                         :src="
                           `data:image/png;base64,` + dadosretorna.qr_code_base64
-                      "
+                        "
                       />
                     </div>
                     <div v-if="!dadosretorna.qr_code">
@@ -146,21 +163,26 @@ export default {
   },
   async beforeMount() {
     let email = localStorage.getItem("email") || [];
+    let cupom = localStorage.getItem("cupom") || null;
     let idGo = JSON.parse(localStorage.getItem("id_go"));
-    email = JSON.parse(email)
+    email = JSON.parse(email);
     await this.carregaCarrinho();
     const obj = {
       ingressos: this.ingressos,
       email: email,
       pagamento: "pix",
-      idGo
+      cupom: cupom,
+      idGo,
     };
-    const {data } = await this.$axios.post(`evento/${this.$route.params.evento}/pre_res_ingresso`, obj)
+    const { data } = await this.$axios.post(
+      `evento/${this.$route.params.evento}/pre_res_ingresso`,
+      obj
+    );
     this.dadosretorna = data;
     this.apareceqr = 1;
-    if (data.error){
-      this.$toast.error(data.error)
-      this.$router.push(`/${this.$route.params.evento}/carrinho`)
+    if (data.error) {
+      this.$toast.error(data.error);
+      this.$router.push(`/${this.$route.params.evento}/carrinho`);
     }
   },
 
@@ -168,10 +190,10 @@ export default {
     copiaCod() {
       if (!this.dadosretorna.qr_code) {
         this.$toast.error("Aguarde o QR Code ser gerado para copiar o código");
-        return
+        return;
       }
       navigator.clipboard.writeText(this.dadosretorna.qr_code);
-      this.$toast.info('Código copiado com sucesso')
+      this.$toast.info("Código copiado com sucesso");
     },
     pagarCard() {
       window.location.replace(`/${this.$route.params.evento}/pagamento/cartao`);
@@ -183,8 +205,8 @@ export default {
       let totalValor = 0;
       const jsonCarrinho = JSON.parse(carrinho);
       jsonCarrinho.forEach((ingresso) => {
-          totalIngressos++;
-          totalValor += parseFloat(ingresso.valor);
+        totalIngressos++;
+        totalValor += parseFloat(ingresso.valor);
       });
       this.valorTotal = totalValor;
       this.totalIngressos = totalIngressos;
@@ -195,13 +217,11 @@ export default {
 </script>
 
 <style scoped>
-
-.card-ing
-{
+.card-ing {
   padding: 10px;
   border: solid 1px #e0e0e0;
   border-radius: 10px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
 }
 

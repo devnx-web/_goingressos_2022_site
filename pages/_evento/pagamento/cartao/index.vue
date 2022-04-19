@@ -473,6 +473,7 @@ export default {
   },
   methods: {
     async aplicaPagamento() {
+    let cupom = localStorage.getItem("cupom") || null;
 
       let idGo = JSON.parse(localStorage.getItem("id_go"));
       if (!idGo) {
@@ -483,6 +484,7 @@ export default {
         ingressos: this.ingressos,
         email: this.infoCard.cardholderEmail,
         pagamento: "credit-card",
+        cupom: cupom,
         idGo,
         card: this.infoCard,
       }
