@@ -66,7 +66,7 @@
             </div>
             <hr class="mt-0 mb-0" />
             <div class="p-3">
-              <b-row hidden>
+              <b-row>
                 <b-col md="4" align-self="center">
                   <p
                     @click="cupom = true"
@@ -78,12 +78,13 @@
                 <b-col>
                   <b-input-group>
                     <b-form-input
+                      v-model="cupom"
                       class="input-form"
                       style="font-size: 13px"
                       placeholder="Digite aqui..."
                     ></b-form-input>
                     <b-input-group-append>
-                      <b-button style="font-size: 13px" variant="success"
+                      <b-button @click="aplicaCupom()" style="font-size: 13px" variant="success"
                         >Aplicar</b-button
                       >
                     </b-input-group-append>
@@ -304,7 +305,7 @@
                 </div>
                 <hr class="mt-0 mb-0" />
                 <div class="p-3">
-                  <b-row hidden>
+                  <b-row>
                     <b-col md="4" align-self="center">
                       <p
                         @click="cupom = true"
@@ -316,12 +317,13 @@
                     <b-col>
                       <b-input-group>
                         <b-form-input
+                          v-model="cupom"
                           class="input-form"
                           style="font-size: 13px"
                           placeholder="Digite aqui..."
                         ></b-form-input>
                         <b-input-group-append>
-                          <b-button style="font-size: 13px" variant="success"
+                          <b-button @click="aplicaCupom()" style="font-size: 13px" variant="success"
                             >Aplicar</b-button
                           >
                         </b-input-group-append>
@@ -392,6 +394,13 @@ export default {
     this.carregaIngressos();
   },
   methods: {
+    async aplicaCupom() {
+      const {data} = await this.$axios.get(`https://phpstack-666249-2556159.cloudwaysapps.com/api/site/surreal-producoes/evento/${this.$route.params.evento}?cupom=${this.cupom}`)
+      console.log(data)
+      this.$toast.success('Cupom aplicado com sucesso!')
+      this.evento = data;
+      this.ingressos = data.ingressos;
+    },
     async carregaIngressos() {
       localStorage.removeItem("ingressos");
       localStorage.removeItem("ingressosC");

@@ -208,12 +208,6 @@ export default {
       }
       if (metodo === "pix") {
         localStorage.setItem("email", JSON.stringify(this.email));
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))
-        {
-        } else {
-          this.$toast.error('Digite um e-mail válido')
-          return
-        }
         this.$refs["finalizaPg"].hide();
         this.$router.push(`/${this.$route.params.evento}/pagamento/pix`)
       }
