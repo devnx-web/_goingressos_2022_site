@@ -71,10 +71,9 @@
               <b-row>
                 <b-col md="4" align-self="center">
                   <p
-                    @click="cupom = true"
                     style="font-size: 14px; color: #25b3ff"
                   >
-                    Possuí um Cupom?
+                    Possui um Cupom?
                   </p>
                 </b-col>
                 <b-col>
@@ -318,10 +317,9 @@
                   <b-row>
                     <b-col md="4" align-self="center">
                       <p
-                        @click="cupom = true"
                         style="font-size: 14px; color: #25b3ff"
                       >
-                        Possuí um Cupom?
+                        Possui um Cupom?
                       </p>
                     </b-col>
                     <b-col>
@@ -357,6 +355,7 @@
                     </b-col>
                     <b-col>
                       <b-button
+                        v-if="valorTotal"
                         style="border-radius: 0; height: 100%"
                         variant="success"
                         block
@@ -412,10 +411,13 @@ export default {
         `evento/${this.$route.params.evento}?cupom=${this.cupom}`
       );
       console.log(data);
-      if (data.ingressos[0].valorOrigin) {
+      if (data.ingressos[0].valorOrigin !== data.ingressos[0].valor) {
+        localStorage.setItem("cupom", this.cupom);
         this.$toast.success("Cupom aplicado com sucesso!");
       }
-      localStorage.setItem("cupom", this.cupom);
+      else {
+        this.$toast.error('Cupom inválido')
+      }
       this.evento = data;
       this.ingressos = data.ingressos;
     },
