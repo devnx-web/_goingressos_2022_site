@@ -70,9 +70,7 @@
             <div class="p-3">
               <b-row>
                 <b-col md="4" align-self="center">
-                  <p
-                    style="font-size: 14px; color: #25b3ff"
-                  >
+                  <p style="font-size: 14px; color: #25b3ff">
                     Possui um Cupom?
                   </p>
                 </b-col>
@@ -316,9 +314,7 @@
                 <div class="p-3">
                   <b-row>
                     <b-col md="4" align-self="center">
-                      <p
-                        style="font-size: 14px; color: #25b3ff"
-                      >
+                      <p style="font-size: 14px; color: #25b3ff">
                         Possui um Cupom?
                       </p>
                     </b-col>
@@ -414,9 +410,8 @@ export default {
       if (data.ingressos[0].valorOrigin !== data.ingressos[0].valor) {
         localStorage.setItem("cupom", this.cupom);
         this.$toast.success("Cupom aplicado com sucesso!");
-      }
-      else {
-        this.$toast.error('Cupom inválido')
+      } else {
+        this.$toast.error("Cupom inválido");
       }
       this.evento = data;
       this.ingressos = data.ingressos;
@@ -425,11 +420,19 @@ export default {
       localStorage.removeItem("ingressos");
       localStorage.removeItem("cupom");
       localStorage.removeItem("ingressosC");
+
       const { data } = await this.$axios.get(
         `evento/${this.$route.params.evento}`
       );
       this.evento = data;
       this.ingressos = data.ingressos;
+
+      let cupomUser = localStorage.getItem("cupomUser") || null;
+      if (cupomUser) {
+        this.cupom = cupomUser;
+        localStorage.removeItem("cupomUser");
+        await this.aplicaCupom();
+      }
       localStorage.setItem("evento", JSON.stringify(data));
     },
     compraIng() {
