@@ -7,8 +7,9 @@
 <script>
 export default {
   name: "Index",
-  beforeMount() {
-        this.$router.push(`/we-are-carnaval`)
+  mounted() {
+    console.log(process.env.slug)
+      this.$router.push('broks-garuva')
   },
 }
 </script>
