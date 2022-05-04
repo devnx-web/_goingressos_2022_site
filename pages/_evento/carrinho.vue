@@ -33,34 +33,44 @@
               :vt="valorTotal"
             />
             <p class="mt-2">Forma de pagamento</p>
-                <div v-if="metodo[0] === 'pix'"
-                @click="validaCampos"
-                class="card-pay text-center mt-2">
-                  <div class="d-flex align-items-center">
-                        <div>
-                          <img
-                            src="../../assets/icones/pix-branco.png"
-                            height="30"
-                            alt=""
-                          />
-                        </div>
-                    <p class="ml-3 text-light" style="font-size: 15px !important">Pagar com PIX</p>
-                  </div>
+            <div
+              v-show="metodo.find((item) => item == 'p')"
+              @click="validaCampos"
+              class="card-pay text-center mt-2"
+            >
+              <div class="d-flex align-items-center">
+                <div>
+                  <img
+                    src="../../assets/icones/pix-branco.png"
+                    height="30"
+                    alt=""
+                  />
                 </div>
-                <div v-if="metodo[1] === 'cc'" @click="escolhePay('card')" class="card-pay-credit cursor-pointer text-center mt-2">
-                  <div class="d-flex align-items-center">
-                    <div>
-                      <img
-                        src="../../assets/icones/cartao.png"
-                        height="30"
-                        alt=""
-                      />
-                    </div>
-                    <p class="ml-3 text-light" style="font-size: 15px !important">Pagar com cartão de crédito</p>
-                  </div>
+                <p class="ml-3 text-light" style="font-size: 15px !important">
+                  Pagar com PIX
+                </p>
+              </div>
+            </div>
+            <div
+              v-show="metodo.find((item) => item == 'c')"
+              @click="escolhePay('card')"
+              class="card-pay-credit cursor-pointer text-center mt-2"
+            >
+              <div class="d-flex align-items-center">
+                <div>
+                  <img
+                    src="../../assets/icones/cartao.png"
+                    height="30"
+                    alt=""
+                  />
                 </div>
-              </b-col>
-            </b-row>
+                <p class="ml-3 text-light" style="font-size: 15px !important">
+                  Pagar com cartão de crédito
+                </p>
+              </div>
+            </div>
+          </b-col>
+        </b-row>
       </div>
     </div>
     <b-modal
@@ -95,7 +105,12 @@
         <div class="mt-2">
           <b-row>
             <b-col>
-              <b-button variant="success" block @click="escolhePay('pix')" class="text-center">
+              <b-button
+                variant="success"
+                block
+                @click="escolhePay('pix')"
+                class="text-center"
+              >
                 <div>
                   <p class="small">Finalizar Compra</p>
                 </div>
@@ -131,7 +146,7 @@ export default {
       valorTotal: 0,
       ingressos: [],
       evento: [],
-      metodo: '',
+      metodo: [],
     };
   },
   beforeMount() {
@@ -141,11 +156,9 @@ export default {
     if (process.browser) {
       let evento = JSON.parse(localStorage.getItem("evento")) || null;
       if (evento === null) {
-        this.$router.push(`/improavel-talks`)
+        this.$router.push(`/improavel-talks`);
       }
-      this.metodo = evento.pagamentos.split(";");
-      console.log( this.metodo[0] );
-      console.log( this.metodo[1] );
+      this.metodo = evento.pg.split(";");
     }
 
     let ano = [];
@@ -179,30 +192,35 @@ export default {
 
     validaCampos(metodo) {
       let erro = false;
-      this.ingressos.forEach(ing => {
-        if (ing.nome === "" || ing.cpf === "" || ing.whats === "" || ing.nasc === "") {
+      this.ingressos.forEach((ing) => {
+        if (
+          ing.nome === "" ||
+          ing.cpf === "" ||
+          ing.whats === "" ||
+          ing.nasc === ""
+        ) {
           erro = true;
           this.$toast.error("Preencha todos os campos");
         }
-      })
+      });
 
       if (erro === false) {
-        this.ingressos.forEach(ing => {
+        this.ingressos.forEach((ing) => {
           if (!this.validarCPF(ing.cpf)) {
             erro = true;
             this.$toast.error("CPF inválido");
           }
-        })
+        });
       }
 
-      if(!erro && metodo === 'card') {
-        return true
+      if (!erro && metodo === "card") {
+        return true;
       }
-      if(!erro) {
-         this.$refs['finalizaPg'].show()
-        return true
+      if (!erro) {
+        this.$refs["finalizaPg"].show();
+        return true;
       }
-      return false
+      return false;
     },
     salvaDadosCarrinho() {
       localStorage.setItem("ingressosC", JSON.stringify(this.ingressos));
@@ -211,16 +229,16 @@ export default {
       this.desabilita = false;
     },
     escolhePay(metodo) {
-      if(!this.validaCampos(metodo)) return
+      if (!this.validaCampos(metodo)) return;
       this.tipoPagamento = metodo;
-      this.salvaDadosCarrinho()
+      this.salvaDadosCarrinho();
       if (metodo === "card") {
         window.location.href = `/${this.$route.params.evento}/pagamento/cartao`;
       }
       if (metodo === "pix") {
         localStorage.setItem("email", JSON.stringify(this.email));
         this.$refs["finalizaPg"].hide();
-        this.$router.push(`/${this.$route.params.evento}/pagamento/pix`)
+        this.$router.push(`/${this.$route.params.evento}/pagamento/pix`);
       }
     },
     removeIngresso(index) {
@@ -237,14 +255,15 @@ export default {
       const evento = JSON.parse(localStorage.getItem("evento")) || [];
 
       if (evento) {
-        this.evento = evento
+        this.evento = evento;
       }
 
-      if (jsonCarrinho.length === 0) return this.$router.push(`/${this.$route.params.evento}`);
+      if (jsonCarrinho.length === 0)
+        return this.$router.push(`/${this.$route.params.evento}`);
       let totalIngressos = 0;
       let totalValor = 0;
       let ingressoArray = [];
-      if(ingressosC.length === 0) {
+      if (ingressosC.length === 0) {
         jsonCarrinho.forEach((ingresso) => {
           for (let i = 0; i < ingresso.qtd; i++) {
             totalIngressos++;
