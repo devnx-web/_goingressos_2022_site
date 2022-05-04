@@ -56,5 +56,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-  axios: { baseURL: `https://back.goingressos.com.br/api/site/${process.env.slug}/` },
+  // axios: { baseURL: `https://back.goingressos.com.br/api/site/${process.env.slug}/` },
+  axios: { baseURL: `http://phpstack-666249-2556159.cloudwaysapps.com/api/site/${process.env.slug}/` },
 }

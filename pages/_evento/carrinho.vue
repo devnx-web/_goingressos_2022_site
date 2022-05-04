@@ -33,7 +33,7 @@
               :vt="valorTotal"
             />
             <p class="mt-2">Forma de pagamento</p>
-                <div
+                <div v-if="metodo[0] === 'pix'"
                 @click="validaCampos"
                 class="card-pay text-center mt-2">
                   <div class="d-flex align-items-center">
@@ -47,7 +47,7 @@
                     <p class="ml-3 text-light" style="font-size: 15px !important">Pagar com PIX</p>
                   </div>
                 </div>
-                <div @click="escolhePay('card')" class="card-pay-credit cursor-pointer text-center mt-2">
+                <div v-if="metodo[1] === 'cc'" @click="escolhePay('card')" class="card-pay-credit cursor-pointer text-center mt-2">
                   <div class="d-flex align-items-center">
                     <div>
                       <img
@@ -131,12 +131,23 @@ export default {
       valorTotal: 0,
       ingressos: [],
       evento: [],
+      metodo: '',
     };
   },
   beforeMount() {
     this.carregaCarrinho();
   },
   created() {
+    if (process.browser) {
+      let evento = JSON.parse(localStorage.getItem("evento")) || null;
+      if (evento === null) {
+        this.$router.push(`/improavel-talks`)
+      }
+      this.metodo = evento.pagamentos.split(";");
+      console.log( this.metodo[0] );
+      console.log( this.metodo[1] );
+    }
+
     let ano = [];
     this.ano = ano;
     for (var i = 2021; i < 2030; i++) {
