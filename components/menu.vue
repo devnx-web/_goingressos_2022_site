@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div>
-      <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999">
-        <a target="_blank" :href="`https://api.whatsapp.com/send?phone=5541988566740&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20improvavel%20talks%20e%20tenho%20algumas%20d%C3%BAvidas%20meu%20id%20%C3%A9%20${idGo}`">
-          <img style="width: 70px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/479px-WhatsApp.svg.png" alt="" />
-        </a>
-      </div>
-    </div>
+<!--    <div>-->
+<!--      <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999">-->
+<!--        <a target="_blank" :href="`https://api.whatsapp.com/send?phone=5541988566740&text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20improvavel%20talks%20e%20tenho%20algumas%20d%C3%BAvidas%20meu%20id%20%C3%A9%20${idGo}`">-->
+<!--          <img style="width: 70px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/479px-WhatsApp.svg.png" alt="" />-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
     <script>
       (function(h,o,t,j,a,r){
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};

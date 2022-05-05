@@ -1,5 +1,6 @@
 <template>
   <div>
+    <script src="//code.jivosite.com/widget/MA6Bi7BCGR"></script>
     <menu-topo />
     <div class="container mt-md-5">
       <b-row class="mt-4">

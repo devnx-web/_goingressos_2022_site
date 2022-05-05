@@ -1,5 +1,6 @@
 <template>
   <div>
+    <script src="//code.jivosite.com/widget/MA6Bi7BCGR"></script>
     <menu-topo />
     <div style="overflow: hidden">
       <div

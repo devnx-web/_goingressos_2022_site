@@ -1,5 +1,6 @@
 <template>
   <div class="mb-5">
+    <script src="//code.jivosite.com/widget/MA6Bi7BCGR"></script>
     <menu-topo />
     <div class="container mt-md-5 mt-3">
       <!--      tornar componente-->
@@ -34,7 +35,7 @@
             />
             <p class="mt-2">Forma de pagamento</p>
             <div
-              v-show="metodo.find((item) => item == 'p')"
+              v-show="metodo.find((item) => item === 'p')"
               @click="validaCampos"
               class="card-pay text-center mt-2"
             >
@@ -52,7 +53,7 @@
               </div>
             </div>
             <div
-              v-show="metodo.find((item) => item == 'c')"
+              v-show="metodo.find((item) => item === 'c')"
               @click="escolhePay('card')"
               class="card-pay-credit cursor-pointer text-center mt-2"
             >
@@ -156,7 +157,7 @@ export default {
     if (process.browser) {
       let evento = JSON.parse(localStorage.getItem("evento")) || null;
       if (evento === null) {
-        this.$router.push(`/improavel-talks`);
+        this.$router.push(`/improvavel-talks`);
       }
       this.metodo = evento.pg.split(";");
     }
