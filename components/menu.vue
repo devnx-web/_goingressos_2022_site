@@ -23,9 +23,10 @@
           <div>
             <nuxt-link :to="`/${$route.params.evento}`">
               <img
+                class="p-1"
                 v-if="evento"
                 height="50"
-                :src="`https://arquivos.devnx.com.br/goingressos/uploads/${evento.logo}`"
+                :src="evento.logo ? `https://arquivos.devnx.com.br/goingressos/uploads/${evento.logo}` : 'https://arquivos.devnx.com.br/goingressos/uploads/go-ingressos-logob.png'"
                 alt=""
               />
             </nuxt-link>
@@ -40,7 +41,7 @@
           <div class="ml-3">
             <img
               height="35"
-              src="https://uni.goingressos.com.br/_nuxt/img/Go.f34a656.png"
+              src="https://arquivos.devnx.com.br/goingressos/uploads/go-ingressos-logo-deitadab.png"
               alt=""
             />
           </div>
