@@ -68,7 +68,7 @@
               </div>
             </div>
             <hr class="mt-0 mb-0" />
-            <div class="p-3">
+            <div v-show="dadosEv.find((item) => item === 'ci')" class="p-3">
               <b-row>
                 <b-col md="4" align-self="center">
                   <p style="font-size: 14px; color: #25b3ff">
@@ -312,7 +312,7 @@
                   </div>
                 </div>
                 <hr class="mt-0 mb-0" />
-                <div class="p-3">
+                <div  v-show="dadosEv.find((item) => item === 'ci')"  class="p-3">
                   <b-row>
                     <b-col md="4" align-self="center">
                       <p style="font-size: 14px; color: #25b3ff">
@@ -389,9 +389,11 @@ export default {
         data: "",
       },
       cupom: "",
+      ci: '',
       titulo: "",
       ingressos: [],
       ingressosCompra: [],
+      dadosEv: [],
     };
   },
   head() {
@@ -407,7 +409,6 @@ export default {
       const { data } = await this.$axios.get(
         `evento/${this.$route.params.evento}?cupom=${this.cupom}`
       );
-      console.log(data);
       if (data.ingressos[0].valorOrigin !== data.ingressos[0].valor) {
         localStorage.setItem("cupom", this.cupom);
         this.$toast.success("Cupom aplicado com sucesso!");
@@ -427,6 +428,8 @@ export default {
       );
       this.evento = data;
       this.ingressos = data.ingressos;
+
+      this.dadosEv = this.evento.pg.split(";");
 
       let cupomUser = localStorage.getItem("cupomUser") || null;
       if (cupomUser) {

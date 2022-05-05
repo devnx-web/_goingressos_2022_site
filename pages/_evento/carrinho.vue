@@ -147,7 +147,7 @@ export default {
       valorTotal: 0,
       ingressos: [],
       evento: [],
-      metodo: [],
+      metodo: '',
     };
   },
   beforeMount() {
