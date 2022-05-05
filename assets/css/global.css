@@ -124,3 +124,16 @@ p {
   background-color: #326faf;
   color: white;
 }
+
+.quadrado
+{
+  width: 25px;
+  height: 25px;
+}
+
+.retangulo
+{
+  width: 40px;
+  height: 25px;
+}
+

@@ -9,7 +9,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'},
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Improvavel Talks é uma palestra imperdível com os especialistas falando sobre empreender no Brasil, investimentos na prática, vender sem mistério, manter a saúde emocional e a mente preparada para o sucesso' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -56,6 +56,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-  // axios: { baseURL: `https://back.goingressos.com.br/api/site/${process.env.slug}/` },
-  axios: { baseURL: `http://phpstack-666249-2556159.cloudwaysapps.com/api/site/${process.env.slug}/` },
+  axios: { baseURL: `https://back.goingressos.com.br/api/site/${process.env.slug}/` },
+  // axios: { baseURL: `http://phpstack-666249-2556159.cloudwaysapps.com/api/site/${process.env.slug}/` },
 }

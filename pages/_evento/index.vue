@@ -127,7 +127,7 @@
                   </b-col>
                   <b-col>
                     <div class="small">Classificação</div>
-                    <div>{{ evento.classificacao }}</div>
+                    <b-badge style="font-size: 15px; font-weight: 600" :class="evento.classificacao === 'L' ? 'quadrado' : 'retangulo'" class="d-flex align-items-center justify-content-center align-content-center" :variant="evento.classificacao === 'L' ? 'success' : 'dark'">{{ evento.classificacao }}</b-badge>
                   </b-col>
                 </b-row>
                 <hr />
