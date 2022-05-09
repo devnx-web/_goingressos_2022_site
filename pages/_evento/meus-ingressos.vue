@@ -200,9 +200,7 @@ export default {
       ingressos: [],
     };
   },
-  beforeMount() {
-    this.buscaIngressos();
-  },
+
   async mounted() {
     localStorage.removeItem("cupom");
     let idGo = JSON.parse(localStorage.getItem("id_go"));
@@ -218,6 +216,11 @@ export default {
         this.buscaIngressos();
       }
     });
+  },
+
+  async created() {
+    this.buscaIngressos();
+    setTimeout(() => {  this.buscaIngressos() }, );
   },
   methods: {
     async buscaIngressos() {
